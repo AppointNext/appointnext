@@ -1,21 +1,21 @@
-// import mongoose from "mongoose";
-// import bcrypt from "bcrypt";
-// import jwt from "jsonwebtoken";
-// const userSchema = new mongoose.Schema({
-//   email: {
-//     type: String,
-//     required: true,
-//     unique: true,
-//     toLowerCase: true,
-//   },
-//   profileImage: {
-//     type: String,
-//     requierd: true,
-//   },
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+const userSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    toLowerCase: true,
+  },
+  profileImage: {
+    type: String,
+    requierd: true,
+  },
 
-//   password: String,
-//   role: String,
-// });
+  password: String,
+  role: String,
+});
 
 // userSchema.pre("save", async function (next) {
 //   try {
@@ -56,13 +56,13 @@
 //   }
 // };
 
-// const User = mongoose.models.users || mongoose.model("users", userSchema);
+const User = mongoose.models.users || mongoose.model("users", userSchema);
 
-// //Next js reloads many a time so we need to check if the model is already loaded or not
-// // if (mongoose.models.users) {
-// //   User = mongoose.models.users;
-// // } else {
-// //   User = mongoose.model("users", userSchema);
-// // }
+//Next js reloads many a time so we need to check if the model is already loaded or not
+// if (mongoose.models.users) {
+//   User = mongoose.models.users;
+// } else {
+//   User = mongoose.model("users", userSchema);
+// }
 
-// export default User;
+export default User;
