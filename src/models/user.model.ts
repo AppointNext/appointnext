@@ -2,8 +2,17 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 const userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    toLowerCase: true,
+  },
+  profileImage: {
+    type: String,
+    requierd: true,
+  },
+
   password: String,
   role: String,
 });
@@ -11,7 +20,7 @@ const userSchema = new mongoose.Schema({
 userSchema.pre("save", async function (next) {
   try {
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(this.password, salt);
+    const hashedPassword = await bcrypt.hash(this.password!, salt);
     this.password = hashedPassword;
     next();
   } catch (error) {
