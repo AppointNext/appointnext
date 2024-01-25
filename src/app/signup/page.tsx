@@ -11,7 +11,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const page = () => {
+export default function Page() {
   const router = useRouter();
   const [userData, setUserData] = useState({
     email: "",
@@ -151,6 +151,4 @@ const page = () => {
       <ToastContainer theme="dark" />
     </form>
   );
-};
-
-export default page;
+}

@@ -13,7 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cookie from "js-cookie";
 
-const page = () => {
+export default function Page() {
   useEffect(() => {
     const start = () => {
       gapi.client.init({
@@ -101,7 +101,7 @@ const page = () => {
             <FaGoogle className="text-2xl static" />
             <button className="">Google</button>
             <GoogleLogin
-              clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
+              // clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
               buttonText="Login"
               onSuccess={successLogin}
               onFailure={failedLogin}
@@ -116,6 +116,4 @@ const page = () => {
       </div>
     </div>
   );
-};
-
-export default page;
+}
