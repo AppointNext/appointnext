@@ -1,7 +1,7 @@
 import { dbConnect } from "@/dbConfig/dbConfig";
 import User from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
-import Cookie from "js-cookie";
+// import Cookie from "js-cookie";
 
 dbConnect();
 

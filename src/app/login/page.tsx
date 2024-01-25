@@ -11,7 +11,6 @@ import { gapi } from "gapi-script";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Cookie from "js-cookie";
 
 export default function Page() {
   useEffect(() => {
@@ -100,12 +99,12 @@ export default function Page() {
           <div className=" flex flex-row border-2 border-black rounded-xl p-2  px-2 m-1 active:translate-y-1 items-center justify-between gap-1 w-[150px] bg-[#fefae0]">
             <FaGoogle className="text-2xl static" />
             <button className="">Google</button>
-            <GoogleLogin
+            {/* <GoogleLogin
               // clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
               buttonText="Login"
               onSuccess={successLogin}
               onFailure={failedLogin}
-            />
+            /> */}
             ;
           </div>
           <div className=" flex flex-row border-2 border-black rounded-xl p-2  px-2 m-1 active:translate-y-1 items-center justify-between gap-1 w-[150px] bg-[#fefae0]">
