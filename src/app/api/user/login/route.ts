@@ -1,6 +1,9 @@
 import { dbConnect } from "@/dbConfig/dbConfig";
 import User from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
+import Cookie from "js-cookie";
+
+dbConnect();
 
 const generateRefreshAndAccessToken = async (userId: any) => {
   const user = await User.findById(userId);
@@ -14,7 +17,6 @@ const generateRefreshAndAccessToken = async (userId: any) => {
   return { refreshToken, accessToken };
 };
 
-dbConnect();
 export async function POST(req: NextRequest) {
   try {
     const reqBody = await req.json();

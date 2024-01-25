@@ -7,6 +7,12 @@ import { FaFacebook } from "react-icons/fa";
 import { GrHide } from "react-icons/gr";
 import Image from "next/image";
 import { gapi } from "gapi-script";
+
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Cookie from "js-cookie";
+
 const page = () => {
   useEffect(() => {
     const start = () => {
