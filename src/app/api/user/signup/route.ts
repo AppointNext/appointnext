@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/user.model";
+import { dbConnect } from "@/dbConfig/dbConfig";
+
+dbConnect();
 export async function POST(req: NextRequest) {
   try {
     const reqBody = await req.json();
@@ -7,7 +10,8 @@ export async function POST(req: NextRequest) {
     console.log(reqBody);
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      NextResponse.json({
+      console.log(existingUser);
+      return NextResponse.json({
         status: 400,
         body: { message: "User already exists" },
       });
@@ -28,7 +32,9 @@ export async function POST(req: NextRequest) {
       profileImage: localImage,
     });
 
-    return NextResponse.json({ success: true });
+    const registeredUser = await User.findById(user._id).select("-password");
+
+    return NextResponse.json({ success: true, user: registeredUser });
   } catch (error) {
     console.log(error);
     return NextResponse.json({ success: false });

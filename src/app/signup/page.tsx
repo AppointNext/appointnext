@@ -10,6 +10,7 @@ import axios from "axios";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cookie from "js-cookie";
 
 export default function Page() {
   const router = useRouter();
@@ -26,17 +27,19 @@ export default function Page() {
     e.preventDefault();
     const { name, value } = e.target;
     setUserData((prev) => ({ ...prev, [name]: value }));
-    //console.log(userData.username, userData.password);
+    console.log(userData.email, userData.password);
   };
 
   const handleSumbit = async (e: any) => {
     e.preventDefault();
     console.log("submit");
+    console.log(userData.password, cpassword);
     if (userData.password !== cpassword) {
       toast.error("password not matched");
       return;
     }
-    const response = await axios.post("/api/signup", userData);
+    const response = await axios.post("/api/user/signup", userData);
+    console.log(response.data);
   };
 
   return (
@@ -73,6 +76,7 @@ export default function Page() {
               className="border-2 border-black rounded p-1  bg-[#d4a373] "
               name="email"
               id="email"
+              value={userData.email}
               onChange={handleChange}
             />
           </div>
@@ -81,7 +85,8 @@ export default function Page() {
             <input
               type={showp ? "text" : "password"}
               className="border-2 border-black rounded p-1  bg-[#d4a373] "
-              name="username"
+              name="password"
+              value={userData.password}
               id="password"
               onChange={handleChange}
             />
@@ -95,8 +100,9 @@ export default function Page() {
             <input
               type={showcp ? "text" : "password"}
               className="border-2 border-black rounded p-1 pl-2 bg-[#d4a373]"
-              name="password"
+              name="confirm-password"
               id="confirm-password"
+              value={cpassword}
               onChange={(e) => setCPassword(e.target.value)}
             />
             <GrHide
@@ -110,6 +116,7 @@ export default function Page() {
               type="text"
               className="border-2 border-black rounded p-1  bg-[#d4a373] "
               name="phone"
+              value={userData.phone}
               id="phone"
               onChange={handleChange}
             />
