@@ -4,6 +4,8 @@ import { dbConnect } from "@/dbConfig/dbConfig";
 import ApiError from "@/helper/ApiError";
 import ApiResponse from "@/helper/ApiResponse";
 import bcrypt from "bcrypt";
+import uploadToCloudinary from "@/helper/uploadToCloudinary";
+
 dbConnect();
 const hashPassword = async (password: string) => {
   try {
@@ -33,29 +35,20 @@ export async function POST(req: NextRequest) {
     if (existedUser) {
       throw new ApiError(409, "User with email or username already exists");
     }
-    //console.log(req.files);
+    console.log(reqBody);
 
-    // const avatarLocalPath = req.files?.avatar[0]?.path;
-    //const coverImageLocalPath = req.files?.coverImage[0]?.path;
+    let profileImageLocalPath;
+    if (reqBody.files && Array.isArray(reqBody.files) && reqBody.files > 0) {
+      profileImageLocalPath = reqBody.files.profileImage[0].path;
+    }
 
-    // let coverImageLocalPath;
-    // if (
-    //   req.files &&
-    //   Array.isArray(req.files.coverImage) &&
-    //   req.files.coverImage.length > 0
-    // ) {
-    //   coverImageLocalPath = req.files.coverImage[0].path;
-    // }
+    if (!profileImageLocalPath) {
+      throw new ApiError(400, "profileImage file is required");
+    }
 
-    // if (!avatarLocalPath) {
-    //   throw new ApiError(400, "Avatar file is required");
-    // }
-
-    // const avatar = await uploadOnCloudinary(avatarLocalPath);
-    // const coverImage = await uploadOnCloudinary(coverImageLocalPath);
-
-    // if (!avatar) {
-    //   throw new ApiError(400, "Avatar file is required");
+    // const profileImage = await uploadToCloudinary(profileImageLocalPath);
+    // if (!profileImage) {
+    //   throw new ApiError(400, "profileImage file is required");
     // }
 
     const hashedPassword = await hashPassword(password);
@@ -63,6 +56,7 @@ export async function POST(req: NextRequest) {
       email,
       password: hashedPassword,
       phone,
+      // profileImage: profileImage.url,
     });
 
     const createdUser = await User.findById(user._id).select(

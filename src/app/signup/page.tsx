@@ -18,6 +18,7 @@ export default function Page() {
     email: "",
     password: "",
     phone: "",
+    profileImage: "",
   });
   const [cpassword, setCPassword] = useState("");
   const [showp, setShowP] = useState(false);
@@ -27,18 +28,33 @@ export default function Page() {
     e.preventDefault();
     const { name, value } = e.target;
     setUserData((prev) => ({ ...prev, [name]: value }));
-    console.log(userData.email, userData.password);
+    console.log(
+      userData.email,
+      userData.password,
+      userData.phone,
+      userData.profileImage
+    );
   };
 
   const handleSumbit = async (e: any) => {
     e.preventDefault();
     console.log("submit");
     console.log(userData.password, cpassword);
+    console.log(userData);
     if (userData.password !== cpassword) {
       toast.error("password not matched");
       return;
     }
-    const response = await axios.post("/api/user/signup", userData);
+    const formData = new FormData();
+    formData.append("email", userData.email);
+    formData.append("password", userData.password);
+    formData.append("phone", userData.phone);
+    formData.append("profileImage", userData.profileImage);
+    const response = await axios.post("/api/user/signup", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     console.log(response.data);
   };
 
@@ -56,15 +72,17 @@ export default function Page() {
 
         <div className="border-2 border-black w-full sm:w-full md:w-1/2 lg:xl:w-1/2 h-screen flex flex-col items-center justify-center gap-2 ">
           <div className=" left-20 top-4">
-            <label htmlFor="uploadImage">Profile Image</label>
+            <label htmlFor="profileImage">Profile Image</label>
             <div className="h-[150px] w-[150px] bg-[#d4a373] rounded-full flex flex-col items-center justify-center p-1 ">
-              <label htmlFor="uploadImage" className="w-[150px] text-center">
+              <label htmlFor="profileImage" className="w-[150px] text-center">
                 Click to upload
               </label>
               <input
                 type="file"
-                id="uploadImage"
-                name="uploadImage"
+                id="profileImage"
+                name="profileImage"
+                value={userData.profileImage}
+                onChange={handleChange}
                 className="hidden"
               />
             </div>

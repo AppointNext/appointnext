@@ -24,10 +24,20 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Phone is required"],
     },
+    role: {
+      type: String,
+      required: [true, "Role is required"],
+      default: "user",
+    }, //we have three roles: user ,company ,admin
     address: {
       type: String,
       required: [true, "Address is required"],
     },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+
     refreshToken: {
       type: String,
     },
