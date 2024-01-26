@@ -47,7 +47,7 @@ export default function Page() {
   };
   return (
     <div className=" flex flex-row bg-[#ccd5ae] ">
-      <div className="border-2 border-black w-1/2 h-screen lg:block 2xl:block sm:flex flex justify-center 2xl:flex items-center md:block items-center justify-center hidden lg:flex md:flex">
+      <div className="border-2 border-black w-1/2 h-screen lg:block 2xl:block sm:flex flex justify-center 2xl:flex items-center md:block items-center justify-center hidden lg:flex md:flex bg-gradient-to-tr from-black to-white ">
         <Image
           src="./login.svg"
           width={500} // Set the width of the image
@@ -105,7 +105,6 @@ export default function Page() {
               onSuccess={successLogin}
               onFailure={failedLogin}
             /> */}
-            ;
           </div>
           <div className=" flex flex-row border-2 border-black rounded-xl p-2  px-2 m-1 active:translate-y-1 items-center justify-between gap-1 w-[150px] bg-[#fefae0]">
             <FaFacebook className="text-2xl" />
