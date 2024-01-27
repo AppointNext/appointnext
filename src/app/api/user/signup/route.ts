@@ -35,13 +35,17 @@ export async function POST(req: NextRequest) {
     if (existedUser) {
       throw new ApiError(409, "User with email or username already exists");
     }
-    console.log(reqBody);
+    console.log(reqBody.profileImage);
 
     let profileImageLocalPath;
-    if (reqBody.files && Array.isArray(reqBody.files) && reqBody.files > 0) {
-      profileImageLocalPath = reqBody.files.profileImage[0].path;
+    if (
+      reqBody.profileImage &&
+      Array.isArray(reqBody.profileImage) &&
+      reqBody.profileImage > 0
+    ) {
+      profileImageLocalPath = reqBody.profileImage;
     }
-
+    console.log(profileImageLocalPath);
     if (!profileImageLocalPath) {
       throw new ApiError(400, "profileImage file is required");
     }

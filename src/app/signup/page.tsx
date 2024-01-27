@@ -38,23 +38,16 @@ export default function Page() {
 
   const handleSumbit = async (e: any) => {
     e.preventDefault();
-    console.log("submit");
-    console.log(userData.password, cpassword);
-    console.log(userData);
     if (userData.password !== cpassword) {
       toast.error("password not matched");
       return;
     }
     const formData = new FormData();
-    formData.append("email", userData.email);
-    formData.append("password", userData.password);
-    formData.append("phone", userData.phone);
-    formData.append("profileImage", userData.profileImage);
-    const response = await axios.post("/api/user/signup", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    formData.set("email", userData.email);
+    formData.set("password", userData.password);
+    formData.set("phone", userData.phone);
+    formData.set("profileImage", userData.profileImage.name);
+    const response = await axios.post("/api/user/signup", userData);
     console.log(response.data);
   };
 
