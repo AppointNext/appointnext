@@ -11,8 +11,14 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cookie from "js-cookie";
+import { useForm } from "react-hook-form";
 
 export default function Page() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const router = useRouter();
   const [userData, setUserData] = useState({
     email: "",
@@ -36,23 +42,30 @@ export default function Page() {
     );
   };
 
-  const handleSumbit = async (e: any) => {
+  const handleSubmitForm = async (e: any) => {
     e.preventDefault();
+    console.log("submit");
+    console.log(userData.password, cpassword);
+    console.log(userData);
     if (userData.password !== cpassword) {
       toast.error("password not matched");
       return;
     }
     const formData = new FormData();
-    formData.set("email", userData.email);
-    formData.set("password", userData.password);
-    formData.set("phone", userData.phone);
-    formData.set("profileImage", userData.profileImage.name);
-    const response = await axios.post("/api/user/signup", userData);
+    formData.append("email", userData.email);
+    formData.append("password", userData.password);
+    formData.append("phone", userData.phone);
+    formData.append("profileImage", userData.profileImage);
+    const response = await axios.post("/api/user/signup", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     console.log(response.data);
   };
 
   return (
-    <form action="" onSubmit={handleSumbit}>
+    <form action="" onSubmit={handleSubmit((data: any) => console.log(data))}>
       <div className=" flex flex-row bg-[#ccd5ae]  ">
         <div className="border-2 border-black w-1/2 h-screen lg:block 2xl:block sm:flex flex-col md:block items-center justify-center hidden lg:flex md:flex 2xl:flex  bg-gradient-to-r from-[#fbcac2] to-[#a8c9fe] ">
           <Image
@@ -71,6 +84,7 @@ export default function Page() {
                 Click to upload
               </label>
               <input
+                {...register("profileImage")}
                 type="file"
                 id="profileImage"
                 name="profileImage"
@@ -83,6 +97,7 @@ export default function Page() {
           <div className="flex flex-col w-[400px]">
             <label htmlFor="email">Email</label>
             <input
+              {...register("email", { required: true })}
               type="email"
               className="border-2 border-black rounded p-1  bg-[#d4a373] "
               name="email"
@@ -94,6 +109,7 @@ export default function Page() {
           <div className="flex flex-col relative w-[400px] justify-center">
             <label htmlFor="password">Password</label>
             <input
+              {...register("password", { required: true })}
               type={showp ? "text" : "password"}
               className="border-2 border-black rounded p-1  bg-[#d4a373] "
               name="password"
@@ -109,6 +125,7 @@ export default function Page() {
           <div className="flex flex-col relative w-[400px] justify-center">
             <label htmlFor="confirm-password">Confirm Password</label>
             <input
+              {...register("confirm-password")}
               type={showcp ? "text" : "password"}
               className="border-2 border-black rounded p-1 pl-2 bg-[#d4a373]"
               name="confirm-password"
@@ -124,6 +141,7 @@ export default function Page() {
           <div className="flex flex-col w-[400px]">
             <label htmlFor="phone">Phone no</label>
             <input
+              {...register("phone")}
               type="text"
               className="border-2 border-black rounded p-1  bg-[#d4a373] "
               name="phone"
