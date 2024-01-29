@@ -17,8 +17,8 @@ const page = () => {
   return (
     <div>
       {/* we are going to make navbar */}
-      <div className="flex flex-row w-screen border-b-[1px] border-black shadow-lg p-3 bg-[#FFC8DD] ">
-        <ul className="flex flex-row items-center  justify-between w-full ">
+      <div className="flex w-screen flex-row border-b-[1px] border-black bg-[#FFC8DD] p-3 shadow-lg ">
+        <ul className="flex w-full flex-row  items-center justify-between ">
           <Link href="">
             <li>
               <Image
@@ -31,7 +31,7 @@ const page = () => {
           </Link>
           {listItems.map((item, index) => (
             <Link href={item.link} key={index}>
-              <li className="hover:font-bold transition-all w-[150px]">
+              <li className="w-[150px] transition-all hover:font-bold">
                 {item.name}
               </li>
             </Link>
@@ -39,10 +39,10 @@ const page = () => {
         </ul>
       </div>
       <div
-        className="h-screen w-screen bg-[#ffffff] flex flex-row items-center justify-center border-b-[1px] border-black shadow-2xl
+        className="flex h-screen w-screen flex-row items-center justify-center border-b-[1px] border-black bg-[#ffffff] shadow-2xl
       "
       >
-        <div className="p-40">Book Appointment like never before</div>
+        <div className="p-40 ">Book Appointment like never before</div>
         <div>
           <Image
             className=""
