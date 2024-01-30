@@ -1,137 +1,91 @@
 "use client";
-import { GoogleLogin } from "@matheusluizn/react-google-login";
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { FaGoogle } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
-import { GrHide } from "react-icons/gr";
+import { Metadata } from "next";
 import Image from "next/image";
-import { gapi } from "gapi-script";
+import Link from "next/link";
 
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { UserAuthForm } from "@/app/user/profile/user-auth-form";
 
-export default function Page() {
-  useEffect(() => {
-    const start = () => {
-      gapi.client.init({
-        clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-        scope: "email",
-      });
-    };
-    gapi.load("client:auth2", start);
-  }, []);
-  const router = useRouter();
-  const [showp, setShowP] = useState(false);
-  const [userData, setUserData] = useState({
-    email: "",
-    password: "",
-  });
-  const successLogin = (response: any) => {
-    console.log(response);
-  };
+// export const metadata: Metadata = {
+//   title: "Authentication",
+//   description: "Authentication forms built using the components.",
+// };
 
-  const failedLogin = (response: any) => {
-    console.log(response);
-  };
-  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-
-  const handleGoogleLogin = (response: any) => {};
-
-  const handleChange = (e: any) => {
-    e.preventDefault();
-    const { name, value } = e.target;
-    setUserData((prev) => ({ ...prev, [name]: value }));
-    //console.log(userData.username, userData.password);
-  };
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    const { email, password } = userData;
-    const data = {
-      email,
-      password,
-    };
-    const res = await axios.post("/api/user/login", data);
-    console.log(res.data);
-
-    toast.success(res.data.message);
-    router.push("/");
-  };
+export default function AuthenticationPage() {
   return (
-    <form action="">
-      <div className=" flex flex-row bg-[#ccd5ae] ">
-        <div className="border-2 border-black w-1/2 h-screen lg:block 2xl:block sm:flex flex justify-center 2xl:flex items-center md:block items-center justify-center hidden lg:flex md:flex bg-gradient-to-tr from-black to-white ">
-          <Image
-            src="./login.svg"
-            width={500} // Set the width of the image
-            height={300}
-            alt="Picture of the author"
-          />
+    <>
+      <div className="md:hidden ">
+        <Image
+          src="/examples/authentication-light.png"
+          width={1280}
+          height={843}
+          alt="Authentication"
+          className="block dark:hidden"
+        />
+        <Image
+          src="/examples/authentication-dark.png"
+          width={1280}
+          height={843}
+          alt="Authentication"
+          className="hidden dark:block"
+        />
+      </div>
+      <div className="container relative hidden  flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0 h-screen">
+        <Link
+          href="/examples/authentication"
+          className={cn(
+            buttonVariants({ variant: "ghost" }),
+            "absolute right-4 top-4 md:right-8 md:top-8"
+          )}
+        >
+          Login
+        </Link>
+        <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
+          <div className="absolute inset-0 bg-zinc-900" />
+          <div className="relative z-20 flex items-center justify-center text-lg font-medium">
+            <Image
+              src="/login.svg"
+              width={600}
+              height={800}
+              alt="login-svg"
+            ></Image>
+          </div>
+          <div className="relative z-20 mt-auto">
+            <blockquote className="space-y-2"></blockquote>
+          </div>
         </div>
-
-        <div className="border-2 border-black w-full sm:w-full md:w-1/2 lg:xl:w-1/2 h-screen flex flex-col items-center justify-center gap-2 ">
-          <div className="flex flex-col w-[400px]">
-            <label htmlFor="email">Username</label>
-            <input
-              type="text"
-              className="border-2 border-black rounded p-1  bg-[#d4a373] "
-              name="email"
-              id="email"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex flex-col w-[400px] relative ">
-            <label htmlFor="password">Password</label>
-            <input
-              type={showp ? "text" : "password"}
-              className="border-2 border-black rounded p-1 bg-[#d4a373] "
-              name="password"
-              id="password"
-              onChange={handleChange}
-            />
-            <GrHide
-              className="absolute bottom-1 transform -translate-y-1/2 right-2 cursor-pointer"
-              onClick={() => setShowP((prev) => !prev)}
-            ></GrHide>
-          </div>
-          <p>
-            Dont have an account?{" "}
-            <span
-              onClick={() => router.push("/signup")}
-              className=" hover:cursor-pointer hover:text-blue-500 text-blue-400"
-            >
-              create one....
-            </span>
-          </p>
-
-          <button
-            className="border-2 border-black rounded-xl p-2 px-4 m-1 active:translate-y-1 bg-[#fefae0] "
-            onClick={handleSubmit}
-          >
-            Login
-          </button>
-          <h1>OR</h1>
-          <div className="flex flex-row">
-            <div className=" flex flex-row border-2 border-black rounded-xl p-2  px-2 m-1 active:translate-y-1 items-center justify-between gap-1 w-[150px] bg-[#fefae0]">
-              <FaGoogle className="text-2xl static" />
-              <button className="">Google</button>
-              {/* <GoogleLogin
-              // clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
-              buttonText="Login"
-              onSuccess={successLogin}
-              onFailure={failedLogin}
-            /> */}
+        <div className="lg:p-8">
+          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+            <div className="flex flex-col space-y-2 text-center">
+              <h1 className="text-2xl font-semibold tracking-tight">
+                Login into your account
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Enter your email below to login
+              </p>
             </div>
-            <div className=" flex flex-row border-2 border-black rounded-xl p-2  px-2 m-1 active:translate-y-1 items-center justify-between gap-1 w-[150px] bg-[#fefae0]">
-              <FaFacebook className="text-2xl" />
-              <button className="">Facebook</button>
-            </div>
+            <UserAuthForm />
+            <p className="px-8 text-center text-sm text-muted-foreground">
+              By clicking continue, you agree to our{" "}
+              <Link
+                href="/terms"
+                className="underline underline-offset-4 hover:text-primary"
+              >
+                Terms of Service
+              </Link>{" "}
+              and{" "}
+              <Link
+                href="/privacy"
+                className="underline underline-offset-4 hover:text-primary"
+              >
+                Privacy Policy
+              </Link>
+              .
+            </p>
           </div>
         </div>
       </div>
-      <ToastContainer theme="dark" />
-    </form>
+    </>
   );
 }

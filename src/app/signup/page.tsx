@@ -1,190 +1,104 @@
-"use client";
-
-import React, { use, useState } from "react";
-import { GrHide } from "react-icons/gr";
-import { useRouter } from "next/navigation";
-import { FaGoogle } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
+import { Metadata } from "next";
 import Image from "next/image";
-import axios from "axios";
+import Link from "next/link";
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Cookie from "js-cookie";
-import { useForm } from "react-hook-form";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { UserAuthForm } from "@/app/user/profile/user-auth-form";
 
-export default function Page() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const router = useRouter();
-  const [userData, setUserData] = useState({
-    email: "",
-    password: "",
-    phone: "",
-    profileImage: "",
-  });
-  const [cpassword, setCPassword] = useState("");
-  const [showp, setShowP] = useState(false);
-  const [showcp, setShowCP] = useState(false);
+export const metadata: Metadata = {
+  title: "Authentication",
+  description: "Authentication forms built using the components.",
+};
 
-  const handleChange = (e: any) => {
-    e.preventDefault();
-    const { name, value } = e.target;
-    setUserData((prev) => ({ ...prev, [name]: value }));
-    console.log(
-      userData.email,
-      userData.password,
-      userData.phone,
-      userData.profileImage
-    );
-  };
-
-  const handleSubmitForm = async (e: any) => {
-    e.preventDefault();
-    console.log("submit");
-    console.log(userData.password, cpassword);
-    console.log(userData);
-    if (userData.password !== cpassword) {
-      toast.error("password not matched");
-      return;
-    }
-    const formData = new FormData();
-    formData.append("email", userData.email);
-    formData.append("password", userData.password);
-    formData.append("phone", userData.phone);
-    formData.append("profileImage", userData.profileImage);
-    const response = await axios.post("/api/user/signup", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    console.log(response.data);
-  };
-
+export default function AuthenticationPage() {
   return (
-    <form action="" onSubmit={handleSubmit((data: any) => console.log(data))}>
-      <div className=" flex flex-row bg-[#ccd5ae]  ">
-        <div className="border-2 border-black w-1/2 h-screen lg:block 2xl:block sm:flex flex-col md:block items-center justify-center hidden lg:flex md:flex 2xl:flex  bg-gradient-to-r from-[#fbcac2] to-[#a8c9fe] ">
-          <Image
-            src="./login.svg"
-            width={500} // Set the width of the image
-            height={300}
-            alt="Picture of the author"
-          />
-        </div>
-
-        <div className="border-2 border-black w-full sm:w-full md:w-1/2 lg:xl:w-1/2 h-screen flex flex-col items-center justify-center gap-2 ">
-          <div className=" left-20 top-4">
-            <label htmlFor="profileImage">Profile Image</label>
-            <div className="h-[150px] w-[150px] bg-[#d4a373] rounded-full flex flex-col items-center justify-center p-1 ">
-              <label htmlFor="profileImage" className="w-[150px] text-center">
-                Click to upload
-              </label>
-              <input
-                {...register("profileImage")}
-                type="file"
-                id="profileImage"
-                name="profileImage"
-                value={userData.profileImage}
-                onChange={handleChange}
-                className="hidden"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col w-[400px]">
-            <label htmlFor="email">Email</label>
-            <input
-              {...register("email", { required: true })}
-              type="email"
-              className="border-2 border-black rounded p-1  bg-[#d4a373] "
-              name="email"
-              id="email"
-              value={userData.email}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex flex-col relative w-[400px] justify-center">
-            <label htmlFor="password">Password</label>
-            <input
-              {...register("password", { required: true })}
-              type={showp ? "text" : "password"}
-              className="border-2 border-black rounded p-1  bg-[#d4a373] "
-              name="password"
-              value={userData.password}
-              id="password"
-              onChange={handleChange}
-            />
-            <GrHide
-              className="absolute bottom-1 transform -translate-y-1/2 right-2 cursor-pointer"
-              onClick={() => setShowP((prev) => !prev)}
-            ></GrHide>
-          </div>
-          <div className="flex flex-col relative w-[400px] justify-center">
-            <label htmlFor="confirm-password">Confirm Password</label>
-            <input
-              {...register("confirm-password")}
-              type={showcp ? "text" : "password"}
-              className="border-2 border-black rounded p-1 pl-2 bg-[#d4a373]"
-              name="confirm-password"
-              id="confirm-password"
-              value={cpassword}
-              onChange={(e) => setCPassword(e.target.value)}
-            />
-            <GrHide
-              onClick={() => setShowCP((prev) => !prev)}
-              className="absolute bottom-1 transform -translate-y-1/2 right-2 cursor-pointer"
-            ></GrHide>
-          </div>
-          <div className="flex flex-col w-[400px]">
-            <label htmlFor="phone">Phone no</label>
-            <input
-              {...register("phone")}
-              type="text"
-              className="border-2 border-black rounded p-1  bg-[#d4a373] "
-              name="phone"
-              value={userData.phone}
-              id="phone"
-              onChange={handleChange}
-            />
-          </div>
-
-          <p>
-            Already have an account?{" "}
-            <span
-              onClick={() => router.push("/login")}
-              className=" hover:cursor-pointer hover:text-blue-500 text-blue-400"
+    <>
+      <div className="md:hidden ">
+        <Image
+          src="/examples/authentication-light.png"
+          width={1280}
+          height={843}
+          alt="Authentication"
+          className="block dark:hidden"
+        />
+        <Image
+          src="/examples/authentication-dark.png"
+          width={1280}
+          height={843}
+          alt="Authentication"
+          className="hidden dark:block"
+        />
+      </div>
+      <div className="container relative hidden  flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0 h-screen">
+        <Link
+          href="/login"
+          className={cn(
+            buttonVariants({ variant: "ghost" }),
+            "absolute right-4 top-4 md:right-8 md:top-8"
+          )}
+        >
+          Login
+        </Link>
+        <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
+          <div className="absolute inset-0 bg-zinc-900" />
+          <div className="relative z-20 flex items-center text-lg font-medium">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="mr-2 h-6 w-6"
             >
-              wanna login....
-            </span>
-          </p>
-
-          <button
-            className="border-2 border-black rounded-xl p-2 px-4 m-1 active:translate-y-1 bg-[#fefae0] "
-            type="submit"
-          >
-            Sign Up
-          </button>
-          <h1>OR</h1>
-          <div className="flex flex-row">
-            <div className=" flex flex-row border-2 border-black rounded-xl p-2  px-2 m-1 active:translate-y-1 items-center justify-between gap-1 w-[150px] bg-[#fefae0]">
-              <FaGoogle className="text-2xl static" />
-              <button className="" type="submit">
-                Google
-              </button>
+              <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
+            </svg>
+            Acme Inc
+          </div>
+          <div className="relative z-20 mt-auto">
+            <blockquote className="space-y-2">
+              <p className="text-lg">
+                &ldquo;This library has saved me countless hours of work and
+                helped me deliver stunning designs to my clients faster than
+                ever before.&rdquo;
+              </p>
+              <footer className="text-sm">Sofia Davis</footer>
+            </blockquote>
+          </div>
+        </div>
+        <div className="lg:p-8">
+          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+            <div className="flex flex-col space-y-2 text-center">
+              <h1 className="text-2xl font-semibold tracking-tight">
+                Create an account
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Enter your email below to create your account
+              </p>
             </div>
-            <div className=" flex flex-row border-2 border-black rounded-xl p-2  px-2 m-1 active:translate-y-1 items-center justify-between gap-1 w-[150px] bg-[#fefae0]">
-              <FaFacebook className="text-2xl" />
-              <button className="" type="submit">
-                Facebook
-              </button>
-            </div>
+            <UserAuthForm />
+            <p className="px-8 text-center text-sm text-muted-foreground">
+              By clicking continue, you agree to our{" "}
+              <Link
+                href="/terms"
+                className="underline underline-offset-4 hover:text-primary"
+              >
+                Terms of Service
+              </Link>{" "}
+              and{" "}
+              <Link
+                href="/privacy"
+                className="underline underline-offset-4 hover:text-primary"
+              >
+                Privacy Policy
+              </Link>
+              .
+            </p>
           </div>
         </div>
       </div>
-      <ToastContainer theme="dark" />
-    </form>
+    </>
   );
 }
