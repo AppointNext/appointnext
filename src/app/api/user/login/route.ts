@@ -1,4 +1,3 @@
-import { cookie } from "cookie-parser";
 import jwt from "jsonwebtoken";
 import { dbConnect } from "@/dbConfig/dbConfig";
 import User from "@/models/user.model";
@@ -23,7 +22,7 @@ const generateAccessToken = async (user: any) => {
   });
 };
 
-const generateRefreshToken = async (user: any) => {
+export const generateRefreshToken = async (user: any) => {
   return jwt.sign(
     { id: user._id, email: user.email },
     process.env.REFRESH_TOKEN_SECRET!,

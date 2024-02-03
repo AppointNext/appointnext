@@ -37,7 +37,14 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
-
+    forgotPassword: {
+      data: String,
+      default: "",
+    },
+    verfiyToken: {
+      type: String,
+      default: "",
+    },
     refreshToken: {
       type: String,
     },
