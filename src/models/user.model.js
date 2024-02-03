@@ -8,7 +8,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      lowecase: true,
+      lowercase: true, // Fix the typo here
       trim: true,
     },
 
@@ -31,19 +31,11 @@ const userSchema = new Schema(
     }, //we have three roles: user ,company ,admin
     address: {
       type: String,
-      required: [true, "Address is required"],
+      required: false,
     },
     isVerified: {
       type: Boolean,
       default: false,
-    },
-    forgotPassword: {
-      data: String,
-      default: "",
-    },
-    verfiyToken: {
-      type: String,
-      default: "",
     },
     refreshToken: {
       type: String,

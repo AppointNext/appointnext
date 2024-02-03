@@ -5,6 +5,7 @@ import ApiError from "@/helper/ApiError";
 import ApiResponse from "@/helper/ApiResponse";
 import bcrypt from "bcrypt";
 import uploadToCloudinary from "@/helper/uploadToCloudinary";
+import { sendMail } from "@/helper/mailer";
 
 dbConnect();
 const hashPassword = async (password: string) => {
@@ -22,9 +23,9 @@ export async function POST(req: NextRequest) {
     const reqBody = await req.json();
     const { email, password, phone } = reqBody;
     // console.log(reqBody);
-    //console.log("email: ", email);
+    console.log("email: ", email, "password: ", password, "phone: ", phone);
 
-    if ([email, password].some((field) => field?.trim() === "")) {
+    if ([email, password, phone].some((field) => field?.trim() === "")) {
       throw new ApiError(400, "All fields are required");
     }
 
@@ -35,20 +36,20 @@ export async function POST(req: NextRequest) {
     if (existedUser) {
       throw new ApiError(409, "User with email or username already exists");
     }
-    console.log(reqBody.profileImage);
+    // console.log(reqBody.profileImage);
 
-    let profileImageLocalPath;
-    if (
-      reqBody.profileImage &&
-      Array.isArray(reqBody.profileImage) &&
-      reqBody.profileImage > 0
-    ) {
-      profileImageLocalPath = reqBody.profileImage;
-    }
-    console.log(profileImageLocalPath);
-    if (!profileImageLocalPath) {
-      throw new ApiError(400, "profileImage file is required");
-    }
+    // let profileImageLocalPath;
+    // if (
+    //   reqBody.profileImage &&
+    //   Array.isArray(reqBody.profileImage) &&
+    //   reqBody.profileImage > 0
+    // ) {
+    //   profileImageLocalPath = reqBody.profileImage;
+    // }
+    // console.log(profileImageLocalPath);
+    // if (!profileImageLocalPath) {
+    //   throw new ApiError(400, "profileImage file is required");
+    // }
 
     // const profileImage = await uploadToCloudinary(profileImageLocalPath);
     // if (!profileImage) {
@@ -74,6 +75,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const response = await sendMail({
+      email,
+      emailType: "VERIFY",
+      userId: createdUser._id,
+    });
+    console.log(response);
     return NextResponse.json(
       new ApiResponse(200, createdUser, "User registered Successfully")
     );

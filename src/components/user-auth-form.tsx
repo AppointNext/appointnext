@@ -32,11 +32,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     event.preventDefault();
     setIsLoading(true);
 
-    const response = await axios.post("/api/auth/signup", userData);
-    if (response.status === 200) {
-      console.log(response.data);
+    const response = await axios.post("/api/user/signup", userData);
+    if (response.data.success === true) {
+      console.log(response.data.success);
       setIsLoading(false);
       router.push("/login");
+    } else {
+      console.log(response.data.message);
+      setIsLoading(false);
     }
   }
 

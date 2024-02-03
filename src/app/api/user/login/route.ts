@@ -22,7 +22,7 @@ const generateAccessToken = async (user: any) => {
   });
 };
 
-export const generateRefreshToken = async (user: any) => {
+const generateRefreshToken = async (user: any) => {
   return jwt.sign(
     { id: user._id, email: user.email },
     process.env.REFRESH_TOKEN_SECRET!,
@@ -32,7 +32,7 @@ export const generateRefreshToken = async (user: any) => {
   );
 };
 
-const generateRefreshAndAccessToken = async (userId: any) => {
+export const generateRefreshAndAccessToken = async (userId: any) => {
   const user = await User.findById(userId);
   if (!user) {
     throw new Error("User not found");
