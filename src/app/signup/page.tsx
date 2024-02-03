@@ -4,7 +4,8 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import { UserAuthForm } from "@/app/user/profile/user-auth-form";
+import { UserAuthForm } from "@/components/user-auth-form";
+UserAuthForm;
 
 export const metadata: Metadata = {
   title: "Authentication",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 export default function AuthenticationPage() {
   return (
     <>
-      <div className="md:hidden ">
+      <div className="md:hidden">
         <Image
           src="/examples/authentication-light.png"
           width={1280}
@@ -30,7 +31,7 @@ export default function AuthenticationPage() {
           className="hidden dark:block"
         />
       </div>
-      <div className="container relative hidden  flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0 h-screen">
+      <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <Link
           href="/login"
           className={cn(

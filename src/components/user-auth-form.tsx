@@ -2,11 +2,13 @@
 
 import * as React from "react";
 
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import axios from "axios";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -17,20 +19,25 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     password: "",
     phone: "",
   });
+  const router = useRouter();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setUserData((prev) => ({ ...prev, [name]: value }));
     console.log(name, value); // Log the updated name and value
+    console.log(userData); // Log the updated userData object
   };
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     setIsLoading(true);
 
-    setTimeout(() => {
+    const response = await axios.post("/api/auth/signup", userData);
+    if (response.status === 200) {
+      console.log(response.data);
       setIsLoading(false);
-    }, 3000);
+      router.push("/login");
+    }
   }
 
   return (
@@ -46,12 +53,12 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               placeholder="name@example.com"
               type="email"
               autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-              disabled={isLoading}
               name="email"
               value={userData.email}
               onChange={handleChange}
+              autoComplete="email"
+              autoCorrect="off"
+              disabled={isLoading}
             />
           </div>
           <div className="grid gap-1">
@@ -60,36 +67,33 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             </Label>
             <Input
               id="password"
-              placeholder="******"
+              placeholder="example@123"
               type="password"
-              disabled={isLoading}
               name="password"
               value={userData.password}
               onChange={handleChange}
+              disabled={isLoading}
             />
           </div>
-
           <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="password">
+            <Label className="sr-only" htmlFor="phone">
               Phone
             </Label>
             <Input
               id="phone"
-              placeholder="1234567890"
+              placeholder="123-456-7890"
               type="tel"
-              autoCapitalize="none"
-              autoCorrect="off"
-              disabled={isLoading}
               name="phone"
               value={userData.phone}
               onChange={handleChange}
+              disabled={isLoading}
             />
           </div>
           <Button disabled={isLoading}>
             {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
-            Log In with Email
+            Sign In with Email
           </Button>
         </div>
       </form>
@@ -114,4 +118,3 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     </div>
   );
 }
-export default UserAuthForm;
