@@ -33,7 +33,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     setIsLoading(true);
 
     const response = await axios.post("/api/user/signup", userData);
-    if (response.data.success === true) {
+    if (response.data.message.success === true) {
       console.log(response.data.success);
       setIsLoading(false);
       router.push("/login");

@@ -5,10 +5,12 @@ import nodemailer from "nodemailer";
 
 export const sendMail = async ({ email, emailType, userId }: any) => {
   try {
+    // console.log(userId, emailType, email);
     const hashedToken = await bcrypt.hash(userId.toString(), 10);
     const user = await User.findById(userId);
     const { refreshToken, accessToken }: any =
-      generateRefreshAndAccessToken(userId);
+      await generateRefreshAndAccessToken(userId);
+    // console.log("refreshToken: ", refreshToken, "accessToken: ", accessToken);
     user.refreshToken = refreshToken;
     await user.save({ validateBeforeSave: false });
     if (emailType === "VERIFY") {
@@ -30,8 +32,9 @@ export const sendMail = async ({ email, emailType, userId }: any) => {
         from: "unknowncoder705@gmail.com",
         to: email,
         subject: "Account Verification",
-        text: `Please click on the link to verify your account: <a>${process.env.DOMAIN}/verify/refreshToken=${refreshToken}/accessToken=${accessToken}</a>`,
+        html: `Please click on the link to verify your account: <a href="${process.env.DOMAIN}/verify/refreshToken=${refreshToken}/accessToken=${accessToken}">${process.env.DOMAIN}/refreshToken=${refreshToken}/accessToken=${accessToken}</a>`,
       };
+
       const mailResponse = await transport.sendMail(mailOptions);
       return mailResponse;
     }

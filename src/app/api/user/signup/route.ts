@@ -80,12 +80,14 @@ export async function POST(req: NextRequest) {
       emailType: "VERIFY",
       userId: createdUser._id,
     });
-    console.log(response);
     return NextResponse.json(
-      new ApiResponse(200, createdUser, "User registered Successfully")
+      new ApiResponse(
+        200,
+        { createdUser, success: true },
+        "User registered Successfully"
+      )
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ success: false });
   }
 }
