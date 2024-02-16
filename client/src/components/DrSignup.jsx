@@ -37,17 +37,16 @@ const DrSignup = () => {
                     
 
                     <label htmlFor='Password' className=' text-start'>Password</label>
-                    <div className='flex gap-2'><input className=' w-[15rem] rounded-md py-2 px-1 text-start' value={form.pass} type={seepass?'text':'password'} name='pass' required id='Password' onChange={changeHandler}  placeholder='Set Your Password'/>
-                    <span><button className=' bg-blue-200 hover:bg-blue-500 rounded-md px-1 py-2' onClick={()=>(
-                        setSeepass((prev)=>(!prev))
-                    )}>See</button></span></div>
-                   
-
+                    <div className='flex gap-2 items-center'><input className=' w-[15rem] rounded-md py-2 px-1 text-start' value={form.pass} type={seepass?'text':'password'} name='pass' required id='Password' onChange={changeHandler}  placeholder='Set Your Password'/>
+                    <span  onClick={()=>(setSeepass((prev)=>(!prev)))}>
+                        {seepass ? (<i className="fa-solid fa-eye"></i>) : (<i className="fa-solid fa-eye-slash"></i>)}
+                    </span></div>
+                    
                     <label htmlFor='cnfPass' className='flex justify-start'>Confirm Password</label>
                     <div className='flex items-center gap-2'><input className=' w-[15rem] rounded-md py-2 px-1 text-start' value={form.cnfpass} type={seeCpass?'text':'password'} name='cnfpass' required id='cnfPass' onChange={changeHandler}  placeholder='confirm Password'/>
-                    <span><button className=' bg-blue-200 hover:bg-blue-500  rounded-md px-1 py-2' onClick={()=>(
-                        setSeeCpass((prev)=>(!prev))
-                    )}>See</button></span></div>
+                    <span onClick={()=>(setSeeCpass((prev)=>(!prev)))}>
+                        {seeCpass ? (<i className="fa-solid fa-eye"></i>) : (<i className="fa-solid fa-eye-slash"></i>)}
+                    </span></div>
                     
                     <button className=' bg-blue-600 text-white font-bold px-2 py-2 rounded-lg text-center text-sm'>SignUp</button>
                 </form>
