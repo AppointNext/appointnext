@@ -153,9 +153,10 @@ const DrSignup = () => {
           </button>
         </form>
       </div>
+      d
       <div className="w-1/2 flex items-center justify-center flex-col bg-[#003cd8]">
         <img
-          src="../../public/Doctors-cuate.svg"
+          src="/Doctors-cuate.svg"
           alt="signup image"
           className="w-[500px] h-[500px]"
         />
