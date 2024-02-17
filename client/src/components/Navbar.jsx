@@ -3,7 +3,7 @@ import React from "react";
 const Navbar = () => {
   return (
     <>
-      <div className="flex flex-row items-center justify-between px-14 py-8">
+      <div className="flex flex-row items-center justify-between  py-8">
         <div className="flex flex-row items-center cursor-pointer ">
           <img src="./logo.png" alt="logo" className="h-[50px]" />
           <p className="inline text-[24px] pl-2">
