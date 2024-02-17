@@ -35,7 +35,7 @@ const DrSignup = () => {
       <div className="flex flex-col w-1/2 justify-center items-center">
         <div className="bg-[#003cd8] rounded-3xl w-[12rem] text-white py-2 flex items-center justify-center h-[80px]">
           <button
-            className={`hover:text-black p-2 m-0.5 hover:rounded-2xl py-2 hover:bg-white hover:transition-all ${
+            className={`hover:text-black p-2 m-0.5 hover:rounded-2xl py-2 hover:bg-white transition-all ${
               page === false ? "bg-white text-black rounded-2xl" : "text-white"
             }`}
             onClick={() => setPage(false)}
@@ -148,7 +148,7 @@ const DrSignup = () => {
             </span>
           </div>
 
-          <button className="bg-[#003CD8] text-white font-bold px-2 py-2 rounded-lg text-center text-sm">
+          <button className="bg-[#003CD8] text-white font-bold px-2 py-2 rounded-lg text-center text-sm hover:bg-[#4874e2]">
             SignUp
           </button>
         </form>

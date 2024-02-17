@@ -1,7 +1,7 @@
 import React from "react";
 import DrSignup from "../components/Form";
 
-const DoctorSignup = () => {
+const Signup = () => {
   return (
     <>
       <DrSignup></DrSignup>
@@ -9,4 +9,4 @@ const DoctorSignup = () => {
   );
 };
 
-export default DoctorSignup;
+export default Signup;
