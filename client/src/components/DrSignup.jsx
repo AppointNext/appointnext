@@ -20,18 +20,17 @@ const DrSignup = () => {
   }
 
   return (
-    <div>
-      <div className="bg-blue-500 rounded-3xl w-[12rem] text-white py-2">
-        <button className="hover:text-black p-2 m-0.5 hover:rounded-2xl py-2 hover:bg-white">
-          Patient
-        </button>
-        <button className="hover:text-black p-2 m-0.5 hover:rounded-2xl py-2 hover:bg-white">
-          Doctor
-        </button>
-      </div>
-
-      <div className="flex flex-row">
-        <div className=" flex-col  w-[420px] border-2 border-black">
+    <>
+      <div className="flex flex-row justify-between">
+        <div className=" flex-col w-1/2 pl-40 pt-20 ">
+          <div className="bg-blue-500 rounded-3xl w-[12rem] text-white py-2 flex items-center justify-center h-[80px]">
+            <button className="hover:text-black p-2 m-0.5 hover:rounded-2xl py-2 hover:bg-white hover:transition-all">
+              Patient
+            </button>
+            <button className="hover:text-black p-2 m-0.5 hover:rounded-2xl py-2 hover:bg-white">
+              Doctor
+            </button>
+          </div>
           <h1 className=" font-bold text-xl">Doctor Signup</h1>
           <form
             onSubmit={(e) => e.preventDefault()}
@@ -41,7 +40,7 @@ const DrSignup = () => {
               Name
             </label>
             <input
-              className=" w-[15rem] rounded-md py-2 px-1 text-start"
+              className=" w-[15rem] rounded-md py-2 px-1 text-start  bg-[#F3F4F6] "
               value={form.Name}
               type="text"
               name="Name"
@@ -55,7 +54,7 @@ const DrSignup = () => {
               specialization
             </label>
             <input
-              className=" w-[15rem] rounded-md py-2 px-1 text-start"
+              className=" w-[15rem] rounded-md py-2 px-1 text-start bg-[#F3F4F6]"
               value={form.specs}
               type="text"
               name="specs"
@@ -69,7 +68,7 @@ const DrSignup = () => {
               Email
             </label>
             <input
-              className=" w-[15rem] rounded-md py-2 px-1 text-start"
+              className=" w-[15rem] rounded-md py-2 px-1 text-start bg-[#F3F4F6]"
               value={form.email}
               type="email"
               name="email"
@@ -84,7 +83,7 @@ const DrSignup = () => {
             </label>
             <div className="flex gap-2 items-center">
               <input
-                className=" w-[15rem] rounded-md py-2 px-1 text-start"
+                className=" w-[15rem] rounded-md py-2 px-1 text-start bg-[#F3F4F6]"
                 value={form.pass}
                 type={seepass ? "text" : "password"}
                 name="pass"
@@ -107,7 +106,7 @@ const DrSignup = () => {
             </label>
             <div className="flex items-center gap-2 justify-between w-screen">
               <input
-                className=" w-[15rem] rounded-md py-2 px-1 text-start"
+                className=" w-[15rem] rounded-md py-2 px-1 text-start bg-[#F3F4F6]"
                 value={form.cnfpass}
                 type={seeCpass ? "text" : "password"}
                 name="cnfpass"
@@ -130,7 +129,7 @@ const DrSignup = () => {
             </button>
           </form>
         </div>
-        <div>
+        <div className="w-1/2">
           <img
             src="../../public/Doctors-cuate.svg"
             alt="signup image"
@@ -138,7 +137,7 @@ const DrSignup = () => {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
