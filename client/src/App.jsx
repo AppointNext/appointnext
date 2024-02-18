@@ -6,10 +6,12 @@ import Signup from "./pages/Signup";
 function App() {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/doctor/signup" element={<Signup />} />
-      </Routes>
+      <div className=" overflow-hidden">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/doctor/signup" element={<Signup />} />
+        </Routes>
+      </div>
     </>
   );
 }
