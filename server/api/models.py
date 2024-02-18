@@ -1,7 +1,7 @@
 from django.db import models
 
-class user(models.Model):
-    username = models.CharField(max_length=20, unique=True)
+class User(models.Model):
+    username = models.CharField(max_length=20)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=20)
     phone = models.IntegerField()
@@ -16,7 +16,7 @@ class user(models.Model):
 
 class appointment(models.Model):
     # withDoctor = models.ForeignKey(user, related_name='doctor_appointments', on_delete=models.CASCADE)
-    user = models.ForeignKey(user, related_name='user_appointments', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='user_appointments', on_delete=models.CASCADE)
     # time = models.TimeField(auto_now_add=True)
     # date = models.DateField(auto_now_add=True)
 
