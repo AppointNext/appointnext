@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import axios from "axios";
 const DrSignup = () => {
   const [form, setForm] = useState({
     Name: "",
@@ -25,9 +25,15 @@ const DrSignup = () => {
     setState((prev) => !prev);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Add your form submission logic here
+    console.log(form);
+    const response = await axios.post(
+      "http://localhost:8000/api/doctorSignUp",
+      { form }
+    );
+    console.log(response.data);
   };
 
   return (
@@ -148,7 +154,10 @@ const DrSignup = () => {
             </span>
           </div>
 
-          <button className="bg-[#003CD8] text-white font-bold px-2 py-2 rounded-lg text-center text-sm hover:bg-[#4874e2]">
+          <button
+            className="bg-[#003CD8] text-white font-bold px-2 py-2 rounded-lg text-center text-sm hover:bg-[#4874e2]"
+            onClick={(e) => handleSubmit(e)}
+          >
             SignUp
           </button>
         </form>
