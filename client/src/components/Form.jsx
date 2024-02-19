@@ -7,6 +7,7 @@ const DrSignup = () => {
     specs: "",
     cnfpass: "",
     pass: "",
+    phone: 1234,
   });
   const [seepass, setSeepass] = useState(false);
   const [seeCpass, setSeeCpass] = useState(false);
@@ -31,7 +32,12 @@ const DrSignup = () => {
     console.log(form);
     const response = await axios.post(
       "http://localhost:8000/api/doctorSignUp",
-      { form }
+      {
+        username: form.Name,
+        password: form.pass,
+        phone: form.phone,
+        email: form.email,
+      }
     );
     console.log(response.data);
   };

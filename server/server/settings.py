@@ -56,6 +56,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'server.urls'
 CORS_ORIGIN_ALLOW_ALL = True
+APPEND_SLASH = False
 
 TEMPLATES = [
     {
