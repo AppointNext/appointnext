@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-
 const DrSignup = () => {
   const [form, setForm] = useState({
     Name: "",
@@ -11,7 +10,6 @@ const DrSignup = () => {
     pass: "",
     phone: 1234,
   });
-
   const [seepass, setSeepass] = useState(false);
   const [seeCpass, setSeeCpass] = useState(false);
   const [page, setPage] = useState(true);
@@ -22,6 +20,7 @@ const DrSignup = () => {
       ...prevForm,
       [name]: value,
     }));
+    console.log(form);
   };
 
   const togglePasswordVisibility = (setState) => {
@@ -30,30 +29,28 @@ const DrSignup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/doctorSignUp",
-        {
-          username: form.Name,
-          password: form.pass,
-          phone: form.phone,
-          email: form.email,
-        }
-      );
-      if (response.data.success) {
-        toast.success("Login successfully");
-      } else {
-        toast.error("Cannot login");
+    // Add your form submission logic here
+    console.log(form);
+    const response = await axios.post(
+      "http://localhost:8000/api/doctorSignUp",
+      {
+        username: form.Name,
+        password: form.pass,
+        phone: form.phone,
+        email: form.email,
       }
-    } catch (error) {
-      console.error("Error:", error);
-      toast.error("An error occurred. Please try again later.");
+    );
+    console.log(response.data);
+    if (response.data.success) {
+      toast.success("Login successfully");
+    } else {
+      toast.error("cannot login");
     }
   };
 
   return (
-    <div className="flex flex-col xl:flex-row justify-between h-screen">
-      <div className="flex flex-col justify-center items-center w-full xl:w-1/2 bg-[#003cd8]">
+    <div className="flex flex-row justify-between h-screen">
+      <div className="flex flex-col w-1/2 h-screen justify-center items-center">
         <div className="bg-[#003cd8] rounded-3xl w-[12rem] text-white py-2 flex items-center justify-center h-[80px]">
           <button
             className={`hover:text-black p-2 m-0.5 hover:rounded-2xl py-2 hover:bg-white transition-all ${
@@ -75,13 +72,13 @@ const DrSignup = () => {
         <h1 className="font-bold text-xl">Doctor Signup</h1>
         <form
           onSubmit={handleSubmit}
-          className="flex item-center flex-col justify-center gap-4 mt-4 w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] 2xl:w-[50%]"
+          className="flex item-center flex-col justify-center gap-4 mt-4 w-[800px] h-full"
         >
           <label htmlFor="Name" className="flex justify-start">
             Name
           </label>
           <input
-            className="w-full rounded-md py-2 px-1 text-start bg-[#F3F4F6]"
+            className="w-[15rem] rounded-md py-2 px-1 text-start bg-[#F3F4F6]"
             value={form.Name}
             type="text"
             name="Name"
@@ -97,7 +94,7 @@ const DrSignup = () => {
                 Specialization
               </label>
               <input
-                className="w-full rounded-md py-2 px-1 text-start bg-[#F3F4F6]"
+                className="w-[15rem] rounded-md py-2 px-1 text-start bg-[#F3F4F6]"
                 value={form.specs}
                 type="text"
                 name="specs"
@@ -113,7 +110,7 @@ const DrSignup = () => {
             Email
           </label>
           <input
-            className="w-full rounded-md py-2 px-1 text-start bg-[#F3F4F6]"
+            className="w-[15rem] rounded-md py-2 px-1 text-start bg-[#F3F4F6]"
             value={form.email}
             type="email"
             name="email"
@@ -128,7 +125,7 @@ const DrSignup = () => {
           </label>
           <div className="flex gap-2 items-center">
             <input
-              className="w-full rounded-md py-2 px-1 text-start bg-[#F3F4F6]"
+              className="w-[15rem] rounded-md py-2 px-1 text-start bg-[#F3F4F6]"
               value={form.pass}
               type={seepass ? "text" : "password"}
               name="pass"
@@ -149,9 +146,9 @@ const DrSignup = () => {
           <label htmlFor="cnfPass" className="flex justify-start">
             Confirm Password
           </label>
-          <div className="flex items-center gap-2 justify-between w-full">
+          <div className="flex items-center gap-2 justify-between w-screen">
             <input
-              className="w-full rounded-md py-2 px-1 text-start bg-[#F3F4F6]"
+              className="w-[15rem] rounded-md py-2 px-1 text-start bg-[#F3F4F6]"
               value={form.cnfpass}
               type={seeCpass ? "text" : "password"}
               name="cnfpass"
@@ -178,11 +175,11 @@ const DrSignup = () => {
         </form>
       </div>
 
-      <div className="flex items-center justify-center flex-col bg-[#003cd8] w-full xl:w-1/2">
+      <div className="w-1/2 h-screen flex items-center justify-center flex-col bg-[#003cd8]">
         <img
           src="/Doctors-cuate.svg"
           alt="signup image"
-          className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] xl:w-[600px] xl:h-[600px] 2xl:w-[700px] 2xl:h-[700px]"
+          className="w-[500px] h-[500px]"
         />
         <p className="text-white">We are here to serve the best to community</p>
       </div>
