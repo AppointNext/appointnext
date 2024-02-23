@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const DrSignup = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     Name: "",
     email: "",
@@ -43,6 +45,9 @@ const DrSignup = () => {
     console.log(response.data);
     if (response.data.success) {
       toast.success("Login successfully");
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
     } else {
       toast.error("cannot login");
     }

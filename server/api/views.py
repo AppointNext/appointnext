@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.http import HttpRequest,HttpResponse
+from django.http import HttpRequest,HttpResponse,JsonResponse
 from .models import User
 # Create your views here.
 
@@ -27,10 +27,8 @@ def register(request):
         return Response({'message': 'User not created'})
       all_users = User.objects.all()
       print(all_users[0].username, all_users[0].password, all_users[0].email, all_users[0].phone)
-      return Response({'message': 'All fields are required',
-                         'username': username,
-                         'password': password,
-                         'email': email})
+      return JsonResponse({'message': 'All fields are required',
+        'user':user,})
     else:
       return Response({'message': 'Invalid request'})
 
@@ -82,7 +80,8 @@ def doctorSignUp(request):
       return Response({'message': 'User created',
                          'username': username,
                          'password': password,
-                         'email': email})
+                         'email': email,
+                         'success':True})
    else:
       return Response({'message': 'Invalid request'})
    
