@@ -5,7 +5,7 @@ import Feature from "../components/Feature";
 
 const Home = () => {
   return (
-    <div className="px-14">
+    <div className="md:px-14 px-2">
       <Navbar />
       <Hero />
       <Feature />

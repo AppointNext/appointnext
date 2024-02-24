@@ -20,15 +20,15 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="*:flex flex-row items-center justify-between py-8 hidden md:block ">
-        <div className="flex flex-row items-center cursor-pointer">
+      <div className="flex flex-row items-center justify-between py-8 md:block ">
+        <div className="flex flex-row items-center cursor-pointer w-[20px]">
           <img src="./logo.png" alt="logo" className="h-[50px]" />
-          <p className="inline text-[24px] pl-2">
+          <p className="inline md:text-[24px] text-[10px] md:pl-2">
             Appoint<span className="font-bold">Next</span>
           </p>
         </div>
         <div>
-          <ul className="flex flex-row justify-between xl:sm:w-screen w-[400px] md:w-screen 2xl:w-[500px] text-[16px] border-2 border-white h-[35px] transition-colors">
+          <ul className="*:flex flex-row justify-between xl:sm:w-screen w-[400px] md:w-screen 2xl:w-[500px] text-[16px] border-2 border-white h-[35px] transition-colors hidden ">
             <li className="hover:border-b-2 border-[#003cd8] cursor-pointer">
               About
             </li>
