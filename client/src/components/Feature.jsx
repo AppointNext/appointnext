@@ -5,7 +5,7 @@ import { RiCheckboxCircleFill } from "react-icons/ri";
 const Feature = () => {
   return (
     <>
-      <div className="px-40 my-8 py-12 shadow-2xl shadow-gray-300 flex flex-row justify-between items-center rounded-lg overflow-hidden">
+      <div className="px-40 my-8 py-12 shadow-2xl shadow-gray-300 flex flex-row justify-between items-center rounded-lg overflow-hidden sm:p-0 md:p-0">
         <div className="flex flex-row items-center justify-between w-[190px]">
           <FaUser />
           <p>Manage Patients</p>
@@ -20,9 +20,9 @@ const Feature = () => {
           <p>Manage Patients</p>
         </div>
       </div>
-      <div className="flex flex-row justify-between m-10 px-36 mt-28">
-        <div>
-          <img src="./feature.svg" alt="feature image" />
+      <div className="flex flex-row 2xl:flex-row justify-between m-10 px-36 mt-28 sm:flex-col md:flex-row sm:p-0 xl:flex-row">
+        <div className=" w-150">
+          <img src="./feature.svg" alt="feature image" className="" />
         </div>
         <div className="flex flex-col justify-between">
           <h1 className="text-[50px] font-bold">

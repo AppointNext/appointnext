@@ -10,7 +10,7 @@ const Hero = () => {
         </button>
       </div>
       <div className="w-1/2 ">
-        <img src="../../public/hero.svg" className=" w-[800px] " alt="hero" />
+        <img src="./hero.svg" className=" w-[800px] " alt="hero" />
       </div>
     </div>
   );
