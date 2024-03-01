@@ -6,50 +6,51 @@ const Feature = () => {
   return (
     <>
       {/* px-40 my-8 py-12 shadow-2xl shadow-gray-300 flex flex-row justify-between items-center rounded-lg overflow-hidden sm:p-0 md:p-0 */}
-      <div className="w-screen flex flex-row sm:text-[15px] md:text-[15px] text-[12px] ">
-        <div className="flex flex-row items-center justify-between w-[190px]">
-          <FaUser />
+      <div className="w-screen flex flex-row sm:text-[15px] md:text-[15px] text-[12px]  my-2 shadow-xl rounded-sm justify-between px-2">
+        <div className="flex flex-row items-center justify-between md:w-[190px] xl:w-[190px] gap-1 w-auto ">
+          <FaUser className="bg-[#C2D0F5] rounded-full md:h-10 md:w-10 text-[#003cd8] md:p-2 p-1 h-5 w-auto " />
           <p className="">Manage Patients</p>
         </div>
-        <div className="flex flex-row items-center justify-between">
-          <FaUser className="bg-[#C2D0F5] rounded-full h-10 w-10 text-[#003cd8] p-2" />
+        <div className="flex flex-row items-center justify-between gap-1 w-auto">
+          <FaUser className="bg-[#C2D0F5] rounded-full md:h-10 md:w-10 text-[#003cd8] md:p-2 p-1 h-5 w-auto" />
 
           <p>Manage Patients</p>
         </div>
-        <div className="flex flex-row items-center justify-between w-[190px] ">
-          <FaUser />
+        <div className="flex flex-row items-center justify-between md:w-[190px] xl:w-[190px] w-auto gap-1 ">
+          <FaUser className="bg-[#C2D0F5] rounded-full md:h-10 md:w-10 text-[#003cd8] md:p-2 p-1 h-5 w-auto" />
           <p>Manage Patients</p>
         </div>
       </div>
-      <div className="flex flex-row 2xl:flex-row justify-between m-10 px-36 mt-28 sm:flex-col md:flex-row sm:p-0 xl:flex-row">
+      <div className="flex  2xl:flex-row justify-between  md:m-10 xl:m-10 2xl:m-10 m-2 md:px-36 xl:px-36 2xl:px-36 px-4 xl:mt-28 md:mt28 mt-10 sm:flex-col md:flex-row sm:p-0 xl:flex-row flex-col gap-2">
         <div className=" w-150">
           <img src="./feature.svg" alt="feature image" className="" />
         </div>
         <div className="flex flex-col justify-between">
-          <h1 className="text-[50px] font-bold">
+          <h1 className=" md:text-[50px] xl:text-[50px] 2xl:text-[50px] text-[15px] font-bold">
             We Provide Many <br /> Features You Can Use
           </h1>
-          <p>
-            You can explore the features that we provide with fun and
-            <br />
+          <p className="text-[12px] md:text-[15px] xl:text-[15px] ">
+            You can explore the features that we provide with <br /> fun and
             have their own functions each feature.
           </p>
           <ul>
             <li className="flex flex-row items-center gap-2">
               <RiCheckboxCircleFill className="text-[#2FAB73] " />
-              <p className="inline">Powerfull online protection.</p>
+              <p className="inline  text-[15px]  ">
+                Powerfull online protection.
+              </p>
             </li>
             <li className="flex flex-row items-center gap-2">
               <RiCheckboxCircleFill className="text-[#2FAB73] " />{" "}
-              <p className="inline">Internet without borders.</p>
+              <p className="inline text-[15px]">Internet without borders.</p>
             </li>
             <li className="flex flex-row items-center gap-2 ">
               <RiCheckboxCircleFill className="text-[#2FAB73] " />{" "}
-              <p className="inline">Supercharged VPN.</p>
+              <p className="inline text-[15px]">Supercharged VPN.</p>
             </li>
             <li className="flex flex-row items-center gap-2">
               <RiCheckboxCircleFill className="text-[#2FAB73] " />{" "}
-              <p className="inline">No specific time limits.</p>
+              <p className="inline text-[15px]">No specific time limits.</p>
             </li>
           </ul>
         </div>

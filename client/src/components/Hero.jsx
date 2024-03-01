@@ -2,7 +2,7 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <div className=" flex flex-row w-screen items-center overflow-hidden">
+    <div className=" flex flex-row w-screen items-center overflow-hidden px-4">
       <div className="w-1/2 ">
         <p className=" sm:text-[15px] text-[15px] ">
           hello this appointment management app
