@@ -5,10 +5,12 @@ from django.http import HttpRequest,HttpResponse,JsonResponse
 from .models import User
 # Create your views here.
 
+# url http://localhost:8000/api/test
 @api_view(['GET'])
 def test(request):
     return Response({'message':'Success'})
 
+# url http://localhost:8000/api/register
 @api_view(['POST'])
 def register(request):
     if request.method == 'POST':
@@ -33,7 +35,7 @@ def register(request):
       return Response({'message': 'Invalid request'})
 
 
-
+# url http://localhost:8000/api/login
 def login(request):
     if request.method == 'POST':
         username = request.data['username']
@@ -64,6 +66,7 @@ def logout(request):
     else:
         return Response({'message': 'Invalid request'})
 
+# url http://localhost:8000/api/doctorSignUp
 @api_view(['POST'])    
 def doctorSignUp(request):
    if request.method == 'POST':
@@ -86,6 +89,7 @@ def doctorSignUp(request):
       return Response({'message': 'Invalid request'})
    
 
+# url http://localhost:8000/api/doctorLogin
 def doctorLogin(request):
     if request.method == 'POST':
         username = request.data['username']
@@ -101,6 +105,7 @@ def doctorLogin(request):
     else:
         return Response({'message': 'Invalid request'})
 
+# url http://localhost:8000/api/doctorLogout
 def doctorLogout(request):
     if request.method == 'POST':
         username = request.data['username']
@@ -115,7 +120,8 @@ def doctorLogout(request):
                          'password': password})
     else:
         return Response({'message': 'Invalid request'})
-    
+
+# url http://localhost:8000/api/bookAppointment    
 def bookAppointment(request):
     if request.method == 'POST':
         username = request.data['username']
@@ -131,6 +137,7 @@ def bookAppointment(request):
     else:
         return Response({'message': 'Invalid request'})
     
+# url http://localhost:8000/api/cancelAppointment
 def cancelAppointment(request):
     if request.method == 'POST':
         username = request.data['username']
@@ -146,6 +153,7 @@ def cancelAppointment(request):
     else:
         return Response({'message': 'Invalid request'})
     
+# url http://localhost:8000/api/viewAppointment
 def viewAppointment(request):
     if request.method == 'POST':
         username = request.data['username']
@@ -161,6 +169,8 @@ def viewAppointment(request):
     else:
         return Response({'message': 'Invalid request'})
 
+
+# url http://localhost:8000/api/viewHistory
 def viewHistory(request):
     if request.method == 'POST':
         username = request.data['username']
@@ -175,7 +185,8 @@ def viewHistory(request):
                          'password': password})
     else:
         return Response({'message': 'Invalid request'})
-    
+
+# url http://localhost:8000/api/addAppointment    
 def addAppointment(request):
     if request.method == 'POST':
         username = request.data['username']
@@ -191,6 +202,8 @@ def addAppointment(request):
     else:
         return Response({'message': 'Invalid request'})
 
+
+# url http://localhost:8000/api/removeAppointment
 def removeAppointment(request):
     if request.method == 'POST':
         username = request.data['username']
