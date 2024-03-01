@@ -23,7 +23,7 @@ const Navbar = () => {
       <div className="flex flex-row items-center justify-between py-8 ">
         <div className="flex flex-row items-center cursor-pointer w-[20px]">
           <img src="./logo.png" alt="logo" className="h-[50px]" />
-          <p className="inline md:text-[24px] text-[10px] md:pl-2">
+          <p className="inline md:text-[24px] text-[15px] md:pl-2">
             Appoint<span className="font-bold">Next</span>
           </p>
         </div>
@@ -47,13 +47,13 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex justify-between items-center w-100 flex-row gap-1 cursor-pointer">
-          <button className="md:px-10 rounded-2xl md:py-2 md:text-[50px] text-[15px] px-4 py-1">
+          <button className="md:px-10 rounded-2xl md:py-2 md:text-[20px] text-[15px] px-4 py-1">
             Sign In
           </button>
           <button
             className={`border-[#003CD8] border-2 md:px-10 text-[#003CD8] rounded-2xl md:py-2 hover:shadow-2xl active:translate-y-2 transition-all ${
               isAnimating ? "active:delay-75" : ""
-            } md:text-[50px] text-[15px] px-4 py-1`}
+            } md:text-[20px] text-[15px] px-4 py-1`}
             onClick={handleSignUpClick}
           >
             Sign Up
