@@ -1,9 +1,14 @@
 import React from "react";
+import Appointment from "../components/Dashboard/Appointment";
+import Nav from "../components/Dashboard/Nav";
+import Hero from "../components/Dashboard/Hero";
 
 const Dashboard = () => {
   return (
     <div>
-      <h1>Dashboard</h1>
+      <Nav/>
+      <Hero/>
+      <Appointment/>
     </div>
   );
 };
