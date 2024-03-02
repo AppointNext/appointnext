@@ -5,9 +5,9 @@ import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 const Footer = () => {
   return (
     <div className="flex flex-col md:flex-row md:w-full md:items-center md:justify-between justify-between md:gap-6">
-      <div className="flex flex-col item-start   gap-8 py-8 md:flex-col md:w-400px md:w-1/2">
+      <div className="flex flex-col items-center md:items-start   gap-8 py-8 md:flex-col md:w-400px md:w-1/2 xl:items-start 2xl:items-start ">
         <Logo />
-        <h1 className=" text-sm md:text-base max-w-prose md:text-[12px]">
+        <h1 className=" text-sm md:text-base max-w-prose md:text-[12px] ">
           AppointNext LaslesVPN is a private virtual network that has unique
           features and has high security.
         </h1>
@@ -17,7 +17,7 @@ const Footer = () => {
           <FaInstagram className="text-[#F53838]" />
         </div>
       </div>
-      <div className="md:w-1/2 md:flex-row md:flex md:gap-4 md:justify-between md:px-20">
+      <div className="md:w-1/2 md:flex-row md:flex md:gap-4 md:justify-between md:px-10">
         <div className="flex flex-col gap-2 items-center justify-center md:items-start md:justify-normal">
           <h3 className="text-sm md:text-base font-bold mb-2">Product</h3>
           <p className="text-[12px]">Download</p>
