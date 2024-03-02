@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Logo from "../utils/Logo";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -21,12 +22,7 @@ const Navbar = () => {
   return (
     <>
       <div className="flex flex-row items-center justify-between md:py-8 xl:py-8 2xl:py-8 py-4 px-4 ">
-        <div className="flex flex-row items-center cursor-pointer w-[20px]">
-          <img src="./logo.png" alt="logo" className="h-[50px]" />
-          <p className="inline md:text-[24px] text-[15px] md:pl-2">
-            Appoint<span className="font-bold">Next</span>
-          </p>
-        </div>
+        <Logo />
         <div>
           <ul className="sm:md:flex flex-row justify-between xl:sm:w-screen w-[400px] md:w-screen 2xl:w-[500px] text-[16px] border-2 border-white h-[35px] transition-colors hidden">
             <li className="hover:border-b-2 border-[#003cd8] cursor-pointer">

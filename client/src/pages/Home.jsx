@@ -3,6 +3,8 @@ import Navbar from "../components/Home/Navbar";
 import Hero from "../components/Home/Hero";
 import Feature from "../components/Home/Feature";
 import Feedback from "../components/Home/Feedback";
+import SubscribeLetter from "../components/Home/SubscribeLetter";
+import Footer from "../components/Home/Footer";
 
 const Home = () => {
   const [location, setLocation] = useState(null);
@@ -29,6 +31,8 @@ const Home = () => {
       <Hero />
       <Feature />
       <Feedback />
+      <SubscribeLetter />
+      <Footer />
     </div>
   );
 };
