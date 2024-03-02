@@ -8,7 +8,9 @@ from .models import User
 # url http://localhost:8000/api/test
 @api_view(['GET'])
 def test(request):
-    return Response({'message':'Success'})
+    return Response({'message':'Success',
+                     'server':'running',
+                     'test':'passed'})
 
 # url http://localhost:8000/api/register
 @api_view(['POST'])
@@ -25,12 +27,16 @@ def register(request):
       print(username, password, email)
       user = User.objects.create(username=username, password=password, email=email,phone=phone)
       user.save()
+      print(user)   
       if not user:
         return Response({'message': 'User not created'})
       all_users = User.objects.all()
       print(all_users[0].username, all_users[0].password, all_users[0].email, all_users[0].phone)
-      return JsonResponse({'message': 'All fields are required',
-        'user':user,})
+      return Response({'message': 'The registration is successful',
+                         'username': username,
+                         'password': password,
+                         'email': email,
+                         'success':True})
     else:
       return Response({'message': 'Invalid request'})
 
