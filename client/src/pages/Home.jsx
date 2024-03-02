@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import Feature from "../components/Feature";
+import Navbar from "../components/Home/Navbar";
+import Hero from "../components/Home/Hero";
+import Feature from "../components/Home/Feature";
+import Feedback from "../components/Home/Feedback";
 
 const Home = () => {
   const [location, setLocation] = useState(null);
@@ -27,6 +28,7 @@ const Home = () => {
       <Navbar />
       <Hero />
       <Feature />
+      <Feedback />
     </div>
   );
 };

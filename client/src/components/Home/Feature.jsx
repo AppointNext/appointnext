@@ -26,7 +26,7 @@ const Feature = () => {
           <img src="./feature.svg" alt="feature image" className="" />
         </div>
         <div className="flex flex-col justify-between">
-          <h1 className=" md:text-[50px] xl:text-[50px] 2xl:text-[50px] text-[15px] font-bold">
+          <h1 className=" md:text-[50px] xl:text-[50px] 2xl:text-[50px] text-[20px] font-bold">
             We Provide Many <br /> Features You Can Use
           </h1>
           <p className="text-[12px] md:text-[15px] xl:text-[15px] ">
