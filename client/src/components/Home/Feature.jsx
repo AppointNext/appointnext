@@ -21,12 +21,12 @@ const Feature = () => {
           <p>Manage Patients</p>
         </div>
       </div>
-      <div className="flex  2xl:flex-row justify-between  md:m-10 xl:m-10 2xl:m-10 m-2 md:px-36 xl:px-36 2xl:px-36 px-4 xl:mt-28 md:mt28 mt-10 sm:flex-col md:flex-row sm:p-0 xl:flex-row flex-col gap-2">
+      <div className="flex md:flex-row md:gap-4 justify-between m-2 mt-10 flex-col gap-2">
         <div className=" w-150">
           <img src="./feature.svg" alt="feature image" className="" />
         </div>
         <div className="flex flex-col justify-between">
-          <h1 className=" md:text-[50px] xl:text-[50px] 2xl:text-[50px] text-[20px] font-bold">
+          <h1 className=" md:text-[25px] xl:text-[50px] 2xl:text-[50px] text-[20px] font-bold">
             We Provide Many <br /> Features You Can Use
           </h1>
           <p className="text-[12px] md:text-[15px] xl:text-[15px] ">

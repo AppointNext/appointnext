@@ -3,7 +3,7 @@ import Button from "../utils/Button";
 
 const SubscribeLetter = () => {
   return (
-    <div className="flex flex-row shadow-lg gap-4 p-4 m-2">
+    <div className="flex flex-row shadow-xl gap-4 p-4 m-2 md:justify-between rounded-md">
       <div>
         <h1 className=" text-[12px] font-bold ">
           Subscribe Now for Get Special Features!
