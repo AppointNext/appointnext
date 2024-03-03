@@ -84,6 +84,12 @@ REST_FRAMEWORK = {
     )
 }
 
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    # Add any other hashers you want to use here
+]
+
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 

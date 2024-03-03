@@ -3,13 +3,28 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.http import HttpRequest,HttpResponse,JsonResponse
 from .models import User
+from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth import get_user_model
+
+
 
 # url http://localhost:8000/api/test
 @api_view(['GET'])
 def test(request):
+    refreshToken,accessToken = generate_Token(User.objects.get(username='tester2212'))
+    print('refreshToken: ',refreshToken,'\naccessToken: ',accessToken)
     return Response({'message':'Success',
                      'server':'running',
                      'test':'passed'})
+
+def generate_Token(user):
+    refresh = RefreshToken.for_user(user)
+    access_token_expires_at = refresh.access_token.lifetime
+    refresh_token_expires_at = refresh.lifetime 
+
+    return str(refresh.access_token), str(refresh)
+
 
 # url http://localhost:8000/api/register
 @api_view(['POST'])
