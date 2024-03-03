@@ -21,7 +21,7 @@ const Feature = () => {
           <p>Manage Patients</p>
         </div>
       </div>
-      <div className="flex md:flex-row md:gap-4 justify-between m-2 mt-10 flex-col gap-2">
+      <div className="flex md:flex-row md:gap-4 justify-between m-2 mt-10 flex-col gap-2 xl:justify-around xl:gap-0">
         <div className=" w-150">
           <img src="./feature.svg" alt="feature image" className="" />
         </div>
