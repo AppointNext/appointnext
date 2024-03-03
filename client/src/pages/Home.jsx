@@ -26,7 +26,7 @@ const Home = () => {
   handleSearch();
   console.log(location);
   return (
-    <div className="md:px-8 px-2">
+    <div className="md:px-4 px-2">
       <Navbar />
       <Hero />
       <Feature />
