@@ -6,7 +6,7 @@ const Feature = () => {
   return (
     <>
       {/* px-40 my-8 py-12 shadow-2xl shadow-gray-300 flex flex-row justify-between items-center rounded-lg overflow-hidden sm:p-0 md:p-0 */}
-      <div className="w-screen flex flex-row sm:text-[15px] md:text-[15px] text-[12px]  my-2 shadow-xl rounded-sm justify-between px-2">
+      <div className="w-full flex flex-row sm:text-[15px] md:text-[15px] text-[12px]  my-2 shadow-xl rounded-xl justify-between px-2 md:py-6 md:px-8">
         <div className="flex flex-row items-center justify-between md:w-[190px] xl:w-[190px] gap-1 w-auto ">
           <FaUser className="bg-[#C2D0F5] rounded-full md:h-10 md:w-10 text-[#003cd8] md:p-2 p-1 h-5 w-auto " />
           <p className="">Manage Patients</p>

@@ -17,8 +17,8 @@ const Footer = () => {
           <FaInstagram className="text-[#F53838]" />
         </div>
       </div>
-      <div className="md:w-1/2 md:flex-row md:flex md:gap-4 md:justify-between md:px-10">
-        <div className="flex flex-col gap-2 items-center justify-center md:items-start md:justify-normal">
+      <div className="md:w-1/2 md:flex-row md:flex md:gap-4 md:justify-between md:px-10 gap-8">
+        <div className="flex flex-col gap-2 items-center justify-center md:items-start md:justify-normal py-4">
           <h3 className="text-sm md:text-base font-bold mb-2">Product</h3>
           <p className="text-[12px]">Download</p>
           <p className="text-[12px]">Pricing</p>
@@ -27,7 +27,7 @@ const Footer = () => {
           <p className="text-[12px]">Server</p>
           <p className="text-[12px]">Blog</p>
         </div>
-        <div className="flex flex-col gap-2 items-center justify-center md:items-start md:justify-normal">
+        <div className="flex flex-col gap-2 items-center justify-center md:items-start md:justify-normal py-4">
           <h3 className="text-sm md:text-base font-bold mb-2">Engage</h3>
           <p className="text-[12px]">AppointNext</p>
           <p className="text-[12px]">FAQ</p>
@@ -36,7 +36,7 @@ const Footer = () => {
           <p className="text-[12px]">Privacy Policy</p>
           <p className="text-[12px]">Terms of Service</p>
         </div>
-        <div className="flex flex-col gap-2 items-center justify-center md:items-start md:justify-normal">
+        <div className="flex flex-col gap-2 items-center justify-center md:items-start md:justify-normal py-4">
           <h3 className="text-sm md:text-base font-bold mb-2">Earn Money</h3>
           <p className="text-[12px]">Affiliate</p>
           <p className="text-[12px]">Become Partner</p>
