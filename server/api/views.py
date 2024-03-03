@@ -20,14 +20,14 @@ def register(request):
       password = request.data['password']
       email = request.data['email']
       phone = request.data['phone']
-      
+
       if not all([username, password, email]):
         return Response({'message': 'All fields are required'})
-      
+
       print(username, password, email)
       user = User.objects.create(username=username, password=password, email=email,phone=phone)
       user.save()
-      print(user)   
+      print(user)
       if not user:
         return Response({'message': 'User not created'})
       all_users = User.objects.all()
@@ -56,7 +56,7 @@ def login(request):
                          'password': password})
     else:
         return Response({'message': 'Invalid request'})
-    
+
 def logout(request):
     if request.method == 'POST':
         username = request.data['username']
@@ -73,7 +73,7 @@ def logout(request):
         return Response({'message': 'Invalid request'})
 
 # url http://localhost:8000/api/doctorSignUp
-@api_view(['POST'])    
+@api_view(['POST'])
 def doctorSignUp(request):
    if request.method == 'POST':
       username = request.data['username']
@@ -85,7 +85,7 @@ def doctorSignUp(request):
         return Response({'message': 'All fields are required'})
       user = User.objects.create(username=username, password=password, email=email,phone=phone)
       if not user:
-        return Response({'message': 'User not created'})  
+        return Response({'message': 'User not created'})
       return Response({'message': 'User created',
                          'username': username,
                          'password': password,
@@ -93,7 +93,7 @@ def doctorSignUp(request):
                          'success':True})
    else:
       return Response({'message': 'Invalid request'})
-   
+
 
 # url http://localhost:8000/api/doctorLogin
 def doctorLogin(request):
@@ -127,7 +127,7 @@ def doctorLogout(request):
     else:
         return Response({'message': 'Invalid request'})
 
-# url http://localhost:8000/api/bookAppointment    
+# url http://localhost:8000/api/bookAppointment
 def bookAppointment(request):
     if request.method == 'POST':
         username = request.data['username']
@@ -142,7 +142,7 @@ def bookAppointment(request):
                          'password': password})
     else:
         return Response({'message': 'Invalid request'})
-    
+
 # url http://localhost:8000/api/cancelAppointment
 def cancelAppointment(request):
     if request.method == 'POST':
@@ -158,7 +158,7 @@ def cancelAppointment(request):
                          'password': password})
     else:
         return Response({'message': 'Invalid request'})
-    
+
 # url http://localhost:8000/api/viewAppointment
 def viewAppointment(request):
     if request.method == 'POST':
@@ -192,7 +192,7 @@ def viewHistory(request):
     else:
         return Response({'message': 'Invalid request'})
 
-# url http://localhost:8000/api/addAppointment    
+# url http://localhost:8000/api/addAppointment
 def addAppointment(request):
     if request.method == 'POST':
         username = request.data['username']
@@ -224,4 +224,3 @@ def removeAppointment(request):
                          'password': password})
     else:
         return Response({'message': 'Invalid request'})
-    
