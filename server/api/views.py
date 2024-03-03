@@ -3,7 +3,6 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.http import HttpRequest,HttpResponse,JsonResponse
 from .models import User
-# Create your views here.
 
 # url http://localhost:8000/api/test
 @api_view(['GET'])
