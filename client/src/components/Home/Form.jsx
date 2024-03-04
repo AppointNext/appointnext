@@ -25,8 +25,8 @@ const Form = () => {
         console.log(res.data);
         console.log(res.data.refresh_token, res.data.access_token);
         if (res.data.access_token && res.data.refresh_token) {
-          Cookie.set("refresh_token", res.data.refresh_token);
-          Cookie.set("access_token", res.data.access_token);
+          Cookie.set("refreshToken", res.data.refresh_token);
+          Cookie.set("accessToken", res.data.access_token);
           navigate("/dashboard");
         }
       })

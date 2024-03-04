@@ -30,7 +30,7 @@ def register(request):
         user.save()
 
         if user:
-            return Response({'message': 'Registration successful', 'username': username, 'email': email}, status=status.HTTP_201_CREATED)
+            return Response({'message': 'Registration successful','id':user.id, 'username': username, 'email': email}, status=status.HTTP_201_CREATED)
         else:
             return Response({'message': 'User creation failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     else:
@@ -53,6 +53,7 @@ def login(request):
             user.save()
             return Response({
                 'message': 'Login successful',
+                'id':user.id,
                 'username': username,
                 'refresh_token': str(refresh),
                 'access_token': str(refresh.access_token)
