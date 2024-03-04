@@ -46,17 +46,17 @@ const Form = () => {
           Doctor
         </button>
       </div>
-      <p className="text-[15px]">
-        Seamlessly manage your appointments with AppointNext.io. Say goodbye to
-        scheduling hassles and hello to efficient, organized healthcare!
+      <p className="text-[11px]">
+        Simplify appointments with AppointNext.io for efficient healthcare
+        scheduling.
       </p>
-      <form action="" onSubmit={handleSubmit}>
+      <form action="" onSubmit={handleSubmit} className="flex flex-col gap-2">
         <div className="input-group">
           <label
             htmlFor="username"
             className={`transition-transform ${
               formData.email ? "-translate-y-6 text-sm" : ""
-            }`}
+            } text-[15px]`}
           >
             Username
           </label>
@@ -66,31 +66,38 @@ const Form = () => {
             id="username"
             value={formData.username}
             onChange={handleChange}
-            className="w-full py-2 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
+            className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
             placeholder="Enter Your Username"
           />
         </div>
         <div className="input-group">
-          <label
-            htmlFor="password"
-            className={`transition-transform ${
-              formData.password ? "-translate-y-6 text-sm" : ""
-            }`}
-          >
-            Password
-          </label>
+          <div className="flex flex-row justify-between items-center">
+            <label
+              htmlFor="password"
+              className={`transition-transform ${
+                formData.password ? "text-sm" : ""
+              } text-[15px] `}
+            >
+              Password
+            </label>
+            <Link
+              to="/forgotpassword"
+              className="text-[10px] text-blue-500 hover:cursor-pointer  "
+            >
+              Forgot Password?
+            </Link>
+          </div>
           <input
             type="password"
             name="password"
             id="password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full py-2 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
+            className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
             placeholder="Enter Your Password"
           />
-          <Link to="/forgotpassword">Forgot Password?</Link>
         </div>
-        <div className="input-group">
+        <div className="input-group flex flex-row items-center">
           <input
             type="checkbox"
             name="remember"
@@ -98,7 +105,9 @@ const Form = () => {
             value={formData.remember}
             onChange={handleChange}
           />
-          <label htmlFor="remember">Remember Me</label>
+          <label htmlFor="remember" className="px-2 text-[10px]">
+            Remember Me
+          </label>
         </div>
         <button
           type="submit"
@@ -107,7 +116,9 @@ const Form = () => {
           Login
         </button>
       </form>
-      <p>Don’t have an account yet? Register now, for free!</p>
+      <p className="text-[10px]">
+        Don’t have an account yet? Register now, for free!
+      </p>
     </div>
   );
 };

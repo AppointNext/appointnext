@@ -4,7 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
-import Form from "./components/Auth/Form";
+import Test from "./pages/TestPage";
+import ProtectedRoute from "./components/utils/ProtectedRoutes";
 function App() {
   return (
     <>
@@ -12,8 +13,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/test" element={<Form />} />
+          <ProtectedRoute
+            path="/dashboard"
+            component={<Dashboard />}
+            redirectPath={"/login"}
+          />
+          <Route path="/test" element={<Test />} />
         </Routes>
       </div>
     </>

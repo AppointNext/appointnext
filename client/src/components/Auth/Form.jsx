@@ -1,115 +1,37 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import Cookie from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
-const Form = () => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    remember: false,
-  });
+const localizer = momentLocalizer(moment);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(formData);
-    await axios
-      .post("http://localhost:8000/api/login", formData)
-      .then((res) => {
-        console.log(res.data);
-        console.log(res.data.refresh_token, res.data.access_token);
-        if (res.data.access_token && res.data.refresh_token) {
-          Cookie.set("refresh_token", res.data.refresh_token);
-          Cookie.set("access_token", res.data.access_token);
-          navigate("/dashboard");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+const MyCalendar = () => {
+  // Example events data
+  const events = [
+    {
+      title: "Event 1",
+      start: new Date(2024, 2, 7),
+      end: new Date(2024, 2, 10),
+    },
+    {
+      title: "Event 2",
+      start: new Date(2024, 2, 15),
+      end: new Date(2024, 2, 17),
+    },
+    // Add more events as needed
+  ];
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen p-4 gap-2 overflow-auto h-full">
-      <img src="" alt="" />
-      <div className="bg-blue-500 rounded-3xl w-[12rem] text-white py-2 flex flex-row justify-center">
-        <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white">
-          Patient
-        </button>
-        <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white">
-          Doctor
-        </button>
-      </div>
-      <p className="text-[15px]">
-        Seamlessly manage your appointments with AppointNext.io. Say goodbye to
-        scheduling hassles and hello to efficient, organized healthcare!
-      </p>
-      <form action="" onSubmit={handleSubmit}>
-        <div className="input-group">
-          <label
-            htmlFor="username"
-            className={`transition-transform ${
-              formData.email ? "-translate-y-6 text-sm" : ""
-            }`}
-          >
-            Username
-          </label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            value={formData.username}
-            onChange={handleChange}
-            className="w-full py-2 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
-            placeholder="Enter Your Username"
-          />
-        </div>
-        <div className="input-group">
-          <label
-            htmlFor="password"
-            className={`transition-transform ${
-              formData.password ? "-translate-y-6 text-sm" : ""
-            }`}
-          >
-            Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full py-2 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
-            placeholder="Enter Your Password"
-          />
-          <Link to="/forgotpassword">Forgot Password?</Link>
-        </div>
-        <div className="input-group">
-          <input
-            type="checkbox"
-            name="remember"
-            id="remember"
-            value={formData.remember}
-            onChange={handleChange}
-          />
-          <label htmlFor="remember">Remember Me</label>
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          Login
-        </button>
-      </form>
-      <p>Don’t have an account yet? Register now, for free!</p>
+    <div style={{ height: "500px" }}>
+      <Calendar
+        localizer={localizer}
+        events={events}
+        startAccessor="start"
+        endAccessor="end"
+        style={{ margin: "50px" }}
+      />
     </div>
   );
 };
 
-export default Form;
+export default MyCalendar;
