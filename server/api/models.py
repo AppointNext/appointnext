@@ -1,14 +1,27 @@
-from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 
-
-class User(models.Model):
-    username = models.CharField(max_length=20)
+class User(AbstractUser):
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=20)
-    phone = models.IntegerField()
-    history = models.CharField(max_length=255, blank=True)
+    phone = models.CharField(max_length=15)
+    history = models.TextField(blank=True)
     refreshToken = models.CharField(max_length=255, blank=True)
+
+    # Specify custom related names for the groups and user_permissions fields
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='custom_user_set',
+        blank=True,
+        verbose_name='groups',
+        help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.',
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='custom_user_set',
+        blank=True,
+        verbose_name='user permissions',
+        help_text='Specific permissions for this user.',
+    )
 
     def addToHistory(self, appointment_id):
         if not self.history:
@@ -16,7 +29,6 @@ class User(models.Model):
         else:
             self.history += ',' + str(appointment_id)
         self.save()
-        pass
 
 # class appointment(models.Model):
 #     withDoctor = models.ForeignKey(, related_name='doctor_appointments', on_delete=models.CASCADE)
