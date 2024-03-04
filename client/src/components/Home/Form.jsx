@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const DrSignup = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     Name: "",
     email: "",
@@ -31,27 +33,27 @@ const DrSignup = () => {
     e.preventDefault();
     // Add your form submission logic here
     console.log(form);
-    const response = await axios.post(
-      "http://localhost:8000/api/doctorSignUp",
-      {
-        username: form.Name,
-        password: form.pass,
-        phone: form.phone,
-        email: form.email,
-      }
-    );
+    const response = await axios.post("http://localhost:8000/api/signup", {
+      username: form.Name,
+      password: form.pass,
+      phone: form.phone,
+      email: form.email,
+    });
     console.log(response.data);
     if (response.data.success) {
       toast.success("Login successfully");
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
     } else {
       toast.error("cannot login");
     }
   };
 
   return (
-    <div className="flex flex-row justify-between h-screen">
-      <div className="flex flex-col w-1/2 h-screen justify-center items-center">
-        <div className="bg-[#003cd8] rounded-3xl w-[12rem] text-white py-2 flex items-center justify-center h-[80px]">
+    <div className="flex flex-row  h-screen">
+      <div className="flex flex-col w-full md:w-1/2 xl:w-1/2 2xl: h-screen  items-center ">
+        <div className="bg-[#003cd8] rounded-3xl md:w-[12rem] xl:w-[12rem] 2xl:w-[12rem] w-50 text-white py-2 flex items-center justify-center md:h-[80px] xl:h-[80px] 2xl:h-[80px] h-10 text-[10px]">
           <button
             className={`hover:text-black p-2 m-0.5 hover:rounded-2xl py-2 hover:bg-white transition-all ${
               page === false ? "bg-white text-black rounded-2xl" : "text-white"
@@ -69,10 +71,12 @@ const DrSignup = () => {
             Doctor
           </button>
         </div>
-        <h1 className="font-bold text-xl">Doctor Signup</h1>
+        <h1 className="font-bold text-sm md:text-md xl:text-xl 2xl:text-2xl">
+          Doctor Signup
+        </h1>
         <form
           onSubmit={handleSubmit}
-          className="flex item-center flex-col justify-center gap-4 mt-4 w-[800px] h-full"
+          className="flex item-center flex-col justify-center gap-4 mt-4 w-[200px]  md:h-full  xl:h-full 2xl:h-full h-1/2 2xl:w-[800px] "
         >
           <label htmlFor="Name" className="flex justify-start">
             Name
@@ -175,7 +179,7 @@ const DrSignup = () => {
         </form>
       </div>
 
-      <div className="w-1/2 h-screen flex items-center justify-center flex-col bg-[#003cd8]">
+      <div className="hidden md:w-1/2 xl:w-1/2 2xl:w-1/2 h-screen md:flex xl:flex 2xl:flex items-center justify-center flex-col bg-[#003cd8]">
         <img
           src="/Doctors-cuate.svg"
           alt="signup image"

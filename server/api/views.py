@@ -1,209 +1,233 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.http import HttpRequest,HttpResponse
-from .models import User
-# Create your views here.
+from rest_framework import status
+from django.contrib.auth import get_user_model, authenticate
+from rest_framework_simplejwt.tokens import RefreshToken
 
-@api_view(['GET'])
-def test(request):
-    return Response({'message':'Success'})
+User = get_user_model()
 
 @api_view(['POST'])
 def register(request):
     if request.method == 'POST':
-      username = request.data['username']
-      password = request.data['password']
-      email = request.data['email']
-      phone = request.data['phone']
-      
-      if not all([username, password, email]):
-        return Response({'message': 'All fields are required'})
-      
-      print(username, password, email)
-      user = User.objects.create(username=username, password=password, email=email,phone=phone)
-      user.save()
-      if not user:
-        return Response({'message': 'User not created'})
-      all_users = User.objects.all()
-      print(all_users[0].username, all_users[0].password, all_users[0].email, all_users[0].phone)
-      return Response({'message': 'All fields are required',
-                         'username': username,
-                         'password': password,
-                         'email': email})
+        username = request.data.get('username')
+        password = request.data.get('password')
+        email = request.data.get('email')
+        phone = request.data.get('phone')
+
+        print(username, password, email, phone)
+        if not all([username, password, email,phone]):
+            return Response({'message': 'All fields are required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if User.objects.filter(username=username).exists():
+            return Response({'message': 'Username already exists'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if User.objects.filter(email=email).exists():
+            return Response({'message': 'Email already exists'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user = User.objects.create(username=username, email=email)
+        user.set_password(password)
+        user.save()
+
+        if user:
+            return Response({'message': 'Registration successful', 'username': username, 'email': email}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'message': 'User creation failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     else:
-      return Response({'message': 'Invalid request'})
+        return Response({'message': 'Invalid request'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
-
-
+@api_view(['POST'])
 def login(request):
     if request.method == 'POST':
-        username = request.data['username']
-        password = request.data['password']
+        username = request.data.get('username')
+        password = request.data.get('password')
         if not all([username, password]):
-            return Response({'message': 'All fields are required'})
-        user = User.objects.get(username=username, password=password)
-        if not user:
-            return Response({'message': 'User not found'})
-        return Response({'message': 'User found',
-                         'username': username,
-                         'password': password})
+            return Response({'message': 'All fields are required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            print(f'User {username} logged in successfully')
+            print(f'User details: {user.__dict__}')
+            refresh = RefreshToken.for_user(user)
+            user.refreshToken = str(refresh)
+            user.save()
+            return Response({
+                'message': 'Login successful',
+                'username': username,
+                'refresh_token': str(refresh),
+                'access_token': str(refresh.access_token)
+            })
+        else:
+            return Response({'message': 'Invalid username or password'}, status=status.HTTP_401_UNAUTHORIZED)
     else:
-        return Response({'message': 'Invalid request'})
-    
+        return Response({'message': 'Invalid request'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+
+@api_view(['POST'])
 def logout(request):
     if request.method == 'POST':
-        username = request.data['username']
-        password = request.data['password']
-        if not all([username, password]):
-            return Response({'message': 'All fields are required'})
-        user = User.objects.get(username=username, password=password)
-        if not user:
-            return Response({'message': 'User not found'})
-        return Response({'message': 'User found',
-                         'username': username,
-                         'password': password})
+        username = request.data.get('username')
+        
+        try:
+            user = User.objects.get(username=username)
+            user.refreshToken = None  # Set refreshToken to null
+            user.save()
+            return Response({'message': 'Logout successful'}, status=status.HTTP_200_OK)
+        except User.DoesNotExist:
+            return Response({'message': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
     else:
-        return Response({'message': 'Invalid request'})
+        return Response({'message': 'Invalid request'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
-@api_view(['POST'])    
-def doctorSignUp(request):
-   if request.method == 'POST':
-      username = request.data['username']
-      password = request.data['password']
-      email = request.data['email']
-      phone = request.data['phone']
+# # url http://localhost:8000/api/doctorSignUp
+# @api_view(['POST'])
+# def doctorSignUp(request):
+#    if request.method == 'POST':
+#       username = request.data['username']
+#       password = request.data['password']
+#       email = request.data['email']
+#       phone = request.data['phone']
 
-      if not all([username, password, email]):
-        return Response({'message': 'All fields are required'})
-      user = User.objects.create(username=username, password=password, email=email,phone=phone)
-      if not user:
-        return Response({'message': 'User not created'})  
-      return Response({'message': 'User created',
-                         'username': username,
-                         'password': password,
-                         'email': email})
-   else:
-      return Response({'message': 'Invalid request'})
-   
+#       if not all([username, password, email]):
+#         return Response({'message': 'All fields are required'})
+#       user = User.objects.create(username=username, password=password, email=email,phone=phone)
+#       if not user:
+#         return Response({'message': 'User not created'})
+#       return Response({'message': 'User created',
+#                          'username': username,
+#                          'password': password,
+#                          'email': email,
+#                          'success':True})
+#    else:
+#       return Response({'message': 'Invalid request'})
 
-def doctorLogin(request):
-    if request.method == 'POST':
-        username = request.data['username']
-        password = request.data['password']
-        if not all([username, password]):
-            return Response({'message': 'All fields are required'})
-        user = User.objects.get(username=username, password=password)
-        if not user:
-            return Response({'message': 'User not found'})
-        return Response({'message': 'User found',
-                         'username': username,
-                         'password': password})
-    else:
-        return Response({'message': 'Invalid request'})
 
-def doctorLogout(request):
-    if request.method == 'POST':
-        username = request.data['username']
-        password = request.data['password']
-        if not all([username, password]):
-            return Response({'message': 'All fields are required'})
-        user = User.objects.get(username=username, password=password)
-        if not user:
-            return Response({'message': 'User not found'})
-        return Response({'message': 'User found',
-                         'username': username,
-                         'password': password})
-    else:
-        return Response({'message': 'Invalid request'})
-    
-def bookAppointment(request):
-    if request.method == 'POST':
-        username = request.data['username']
-        password = request.data['password']
-        if not all([username, password]):
-            return Response({'message': 'All fields are required'})
-        user = User.objects.get(username=username, password=password)
-        if not user:
-            return Response({'message': 'User not found'})
-        return Response({'message': 'User found',
-                         'username': username,
-                         'password': password})
-    else:
-        return Response({'message': 'Invalid request'})
-    
-def cancelAppointment(request):
-    if request.method == 'POST':
-        username = request.data['username']
-        password = request.data['password']
-        if not all([username, password]):
-            return Response({'message': 'All fields are required'})
-        user = User.objects.get(username=username, password=password)
-        if not user:
-            return Response({'message': 'User not found'})
-        return Response({'message': 'User found',
-                         'username': username,
-                         'password': password})
-    else:
-        return Response({'message': 'Invalid request'})
-    
-def viewAppointment(request):
-    if request.method == 'POST':
-        username = request.data['username']
-        password = request.data['password']
-        if not all([username, password]):
-            return Response({'message': 'All fields are required'})
-        user = User.objects.get(username=username, password=password)
-        if not user:
-            return Response({'message': 'User not found'})
-        return Response({'message': 'User found',
-                         'username': username,
-                         'password': password})
-    else:
-        return Response({'message': 'Invalid request'})
+# # url http://localhost:8000/api/doctorLogin
+# def doctorLogin(request):
+#     if request.method == 'POST':
+#         username = request.data['username']
+#         password = request.data['password']
+#         if not all([username, password]):
+#             return Response({'message': 'All fields are required'})
+#         user = User.objects.get(username=username, password=password)
+#         if not user:
+#             return Response({'message': 'User not found'})
+#         return Response({'message': 'User found',
+#                          'username': username,
+#                          'password': password})
+#     else:
+#         return Response({'message': 'Invalid request'})
 
-def viewHistory(request):
-    if request.method == 'POST':
-        username = request.data['username']
-        password = request.data['password']
-        if not all([username, password]):
-            return Response({'message': 'All fields are required'})
-        user = User.objects.get(username=username, password=password)
-        if not user:
-            return Response({'message': 'User not found'})
-        return Response({'message': 'User found',
-                         'username': username,
-                         'password': password})
-    else:
-        return Response({'message': 'Invalid request'})
-    
-def addAppointment(request):
-    if request.method == 'POST':
-        username = request.data['username']
-        password = request.data['password']
-        if not all([username, password]):
-            return Response({'message': 'All fields are required'})
-        user = User.objects.get(username=username, password=password)
-        if not user:
-            return Response({'message': 'User not found'})
-        return Response({'message': 'User found',
-                         'username': username,
-                         'password': password})
-    else:
-        return Response({'message': 'Invalid request'})
+# # url http://localhost:8000/api/doctorLogout
+# def doctorLogout(request):
+#     if request.method == 'POST':
+#         username = request.data['username']
+#         password = request.data['password']
+#         if not all([username, password]):
+#             return Response({'message': 'All fields are required'})
+#         user = User.objects.get(username=username, password=password)
+#         if not user:
+#             return Response({'message': 'User not found'})
+#         return Response({'message': 'User found',
+#                          'username': username,
+#                          'password': password})
+#     else:
+#         return Response({'message': 'Invalid request'})
 
-def removeAppointment(request):
-    if request.method == 'POST':
-        username = request.data['username']
-        password = request.data['password']
-        if not all([username, password]):
-            return Response({'message': 'All fields are required'})
-        user = User.objects.get(username=username, password=password)
-        if not user:
-            return Response({'message': 'User not found'})
-        return Response({'message': 'User found',
-                         'username': username,
-                         'password': password})
-    else:
-        return Response({'message': 'Invalid request'})
-    
+# # url http://localhost:8000/api/bookAppointment
+# def bookAppointment(request):
+#     if request.method == 'POST':
+#         username = request.data['username']
+#         password = request.data['password']
+#         if not all([username, password]):
+#             return Response({'message': 'All fields are required'})
+#         user = User.objects.get(username=username, password=password)
+#         if not user:
+#             return Response({'message': 'User not found'})
+#         return Response({'message': 'User found',
+#                          'username': username,
+#                          'password': password})
+#     else:
+#         return Response({'message': 'Invalid request'})
+
+# # url http://localhost:8000/api/cancelAppointment
+# def cancelAppointment(request):
+#     if request.method == 'POST':
+#         username = request.data['username']
+#         password = request.data['password']
+#         if not all([username, password]):
+#             return Response({'message': 'All fields are required'})
+#         user = User.objects.get(username=username, password=password)
+#         if not user:
+#             return Response({'message': 'User not found'})
+#         return Response({'message': 'User found',
+#                          'username': username,
+#                          'password': password})
+#     else:
+#         return Response({'message': 'Invalid request'})
+
+# # url http://localhost:8000/api/viewAppointment
+# def viewAppointment(request):
+#     if request.method == 'POST':
+#         username = request.data['username']
+#         password = request.data['password']
+#         if not all([username, password]):
+#             return Response({'message': 'All fields are required'})
+#         user = User.objects.get(username=username, password=password)
+#         if not user:
+#             return Response({'message': 'User not found'})
+#         return Response({'message': 'User found',
+#                          'username': username,
+#                          'password': password})
+#     else:
+#         return Response({'message': 'Invalid request'})
+
+
+# # url http://localhost:8000/api/viewHistory
+# def viewHistory(request):
+#     if request.method == 'POST':
+#         username = request.data['username']
+#         password = request.data['password']
+#         if not all([username, password]):
+#             return Response({'message': 'All fields are required'})
+#         user = User.objects.get(username=username, password=password)
+#         if not user:
+#             return Response({'message': 'User not found'})
+#         return Response({'message': 'User found',
+#                          'username': username,
+#                          'password': password})
+#     else:
+#         return Response({'message': 'Invalid request'})
+
+# # url http://localhost:8000/api/addAppointment
+# def addAppointment(request):
+#     if request.method == 'POST':
+#         username = request.data['username']
+#         password = request.data['password']
+#         if not all([username, password]):
+#             return Response({'message': 'All fields are required'})
+#         user = User.objects.get(username=username, password=password)
+#         if not user:
+#             return Response({'message': 'User not found'})
+#         return Response({'message': 'User found',
+#                          'username': username,
+#                          'password': password})
+#     else:
+#         return Response({'message': 'Invalid request'})
+
+
+# # url http://localhost:8000/api/removeAppointment
+# def removeAppointment(request):
+#     if request.method == 'POST':
+#         username = request.data['username']
+#         password = request.data['password']
+#         if not all([username, password]):
+#             return Response({'message': 'All fields are required'})
+#         user = User.objects.get(username=username, password=password)
+#         if not user:
+#             return Response({'message': 'User not found'})
+#         return Response({'message': 'User found',
+#                          'username': username,
+#                          'password': password})
+#     else:
+#         return Response({'message': 'Invalid request'})
