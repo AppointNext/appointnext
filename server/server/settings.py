@@ -49,11 +49,16 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:5173',  # Add your frontend domain here
+]
+
 
 ROOT_URLCONF = 'server.urls'
 CORS_ORIGIN_ALLOW_ALL = True

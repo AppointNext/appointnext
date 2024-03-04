@@ -33,15 +33,12 @@ const DrSignup = () => {
     e.preventDefault();
     // Add your form submission logic here
     console.log(form);
-    const response = await axios.post(
-      "http://localhost:8000/api/doctorSignUp",
-      {
-        username: form.Name,
-        password: form.pass,
-        phone: form.phone,
-        email: form.email,
-      }
-    );
+    const response = await axios.post("http://localhost:8000/api/signup", {
+      username: form.Name,
+      password: form.pass,
+      phone: form.phone,
+      email: form.email,
+    });
     console.log(response.data);
     if (response.data.success) {
       toast.success("Login successfully");
