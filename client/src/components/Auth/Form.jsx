@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Cookie from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -19,7 +22,13 @@ const Form = () => {
     await axios
       .post("http://localhost:8000/api/login", formData)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        console.log(res.data.refresh_token, res.data.access_token);
+        if (res.data.access_token && res.data.refresh_token) {
+          Cookie.set("refresh_token", res.data.refresh_token);
+          Cookie.set("access_token", res.data.access_token);
+          navigate("/dashboard");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -27,17 +36,17 @@ const Form = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen p-4 gap-2 overflow-auto h-full">
       <img src="" alt="" />
       <div className="bg-blue-500 rounded-3xl w-[12rem] text-white py-2 flex flex-row justify-center">
-        <button className="hover:text-black p-2 m-0.5 hover:rounded-2xl py-2 hover:bg-white">
+        <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white">
           Patient
         </button>
-        <button className="hover:text-black p-2 m-0.5 hover:rounded-2xl py-2 hover:bg-white">
+        <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white">
           Doctor
         </button>
       </div>
-      <p>
+      <p className="text-[15px]">
         Seamlessly manage your appointments with AppointNext.io. Say goodbye to
         scheduling hassles and hello to efficient, organized healthcare!
       </p>
