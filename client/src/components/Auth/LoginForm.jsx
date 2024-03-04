@@ -3,15 +3,20 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/userSlice";
+import { useSelector } from "react-redux";
 
-const Form = () => {
+const LoginForm = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
     remember: false,
   });
 
+  const user = useSelector((state) => state.user);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -23,6 +28,10 @@ const Form = () => {
       .post("http://localhost:8000/api/login", formData)
       .then((res) => {
         console.log(res.data);
+        const { username, email, profileImage } = res.data;
+        console.log(username, email, profileImage);
+        dispatch(setUser({ username, email, profileImage }));
+        console.log(user);
         console.log(res.data.refresh_token, res.data.access_token);
         if (res.data.access_token && res.data.refresh_token) {
           Cookie.set("refreshToken", res.data.refresh_token);
@@ -33,6 +42,7 @@ const Form = () => {
       .catch((err) => {
         console.log(err);
       });
+    console.log(user);
   };
 
   return (
@@ -123,4 +133,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default LoginForm;

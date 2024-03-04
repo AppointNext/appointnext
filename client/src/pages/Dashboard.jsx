@@ -2,8 +2,11 @@ import React from "react";
 import Appointment from "../components/Dashboard/Appointment";
 import Nav from "../components/Dashboard/Nav";
 import Hero from "../components/Dashboard/Hero";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
+  const user = useSelector((state) => state.user);
+  console.log(user);
   return (
     <div className="flex flex-col gap-2">
       <Nav />
