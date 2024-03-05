@@ -5,6 +5,8 @@ Django==5.0.2
 django-cors-headers==4.3.1
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.3.1
+gunicorn==21.2.0
+packaging==23.2
 pillow==10.2.0
 PyJWT==2.8.0
 pytz==2024.1
