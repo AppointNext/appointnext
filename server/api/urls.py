@@ -5,6 +5,8 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from .views import test_view
+
 
 urlpatterns = [
     path('token', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -24,6 +26,6 @@ urlpatterns = [
     # path('doctorSignUp', doctorSignUp, name='doctorSignUp'),
     # path('doctorLogin', doctorLogin, name='doctorLogin'),
     # path('doctorLogout', doctorLogout, name='doctorLogout'),
-    path('test',test)
+    path('test',test_view.test)
     # # path('doctorAppointments/', doctorAppointments, name='doctorAppointments'),
 ]
