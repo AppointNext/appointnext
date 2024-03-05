@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { useCookies } from "react-cookie";
 
 const Nav = () => {
+  const [, , removeCookie] = useCookies(["refreshToken", "accessToken"]);
+
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.auth.userData);
-  const username = userData.username;
-  console.log(userData, username);
+  // const userData = useSelector((state) => state.auth.userData);
+  const username = localStorage.getItem("username");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -20,6 +22,9 @@ const Nav = () => {
       username,
     });
     if (response.data.success === true) {
+      removeCookie("refreshToken", { path: "/" });
+      removeCookie("accessToken", { path: "/" });
+      localStorage.removeItem("username");
       navigate("/login");
     }
   };
