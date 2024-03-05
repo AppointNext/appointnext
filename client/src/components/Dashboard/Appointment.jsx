@@ -14,7 +14,7 @@ const Appointment = () => {
           <div className="text-[#54577A]">AfterNoon at 2:30 pm</div>
           <div>
             <h2>Want to cancel ?</h2>
-            <button className=" bg-blue-600 font-semibold text-white rounded-md p-2">
+            <button className=" bg-blue-600 font-semibold text-white rounded-md p-2 hover:shadow-xl active:translate-y-2 transition-all">
               Cancel
             </button>
           </div>
