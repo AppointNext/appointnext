@@ -16,7 +16,6 @@ const LoginForm = () => {
     remember: false,
   });
 
-  const user = useSelector((state) => state.user);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -28,10 +27,9 @@ const LoginForm = () => {
       .post("http://localhost:8000/api/login", formData)
       .then((res) => {
         console.log(res.data);
-        const { username, email, profileImage } = res.data;
-        console.log(username, email, profileImage);
-        dispatch(setUser({ username, email, profileImage }));
-        console.log(user);
+        const { username, email } = res.data;
+        console.log(username, email);
+        dispatch(setUser({ username, email }));
         console.log(res.data.refresh_token, res.data.access_token);
         if (res.data.access_token && res.data.refresh_token) {
           Cookie.set("refreshToken", res.data.refresh_token);
@@ -42,7 +40,6 @@ const LoginForm = () => {
       .catch((err) => {
         console.log(err);
       });
-    console.log(user);
   };
 
   return (

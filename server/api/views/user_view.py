@@ -46,14 +46,13 @@ def login(request):
         
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            print(f'User {username} logged in successfully')
-            print(f'User details: {user.__dict__}')
             refresh = RefreshToken.for_user(user)
             user.refreshToken = str(refresh)
             user.save()
             return Response({
                 'message': 'Login successful',
                 'id':user.id,
+                'email': user.email,
                 'username': username,
                 'refresh_token': str(refresh),
                 'access_token': str(refresh.access_token)
@@ -74,7 +73,7 @@ def logout(request):
             user = User.objects.get(username=username)
             user.refreshToken = None  # Set refreshToken to null
             user.save()
-            return Response({'message': 'Logout successful'}, status=status.HTTP_200_OK)
+            return Response({'message': 'Logout successful','success':True}, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response({'message': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
     else:

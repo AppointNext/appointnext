@@ -2,17 +2,26 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Nav = () => {
   const navigate = useNavigate();
+  const userData = useSelector((state) => state.auth.userData);
+  const username = userData.username;
+  console.log(userData, username);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleLogout = () => {
-    const response = axios.post("http://localhost:8000/api/logout", username);
+  const handleLogout = async () => {
+    const response = await axios.post("http://127.0.0.1:8000/api/logout", {
+      username,
+    });
+    if (response.data.success === true) {
+      navigate("/login");
+    }
   };
 
   return (
