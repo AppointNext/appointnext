@@ -24,6 +24,6 @@ urlpatterns = [
     # path('doctorSignUp', doctorSignUp, name='doctorSignUp'),
     # path('doctorLogin', doctorLogin, name='doctorLogin'),
     # path('doctorLogout', doctorLogout, name='doctorLogout'),
-    # path('test',test)
+    path('test',test)
     # # path('doctorAppointments/', doctorAppointments, name='doctorAppointments'),
 ]
