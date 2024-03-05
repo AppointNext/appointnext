@@ -3,9 +3,9 @@ import Appointment from "../components/Dashboard/Appointment";
 import Nav from "../components/Dashboard/Nav";
 import Hero from "../components/Dashboard/Hero";
 import { useSelector } from "react-redux";
+import Calendar from "../components/Dashboard/Calender";
 
 const Dashboard = () => {
-  const user = useSelector((state) => state.auth.userData);
   return (
     <div className="flex flex-col gap-2">
       <Nav />
@@ -20,9 +20,14 @@ const Dashboard = () => {
         </div>
         <Appointment />
       </div>
+      <div className="border-2 p-1 border-slate-200">
+        <Calendar />
+      </div>
       <div>
         <Appointment />
       </div>
+      <br />
+      <br />
     </div>
   );
 };
