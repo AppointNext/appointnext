@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import Appointment from "../components/Dashboard/Appointment";
-import Nav from "../components/Dashboard/Nav";
-import Hero from "../components/Dashboard/Hero";
-import { useSelector } from "react-redux";
-import Calendar from "../components/Dashboard/Calender";
-import { Routes,Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import Overview from "../components/Dashboard/Overview/Overview";
 
 const Dashboard = () => {
   // 1. Overveiw
@@ -15,7 +12,11 @@ const Dashboard = () => {
   const [page, setPage] = useState(1);
   return (
     <Routes>
-      <Route path="/overview" element={<}/>
+      <Route path="/" element={<Overview />} />
+      <Route path="/task" element={<Appointment />} />
+      <Route path="/mentor" element={<Appointment />} />
+      <Route path="/message" element={<Appointment />} />
+      <Route path="/setting" element={<Appointment />} />
     </Routes>
   );
 };
