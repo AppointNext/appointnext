@@ -77,7 +77,7 @@ class Appointment(models.Model):
 class Organisation(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    doctors = models.ManyToManyField(Doctor)
+    doctors = models.ManyToManyField(Doctor, related_name='organization_doctors')
 
     def __str__(self):
         return self.name

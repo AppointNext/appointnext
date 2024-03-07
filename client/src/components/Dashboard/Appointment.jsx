@@ -6,7 +6,7 @@ const Appointment = () => {
       <div className="">
         <img
           className="rounded-lg w-screen h-[1/2]"
-          src="./appointdemo.jpg"
+          src="../../../public/appointdemo.jpg"
           alt=""
         />
         <div>

@@ -9,6 +9,7 @@ const Overview = () => {
     <div className="flex flex-col gap-2">
       <Nav />
       <Hero />
+      <Appointment />
       <div className="flex flex-col gap-2 rounded-lg border-2 p-1 border-slate-200">
         <div className=" my-3 flex justify-between px-2">
           <h1 className=" font-semibold">Upcoming Appointments</h1>
