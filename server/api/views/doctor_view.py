@@ -6,7 +6,7 @@ from rest_framework import status
 
 
 
-
+# Authentication
 # url http://localhost:8000/api/doctorSignUp
 @api_view(['POST'])
 def doctorSignUp(request):
@@ -134,3 +134,9 @@ def show_appointments_by_date(request):
     return Response({'message': 'Appointments found', 'appointments': appointments}, status=status.HTTP_200_OK)
   else:
     return Response({'message': 'No appointments found'}, status=status.HTTP_404_NOT_FOUND)
+
+
+# features
+# @api_view(["GET"])
+# @permission_classes([IsAuthenticated])
+# def 

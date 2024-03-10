@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import get_user_model, authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
+from models import UserLocation
 
 User = get_user_model()
 
@@ -36,15 +37,21 @@ def register(request):
     else:
         return Response({'message': 'Invalid request'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
+
+
+# our logic is that we take the user location while login and remove while logout so whenever user is logged in we will have the location of the user and we can use it to track the user and when the user logs out we will remove the location of the user
 @api_view(['POST'])
 def login(request):
     if request.method == 'POST':
         username = request.data.get('username')
         password = request.data.get('password')
+        latitude = request.data.get('latitude')
+        longitude = request.data.get('longitude')
         if not all([username, password]):
             return Response({'message': 'All fields are required'}, status=status.HTTP_400_BAD_REQUEST)
         
         user = authenticate(request, username=username, password=password)
+        userLocation = UserLocation.objects.create(user=user.id, latitude=latitude, longitude=longitude)
         if user is not None:
             refresh = RefreshToken.for_user(user)
             user.refreshToken = str(refresh)

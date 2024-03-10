@@ -1,11 +1,13 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from rest_framework import serializers
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=15)
     history = models.TextField(blank=True)
     refreshToken = models.CharField(max_length=255, blank=True)
+
 
     # Specify custom related names for the groups and user_permissions fields
     groups = models.ManyToManyField(
@@ -29,6 +31,15 @@ class User(AbstractUser):
         else:
             self.history += ',' + str(appointment_id)
         self.save()
+
+class UserLocation(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Location of {self.user.username}"
 
 class Doctor(AbstractUser):
     email = models.EmailField(unique=True)
@@ -74,6 +85,13 @@ class Appointment(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.doctor.username} - {self.date_time.strftime('%Y-%m-%d %H:%M')}"
     
+
+class AppointmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Appointment
+        fields = '__all__'
+
+
 class Organisation(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
