@@ -137,6 +137,6 @@ def show_appointments_by_date(request):
 
 
 # features
-# @api_view(["GET"])
+@api_view(["GET"])
 # @permission_classes([IsAuthenticated])
 # def 
