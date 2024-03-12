@@ -55,7 +55,6 @@ def login(request):
         if user is not None:
             # Create UserLocation instance with user instance
             user_location = UserLocation.objects.create(user=user, latitude=latitude, longitude=longitude)
-            print(user_location)
             refresh = RefreshToken.for_user(user)
             user.refreshToken = str(refresh)
             user.save()
