@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookie from "js-cookie";
@@ -8,11 +8,39 @@ import { setUser } from "../../store/userSlice";
 import { useSelector } from "react-redux";
 
 const LoginForm = () => {
+  const [location, setLocation] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const handleSearch = async () => {
+      try {
+        const { coords } = await getCurrentLocation();
+        const { latitude, longitude } = coords;
+        setLocation({ latitude, longitude });
+      } catch (error) {
+        console.error("Error searching:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const getCurrentLocation = async () => {
+      return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
+    };
+
+    handleSearch();
+  }, []); // Empty dependency array ensures the effect runs only once
+
+  console.log(location);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
+    latitude: "",
+    longitude: "",
     remember: false,
   });
 
