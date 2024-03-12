@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import get_user_model, authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
-from models import UserLocation
+from ..models import UserLocation
 
 User = get_user_model()
 
@@ -47,18 +47,21 @@ def login(request):
         password = request.data.get('password')
         latitude = request.data.get('latitude')
         longitude = request.data.get('longitude')
-        if not all([username, password]):
+        if not all([username, password, latitude, longitude]):
             return Response({'message': 'All fields are required'}, status=status.HTTP_400_BAD_REQUEST)
         
         user = authenticate(request, username=username, password=password)
-        userLocation = UserLocation.objects.create(user=user.id, latitude=latitude, longitude=longitude)
+        print(user)
         if user is not None:
+            # Create UserLocation instance with user instance
+            user_location = UserLocation.objects.create(user=user, latitude=latitude, longitude=longitude)
+            print(user_location)
             refresh = RefreshToken.for_user(user)
             user.refreshToken = str(refresh)
             user.save()
             return Response({
                 'message': 'Login successful',
-                'id':user.id,
+                'id': user.id,
                 'email': user.email,
                 'username': username,
                 'refresh_token': str(refresh),
@@ -68,7 +71,6 @@ def login(request):
             return Response({'message': 'Invalid username or password'}, status=status.HTTP_401_UNAUTHORIZED)
     else:
         return Response({'message': 'Invalid request'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
-
 
 
 @api_view(['POST'])

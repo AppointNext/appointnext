@@ -32,14 +32,16 @@ class User(AbstractUser):
             self.history += ',' + str(appointment_id)
         self.save()
 
+
 class UserLocation(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
-    timestamp = models.DateTimeField(auto_now_add=True)
+    user = models.CharField(max_length=100)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Location of {self.user.username}"
+        return f"{self.user.username} - {self.latitude}, {self.longitude} - {self.created_at.strftime('%Y-%m-%d %H:%M')}"
+    
 
 class Doctor(AbstractUser):
     email = models.EmailField(unique=True)

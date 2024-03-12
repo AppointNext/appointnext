@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Home/Navbar";
 import Hero from "../components/Home/Hero";
 import Feature from "../components/Home/Feature";
@@ -9,22 +9,28 @@ import Footer from "../components/Home/Footer";
 const Home = () => {
   const [location, setLocation] = useState(null);
 
-  const handleSearch = async () => {
-    try {
-      const { coords } = await getCurrentLocation();
-      const { latitude, longitude } = coords;
-      setLocation({ latitude, longitude });
-    } catch (error) {
-      console.error("Error searching:", error);
-    }
-  };
-  const getCurrentLocation = async () => {
-    return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(resolve, reject);
-    });
-  };
-  handleSearch();
-  console.log(location);
+  useEffect(() => {
+    const handleSearch = async () => {
+      try {
+        const { coords } = await getCurrentLocation();
+        const { latitude, longitude } = coords;
+        setLocation({ latitude, longitude });
+      } catch (error) {
+        console.error("Error searching:", error);
+      }
+    };
+
+    const getCurrentLocation = async () => {
+      return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
+    };
+
+    handleSearch();
+  }, []); // Empty dependency array ensures the effect runs only once
+
+  console.log(location); // You can access location here, or wherever needed
+
   return (
     <div className="md:px-4 px-2">
       <Navbar />
