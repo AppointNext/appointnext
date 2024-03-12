@@ -87,3 +87,64 @@ def logout(request):
             return Response({'message': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
     else:
         return Response({'message': 'Invalid request'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+
+def doctorSignUp(request):
+    if request.method == 'POST':
+        username = request.data.get('username')
+        password = request.data.get('password')
+        email = request.data.get('email')
+        phone = request.data.get('phone')
+
+        print(username, password, email, phone)
+        if not all([username, password, email,phone]):
+            return Response({'message': 'All fields are required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if User.objects.filter(username=username).exists():
+            return Response({'message': 'Username already exists'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if User.objects.filter(email=email).exists():
+            return Response({'message': 'Email already exists'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user = User.objects.create(username=username, email=email)
+        user.set_password(password)
+        user.save()
+
+        if user:
+            return Response({'message': 'Registration successful','id':user.id, 'username': username, 'email': email}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'message': 'User creation failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    else:
+        return Response({'message': 'Invalid request'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    
+def doctorLogin(request):
+    if request.method == 'POST':
+        username = request.data['username']
+        password = request.data['password']
+        if not all([username, password]):
+            return Response({'message': 'All fields are required'})
+        user = User.objects.get(username=username, password=password)
+        if not user:
+            return Response({'message': 'User not found'})
+        return Response({'message': 'User found',
+                         'username': username,
+                         'password': password})
+    else:
+        return Response({'message': 'Invalid request'})
+    
+def doctorLogout(request):
+    if request.method == 'POST':
+        username = request.data['username']
+        password = request.data['password']
+        if not all([username, password]):
+            return Response({'message': 'All fields are required'})
+        user = User.objects.get(username=username, password=password)
+        if not user:
+            return Response({'message': 'User not found'})
+        return Response({'message': 'User found',
+                         'username': username,
+                         'password': password})
+    else:
+        return Response({'message': 'Invalid request'})
+    
