@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "../components/Home/Navbar";
-import Hero from "../components/Home/Hero";
-import Feature from "../components/Home/Feature";
-import Feedback from "../components/Home/Feedback";
-import SubscribeLetter from "../components/Home/SubscribeLetter";
-import Footer from "../components/Home/Footer";
+import React, { useState, useEffect } from "react";
+import Navbar from "../../components/ui/Navbar";
+import Hero from "../../components/ui/Hero";
+import Feature from "../../components/ui/Feature";
+import Feedback from "../../components/ui/Feedback";
+import SubscribeLetter from "../../components/ui/SubscribeLetter";
+import Footer from "../../components/ui/Footer";
 
 const Home = () => {
   const [location, setLocation] = useState(null);

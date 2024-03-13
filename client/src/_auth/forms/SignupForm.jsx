@@ -4,10 +4,10 @@ import axios from "axios";
 import Cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../store/userSlice";
-import { useSelector } from "react-redux";
+// import { setUser } from "../../store/userSlice";
+// import { useSelector } from "react-redux";
 
-const LoginForm = () => {
+const SignupForm = () => {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -160,4 +160,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;

@@ -15,7 +15,7 @@ const Navbar = () => {
       setIsAnimating(false);
 
       // Navigate to "/signup"
-      navigate("/signup");
+      navigate("/login");
     }, 500); // Adjust delay time as needed
   };
 

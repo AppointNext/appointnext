@@ -8,8 +8,10 @@ import { SlBookOpen } from "react-icons/sl";
 import { FaUserDoctor } from "react-icons/fa6";
 import { AiOutlineMessage } from "react-icons/ai";
 import { IoSettingsOutline } from "react-icons/io5";
+import { IoMenuSharp } from "react-icons/io5";
+import Logo from "../utils/Logo";
 
-const Nav = () => {
+const Sidebar = () => {
   const [, , removeCookie] = useCookies(["refreshToken", "accessToken"]);
   const navigate = useNavigate();
   const username = localStorage.getItem("username");
@@ -36,18 +38,26 @@ const Nav = () => {
   };
 
   return (
-    <div className="py-4">
+    <div className="py-0">
       <nav className="flex justify-between w-screen items-center px-4">
         <div className="flex justify-center items-center px-2 w-[1/2]">
-          <i
-            className="fa-solid fa-bars cursor-pointer"
+          <IoMenuSharp
+            className="xl:hidden md:hidden cursor-pointer text-3xl"
             onClick={toggleDropdown}
-          ></i>
+          ></IoMenuSharp>
           {isDropdownOpen && (
-            <div className="absolute left-2 top-10 mt-2 w-32 bg-white rounded-lg shadow-xl z-10 xl:h-screen">
+            <div className="absolute left-2 top-6 mt-2 w-40 bg-white rounded-lg shadow-xl z-10 xl:h-screen flex flex-col items-center md:left-0 md:top-0 xl:left-0 xl:top-0 md:h-screen">
               <div className="py-1">
                 <Link
-                  to="/dashboard/overview"
+                  to="/overview"
+                  className="block px-4 py-2 text-gray-800 text-[14px] "
+                >
+                  <div className="sm:flex flex-row items-center gap-2 hidden xl:block">
+                    <Logo />
+                  </div>
+                </Link>
+                <Link
+                  to="/overview"
                   className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white text-[14px] active:bg-indigo-500 "
                 >
                   <div className="flex flex-row items-center gap-2">
@@ -57,43 +67,43 @@ const Nav = () => {
                   </div>
                 </Link>
                 <Link
-                  to="/dashboard/task"
+                  to="/appointments"
                   className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white text-[14px]"
                 >
                   <div className="flex flex-row items-center gap-2">
                     {" "}
                     <SlBookOpen />
-                    Task
+                    Appointments
                   </div>
                 </Link>
                 <Link
-                  to="/dashboard/doctor"
+                  to="/doctors"
                   className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white text-[14px]"
                 >
                   <div className="flex flex-row items-center gap-2">
                     {" "}
                     <FaUserDoctor />
-                    Mentor
+                    Doctors
                   </div>
                 </Link>
                 <Link
-                  to="/dashboard/message"
+                  to="/messages"
                   className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white text-[14px]"
                 >
                   <div className="flex flex-row items-center gap-2">
                     {" "}
                     <AiOutlineMessage />
-                    Profile
+                    Messages
                   </div>
                 </Link>
                 <Link
-                  to="/dashboard/setting"
+                  to="/settings"
                   className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white text-[14px]"
                 >
                   <div className="flex flex-row items-center gap-2">
                     {" "}
                     <IoSettingsOutline />
-                    Setting
+                    Settings
                   </div>
                 </Link>
               </div>
@@ -135,4 +145,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default Sidebar;
