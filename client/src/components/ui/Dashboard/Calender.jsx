@@ -26,7 +26,7 @@ const Calendar = () => {
   };
 
   return (
-    <div className="container  md:w-[300px] xl:w-[300px] m-4 bg-white px-4 pt-4 ">
+    <div className="container  md:w-auto xl:w-auto m-2 bg-white px-4 py-4 rounded-lg ">
       <div className="flex justify-between items-center mb-4">
         <button
           className="px-2 py-1 rounded  text-black"
@@ -43,7 +43,7 @@ const Calendar = () => {
         {days.map(({ dayInitial, dayOfMonth }) => (
           <div
             key={dayInitial + dayOfMonth}
-            className={` rounded-3xl p-1 text-center flex flex-col justify-center items-center ${
+            className={` rounded-3xl p-1 text-center flex flex-col justify-center items-center hover:cursor-pointer ${
               new Date().getDate() === parseInt(dayOfMonth)
                 ? "bg-black text-white"
                 : "text-black bg-gray-200"
@@ -53,7 +53,7 @@ const Calendar = () => {
             <div
               className={`${
                 new Date().getDate() === parseInt(dayOfMonth)
-                  ? "bg-blue-400 text-white rounded-full w-full"
+                  ? "bg-blue-400 text-white rounded-full w-full "
                   : ""
               }`}
             >

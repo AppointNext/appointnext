@@ -4,8 +4,8 @@ import { FaStar } from "react-icons/fa";
 
 const DoctorCard = () => {
   return (
-    <div className="doctor-card-container container">
-      <div className="doctor-card-content bg-white p-2 rounded-lg w-[320px]">
+    <div className="doctor-card-container container ">
+      <div className="doctor-card-content bg-white p-2 py-4 rounded-lg w-[320px] gap-2">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center gap-2 ">
             <img
