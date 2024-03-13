@@ -10,6 +10,7 @@ import { AiOutlineMessage } from "react-icons/ai";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoMenuSharp } from "react-icons/io5";
 import Logo from "../utils/Logo";
+import { FaBell } from "react-icons/fa";
 
 const Sidebar = () => {
   const [, , removeCookie] = useCookies(["refreshToken", "accessToken"]);
@@ -110,12 +111,15 @@ const Sidebar = () => {
             </div>
           )}
         </div>
-        <div className="flex justify-center items-center full gap-2">
-          <i className="fa-solid fa-bell"></i>
+        <div>
+          <h1 className="text-2xl font-bold">Dashboard</h1>
+        </div>
+        <div className="flex justify-center items-center full gap-4 mt-4  ">
+          <FaBell className="text-2xl cursor-pointer"></FaBell>
           <div className="relative">
             <img
-              className="rounded-full w-10 h-10 cursor-pointer"
-              src="../../../public/profile.png"
+              className="rounded-full w-10 h-10 cursor-pointer "
+              src="./profile.png"
               alt="profile"
               onClick={toggleDropdown2}
             />
@@ -134,7 +138,6 @@ const Sidebar = () => {
                   >
                     Logout
                   </button>
-                  {/* Add more options as needed */}
                 </div>
               </div>
             )}
