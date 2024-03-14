@@ -1,13 +1,13 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from rest_framework import serializers
+import datetime
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=15)
     history = models.TextField(blank=True)
     refreshToken = models.CharField(max_length=255, blank=True)
-
 
     # Specify custom related names for the groups and user_permissions fields
     groups = models.ManyToManyField(
@@ -45,10 +45,21 @@ class UserLocation(models.Model):
 
 class Doctor(AbstractUser):
     email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    dob = models.DateField(default=datetime.date.today)
+
+    gender = models.CharField(max_length=10,default="male")
     phone = models.CharField(max_length=15)
     history = models.TextField(blank=True)
     refreshToken = models.CharField(max_length=255, blank=True)
-    organisation = models.ForeignKey('Organisation', on_delete=models.CASCADE, blank=True, null=True)
+    medical_license = models.CharField(max_length=100,default="")
+    specialization = models.CharField(max_length=100,default="")
+    clinic = models.ForeignKey('Hospital', on_delete=models.CASCADE, null=True)  # Allow null values
+    
+    years_of_experience = models.PositiveIntegerField(default=0)
+    medical_qualifications = models.TextField(default="")
+    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
 
     # Specify custom related names for the groups and user_permissions fields
     groups = models.ManyToManyField(
@@ -73,6 +84,7 @@ class Doctor(AbstractUser):
             self.history += ',' + str(appointment_id)
         self.save()
 
+
 class Appointment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
@@ -94,59 +106,17 @@ class AppointmentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class Organisation(models.Model):
-    name = models.CharField(max_length=100)
+class Hospital(models.Model):
+    clinic_name = models.CharField(max_length=100)
+    clinic_address = models.TextField()
+    clinic_phone = models.CharField(max_length=15)
     description = models.TextField()
-    doctors = models.ManyToManyField(Doctor, related_name='organization_doctors')
 
     def __str__(self):
-        return self.name
+        return self.clinic_name
 
-# class ServiceCategory(models.Model):
-#     name = models.CharField(max_length=100)
-#     description = models.TextField()
 
-#     def __str__(self):
-#         return self.name
-
-# class Service(models.Model):
-#     category = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE)
-#     name = models.CharField(max_length=100)
-#     provider = models.ForeignKey(User, on_delete=models.CASCADE)
-#     description = models.TextField()
-#     price = models.DecimalField(max_digits=10, decimal_places=2)
-#     duration_minutes = models.PositiveIntegerField()
-
-#     def __str__(self):
-#         return self.name
-
-# class Appointment(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     service = models.ForeignKey(Service, on_delete=models.CASCADE)
-#     date_time = models.DateTimeField()
-#     status_choices = [
-#         ('BOOKED', 'Booked'),
-#         ('CANCELLED', 'Cancelled'),
-#         ('COMPLETED', 'Completed')
-#     ]
-#     status = models.CharField(max_length=10, choices=status_choices)
-
-#     def __str__(self):
-#         return f"{self.user.username} - {self.service.name} - {self.date_time.strftime('%Y-%m-%d %H:%M')}"
-
-# class Review(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     service = models.ForeignKey(Service, on_delete=models.CASCADE)
-#     rating = models.IntegerField()
-#     comment = models.TextField()
-#     created_at = models.DateTimeField(auto_now_add=True)
-
-#     def __str__(self):
-#         return f"{self.user.username} - {self.service.name} - Rating: {self.rating}"
-
-# class AppointmentReminder(models.Model):
-#     appointment = models.ForeignKey(Appointment, on_delete=models.CASCADE)
-#     reminder_time = models.DateTimeField()
-
-#     def __str__(self):
-#         return f"{self.appointment} - Reminder at {self.reminder_time.strftime('%Y-%m-%d %H:%M')}"
+class HospitalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Hospital
+        fields = '__all__'
