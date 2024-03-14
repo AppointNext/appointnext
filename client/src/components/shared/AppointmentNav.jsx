@@ -12,11 +12,11 @@ const AppointmentNav = () => {
           <input type="text" placeholder="Search Appointment" className=" outline-blue-400 rounded-lg w-[300px] px-2 p-2" />
         </div>
         <div className=" flex gap-10">
-          <div className=" flex justify-center items-center">
+          <div className=" flex justify-center items-center gap-2">
             <BiCategory />
             <p>Category</p>
           </div>
-          <div className=" flex justify-center items-center">
+          <div className=" flex justify-center items-center gap-2">
             <MdSort />
             <p>SortBy : Deadline</p>
           </div>

@@ -11,6 +11,7 @@ import Doctors from "./_root/pages/Doctors";
 import Message from "./_root/pages/Messages";
 import Messages from "./_root/pages/Messages";
 import Detailedappointment from "./_root/pages/Detailedappointment";
+import AppointForm from "./_root/pages/AppointForm";
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
         <Route element={<RootLayout />}>
           <Route path="/overview" element={<Overview />} />
           <Route path="/appointments" element={<Appointments />} />
+          <Route path="/appointmentForm" element={<AppointForm/>} />
           <Route path="/dappointments" element={<Detailedappointment/>} />
           <Route path="/doctors" element={<Doctors />} />
           <Route path="/messages" element={<Messages />} />
