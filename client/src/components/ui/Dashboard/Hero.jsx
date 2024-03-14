@@ -2,7 +2,7 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <div className=" bg-white">
+    <div className=" bg-white w-full">
       <div className=" m-4">
         <div className="  px-2 rounded-md w-[150px] ">
           <h1 className=" font-bold">Name of Patient</h1>
