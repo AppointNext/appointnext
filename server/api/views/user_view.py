@@ -15,6 +15,7 @@ def register(request):
         password = request.data.get('password')
         email = request.data.get('email')
         phone = request.data.get('phone')
+        print(request.data)
 
         print(username, password, email, phone)
         if not all([username, password, email,phone]):
@@ -47,6 +48,8 @@ def login(request):
         password = request.data.get('password')
         latitude = request.data.get('latitude')
         longitude = request.data.get('longitude')
+        print(request.data)
+        print(username, password, latitude, longitude)
         if not all([username, password, latitude, longitude]):
             return Response({'message': 'All fields are required'}, status=status.HTTP_400_BAD_REQUEST)
         

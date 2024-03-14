@@ -10,32 +10,47 @@ import { useDispatch } from "react-redux";
 const LoginForm = () => {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [position, setPosition] = useState({ latitude: null, longitude: null });
 
   useEffect(() => {
-    const handleSearch = async () => {
-      try {
-        const { coords } = await getCurrentLocation();
-        const { latitude, longitude } = coords;
-        setLocation({ latitude, longitude });
-      } catch (error) {
-        console.error("Error searching:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    const getCurrentLocation = async () => {
-      return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject);
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setPosition({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
       });
-    };
+    } else {
+      console.log("Geolocation is not available in your browser.");
+    }
+  }, []);
 
-    handleSearch();
-  }, []); // Empty dependency array ensures the effect runs only once
+  // useEffect(() => {
+  //   const handleSearch = async () => {
+  //     try {
+  //       const { coords } = await getCurrentLocation();
+  //       const { latitude, longitude } = coords;
+  //       setLocation({ latitude, longitude });
+  //     } catch (error) {
+  //       console.error("Error searching:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-  console.log(location);
+  //   const getCurrentLocation = async () => {
+  //     return new Promise((resolve, reject) => {
+  //       navigator.geolocation.getCurrentPosition(resolve, reject);
+  //     });
+  //   };
+
+  //   handleSearch();
+  // }, []); // Empty dependency array ensures the effect runs only once
+
+  console.log(location, position);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -51,6 +66,8 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
+    formData.latitude = position.latitude;
+    formData.longitude = position.longitude;
     await axios
       .post("http://localhost:8000/api/login", formData)
       .then((res) => {
@@ -64,7 +81,7 @@ const LoginForm = () => {
         if (res.data.access_token && res.data.refresh_token) {
           Cookie.set("refreshToken", res.data.refresh_token);
           Cookie.set("accessToken", res.data.access_token);
-          navigate("/dashboard");
+          navigate("/overview");
         }
       })
       .catch((err) => {

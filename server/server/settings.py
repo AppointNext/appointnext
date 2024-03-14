@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-a9o75n=7=5&#afn6!jv768$!b)-)fgwzn6!zigzofu)c=9g4ld
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['appoint-next.onrender.com','*']
+ALLOWED_HOSTS = ['appoint-next.onrender.com','*', 'localhost','http://localhost:5173']
 
 
 
