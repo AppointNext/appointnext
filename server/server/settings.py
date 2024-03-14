@@ -60,6 +60,11 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:5173',  # Add your frontend domain here
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'api.views.doctor_view.VerifyUser',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 
 ROOT_URLCONF = 'server.urls'
 CORS_ORIGIN_ALLOW_ALL = True

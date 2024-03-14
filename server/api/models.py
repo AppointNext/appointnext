@@ -84,7 +84,12 @@ class Doctor(AbstractUser):
             self.history += ',' + str(appointment_id)
         self.save()
 
+class DoctorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Doctor
+        fields = '__all__'
 
+        
 class Appointment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)

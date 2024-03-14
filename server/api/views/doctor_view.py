@@ -1,71 +1,85 @@
-from rest_framework.decorators import api_view,permission_classes
-from ..models import Doctor, Appointment,Hospital
+from django.contrib.auth import authenticate
+from rest_framework.decorators import api_view, renderer_classes, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-from django.contrib.auth import get_user_model, authenticate
+from rest_framework.renderers import JSONRenderer
+from ..models import Doctor, Appointment, Hospital
 from rest_framework_simplejwt.tokens import RefreshToken
 from ..models import UserLocation
+from rest_framework import serializers
+from django.contrib.auth.backends import BaseBackend
 
-Doctor = get_user_model()
+class VerifyUser(BaseBackend):
+    def authenticate(self, request, username=None, password=None):
+        user = authenticate(request=request, username=username, password=password)
+        return user
 
 
-# Authentication
-# url http://localhost:8000/api/doctorSignUp
+# Serializer for Doctor model
+class DoctorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Doctor
+        fields = '__all__'
+
 @api_view(['POST'])
+@renderer_classes([JSONRenderer])
 def doctorSignUp(request):
-   if request.method == 'POST':
-      username = request.data['username']
-      password = request.data['password']
-      email = request.data['email']
-      phone = request.data['phone']
-      first_name = request.data['first_name']
-      last_name = request.data['last_name']
-      clinic_name = request.data['clinic_name']
-      clinic_address = request.data['clinic_address']
-      clinic_phone = request.data['clinic_phone']
-      medical_license = request.data['medical_license']
-      specialization = request.data['specialization']
-      dob = request.data['dob']
+    if request.method == 'POST':
+        # Extract data from request
+        username = request.data.get('username')
+        password = request.data.get('password')
+        email = request.data.get('email')
+        phone = request.data.get('phone')
+        first_name = request.data.get('first_name')
+        last_name = request.data.get('last_name')
+        medical_license = request.data.get('medical_license')
+        specialization = request.data.get('specialization')
+        dob = request.data.get('dob')
 
+        # Validate input data
+        if not all([username, password, email]):
+            return Response({'message': 'All fields are required'})
 
-      if not all([username, password, email]):
-        return Response({'message': 'All fields are required'})
-      if Doctor.objects.filter(username=username).exists():
-        return Response({'message': 'Username already exists'})
-      if Doctor.objects.filter(email=email).exists():
-        return Response({'message': 'Email already exists'})
-      
+        # Check if username or email already exists
+        if Doctor.objects.filter(username=username).exists():
+            return Response({'message': 'Username already exists'})
+        if Doctor.objects.filter(email=email).exists():
+            return Response({'message': 'Email already exists'})
 
-      doctor = Doctor.objects.create(username=username, password=password, email=email,phone=phone)
-      if not doctor:
-        return Response({'message': 'User not created'})
-      return Response({'message': 'User created',
-                         'username': username,
-                         'password': password,
-                         'email': email,
-                         'success':True})
-   else:
-      return Response({'message': 'Invalid request'})
-   
+        # Create Doctor instance
+        doctor = Doctor.objects.create(username=username, email=email, phone=phone, first_name=first_name,
+                                       last_name=last_name, medical_license=medical_license, specialization=specialization,
+                                       dob=dob)
+
+        # Authenticate the user
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            # Check if Doctor instance was created successfully
+            if doctor:
+                # Serialize the created Doctor instance
+                serializer = DoctorSerializer(doctor)
+                return Response({'message': 'User created', 'Doctor': serializer.data, 'success': True})
+            else:
+                return Response({'message': 'User not created'})
+        else:
+            return Response({'message': 'Invalid username or password'}, status=status.HTTP_401_UNAUTHORIZED)
+    else:
+        return Response({'message': 'Invalid request'})
+
 @api_view(['POST'])
 def login(request):
     if request.method == 'POST':
         username = request.data.get('username')
         password = request.data.get('password')
-        latitude = request.data.get('latitude')
-        longitude = request.data.get('longitude')
-        
-        print(request.data)
-        print(username, password, latitude, longitude)
-        if not all([username, password, latitude, longitude]):
+
+        if not all([username, password]):
             return Response({'message': 'All fields are required'}, status=status.HTTP_400_BAD_REQUEST)
-        
+
         doctor = authenticate(request, username=username, password=password)
-        print(doctor)
+
         if doctor is not None:
-            # Create UserLocation instance with user instance
-            user_location = UserLocation.objects.create(user=doctor, latitude=latitude, longitude=longitude)
             refresh = RefreshToken.for_user(doctor)
             doctor.refreshToken = str(refresh)
             doctor.save()
@@ -82,22 +96,27 @@ def login(request):
     else:
         return Response({'message': 'Invalid request'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
-    
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def doctorLogout(request):
     if request.method == 'POST':
-        username = request.data['username']
-        password = request.data['password']
+        username = request.data.get('username')
+        password = request.data.get('password')
+
         if not all([username, password]):
             return Response({'message': 'All fields are required'})
+
         doctor = Doctor.objects.get(username=username, password=password)
+
         if not doctor:
             return Response({'message': 'User not found'})
+
         return Response({'message': 'User found',
                          'username': username,
                          'password': password})
     else:
         return Response({'message': 'Invalid request'})
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
