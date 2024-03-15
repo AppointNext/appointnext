@@ -23,7 +23,7 @@ const DoctorSignupForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8000/api/signup", formData);
+      const res = await axios.post("http://localhost:8000/api/doctorSignup", formData);
       console.log(res.data);
       // Redirect to dashboard or any other page upon successful signup
       navigate("/dashboard");
