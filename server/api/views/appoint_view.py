@@ -1,4 +1,5 @@
 from rest_framework.decorators import api_view,permission_classes
+from ..models import Appointment,User,Doctor
 # from models import Appointment,AppointmentSerializer
 from ..models import AppointmentSerializer,Appointment,Hospital,HospitalSerializer
 from rest_framework.response import Response
@@ -13,6 +14,7 @@ from django.utils import timezone
 def show_dates_appointment(request):
   date = request.data.get('date')
   user_id = request.data.get('id')
+
   if not date:
     return Response({'message': 'Date is required'}, status=status.HTTP_400_BAD_REQUEST)
   else:
@@ -58,22 +60,22 @@ def get_todays_appointment(request):
     else:
         return Response({'message': 'No todays appointments found'}, status=status.HTTP_404_NOT_FOUND)
     
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def book_appointment(request):
-    user_id = request.data.get('id')
-    doctor_id = request.data.get('doctor_id')
-    description = request.data.get('description')
-    option = request.data.get('option')
-    date_time = request.data.get('date_time')
-    if not all([user_id, doctor_id, date_time]):
-        return Response({'message': 'User id, doctor id, date and time are required'}, status=status.HTTP_400_BAD_REQUEST)
-    else:
-        appointment = Appointment.objects.create(user=user_id, doctor=doctor_id, description=description, option=option, date_time=date_time)
-        if appointment:
-            return Response({'message': 'Appointment booked', 'appointment_id': appointment.id}, status=status.HTTP_201_CREATED)
-        else:
-            return Response({'message': 'Appointment booking failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+# @api_view(['POST'])
+# @permission_classes([IsAuthenticated])
+# def book_appointment(request):
+#     user_id = request.data.get('id')
+#     doctor_id = request.data.get('doctor_id')
+#     description = request.data.get('description')
+#     option = request.data.get('option')
+#     date_time = request.data.get('date_time')
+#     if not all([user_id, doctor_id, date_time]):
+#         return Response({'message': 'User id, doctor id, date and time are required'}, status=status.HTTP_400_BAD_REQUEST)
+#     else:
+#         appointment = Appointment.objects.create(user=user_id, doctor=doctor_id, description=description, option=option, date_time=date_time)
+#         if appointment:
+#             return Response({'message': 'Appointment booked', 'appointment_id': appointment.id}, status=status.HTTP_201_CREATED)
+#         else:
+#             return Response({'message': 'Appointment booking failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
   
 
 @api_view(['GET'])
@@ -84,3 +86,21 @@ def get_all_hospital(request):
         return Response({'message': 'Hospitals found', 'hospitals': serialized_hospitals}, status=status.HTTP_200_OK)
     else:
         return Response({'message': 'No hospitals found'}, status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def book_appointment(request):
+    user_id = request.data.get('id')
+    doctor_id = request.data.get('doctor_id')
+    description = request.data.get('description')
+    date_time = request.data.get('date_time')
+    user = User.objects.get(id=user_id)
+    doctor = Doctor.objects.get(id=doctor_id)
+    if not all([user_id, doctor_id, date_time]):
+        return Response({'message': 'User id, doctor id, date and time are required'}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        appointment = Appointment.objects.create(user=user, doctor=doctor, description=description, status='PENDING', date_time=date_time)
+        if appointment:
+            return Response({'message': 'Appointment booked', 'appointment_id': appointment.id}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'message': 'Appointment booking failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
