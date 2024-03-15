@@ -94,12 +94,17 @@ class Appointment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     date_time = models.DateTimeField()
+    description = models.TextField(max_length=1000, blank=True, null=True)
     status_choices = [
         ('BOOKED', 'Booked'),
         ('CANCELLED', 'Cancelled'),
-        ('COMPLETED', 'Completed')
+        ('COMPLETED', 'Completed'),
+        ('PENDING', 'Pending')
     ]
-    status = models.CharField(max_length=10, choices=status_choices)
+    treatment_for = models.TextField(max_length=1000, blank=True, null=True)
+    previously_visited = models.BooleanField(default=False)
+    any_report = models.ImageField(upload_to='reports/', blank=True, null=True)
+    status = models.CharField(max_length=10, choices=status_choices,default='PENDING')
 
     def __str__(self):
         return f"{self.user.username} - {self.doctor.username} - {self.date_time.strftime('%Y-%m-%d %H:%M')}"
