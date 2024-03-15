@@ -12,6 +12,8 @@ import Message from "./_root/pages/Messages";
 import Messages from "./_root/pages/Messages";
 import Detailedappointment from "./_root/pages/Detailedappointment";
 import AppointForm from "./_root/pages/AppointForm";
+import DoctorLoginForm from "./_auth/forms/DoctorLoginForm";
+import DoctorSignupForm from "./_auth/forms/DoctorSignupForm";
 function App() {
   return (
     <>
@@ -20,12 +22,14 @@ function App() {
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<SignupForm />} />
+          <Route path="/doctorSignup" element={<DoctorSignupForm />} />
+          <Route path="/doctorLogin" element={<DoctorLoginForm />} />
         </Route>
         <Route element={<RootLayout />}>
           <Route path="/overview" element={<Overview />} />
           <Route path="/appointments" element={<Appointments />} />
-          <Route path="/appointmentForm" element={<AppointForm/>} />
-          <Route path="/dappointments" element={<Detailedappointment/>} />
+          <Route path="/appointmentForm" element={<AppointForm />} />
+          <Route path="/dappointments" element={<Detailedappointment />} />
           <Route path="/doctors" element={<Doctors />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/settings" element={<Message />} />

@@ -47,7 +47,7 @@ const Sidebar = () => {
             onClick={toggleDropdown}
           ></IoMenuSharp>
           {isDropdownOpen && (
-            <div className="absolute left-2 top-6 mt-2 w-40 bg-white rounded-lg shadow-xl z-10 xl:h-screen flex flex-col items-center md:left-0 md:top-0 xl:left-0 xl:top-0 md:h-screen">
+            <div className="absolute left-2 top-6 mt-2 w-48 bg-white rounded-lg shadow-xl z-10 xl:h-screen flex flex-col items-center md:left-0 md:top-0 xl:left-0 xl:top-0 md:h-screen">
               <div className="py-1">
                 <Link
                   to="/overview"
