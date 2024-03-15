@@ -90,9 +90,9 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen p-4 gap-2 overflow-auto h-full">
-      <img src="" alt="" />
-      <div className="bg-blue-500 rounded-3xl w-[12rem] text-white py-2 flex flex-row justify-center">
+    <div className="flex items-center justify-evenly h-screen p-4 gap-2 overflow-auto h-full w-screen">
+      <div className=" flex-col gap-2 w-[1/2]">
+      <div className="bg-[#4F46E5] rounded-3xl w-[12rem] text-white py-2 flex flex-row justify-center ml-[90px]">
         <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white">
           Patient
         </button>
@@ -100,12 +100,13 @@ const LoginForm = () => {
           Doctor
         </button>
       </div>
+      <br />
       <p className="text-[11px]">
         Simplify appointments with AppointNext.io for efficient healthcare
         scheduling.
       </p>
       <form action="" onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <div className="input-group">
+        <div className="input-group font-semibold">
           <label
             htmlFor="username"
             className={`transition-transform ${
@@ -124,7 +125,7 @@ const LoginForm = () => {
             placeholder="Enter Your Username"
           />
         </div>
-        <div className="input-group">
+        <div className="input-group font-semibold">
           <div className="flex flex-row justify-between items-center">
             <label
               htmlFor="password"
@@ -159,20 +160,28 @@ const LoginForm = () => {
             value={formData.remember}
             onChange={handleChange}
           />
-          <label htmlFor="remember" className="px-2 text-[10px]">
+          <label htmlFor="remember" className="px-2 text-[15px]">
             Remember Me
           </label>
         </div>
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="bg-[#4F46E5] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Login
         </button>
       </form>
-      <p className="text-[10px]">
-        Don’t have an account yet? Register now, for free!
-      </p>
+      <br />
+      <br />
+      <div className=" text-center">
+        <p className="text-[15px]">
+          Don’t have an account yet? Register now, for free!
+        </p>
+      </div>
+      </div>
+      <div className=" bg-[#003CD8] h-screen justify-center flex items-center w-[1/2]">
+      <img src="./public/image.png" alt="" className=" w-[400px]" />
+      </div>
     </div>
   );
 };
