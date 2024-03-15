@@ -4,13 +4,10 @@ import axios from "axios";
 import Cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-// import { setUser } from "../../store/userSlice";
-// import { useSelector } from "react-redux";
 
 const DoctorLoginForm = () => {
-  const [location, setLocation] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [position, setPosition] = useState({ latitude: null, longitude: null });
+  const navigate = useNavigate();
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -25,56 +22,25 @@ const DoctorLoginForm = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const handleSearch = async () => {
-  //     try {
-  //       const { coords } = await getCurrentLocation();
-  //       const { latitude, longitude } = coords;
-  //       setLocation({ latitude, longitude });
-  //     } catch (error) {
-  //       console.error("Error searching:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   const getCurrentLocation = async () => {
-  //     return new Promise((resolve, reject) => {
-  //       navigator.geolocation.getCurrentPosition(resolve, reject);
-  //     });
-  //   };
-
-  //   handleSearch();
-  // }, []); // Empty dependency array ensures the effect runs only once
-
-  console.log(location, position);
-  const navigate = useNavigate();
-  // const dispatch = useDispatch();
-
   const [formData, setFormData] = useState({
     username: "",
     password: "",
+    remember: false,
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    setFormData({ ...formData, [e.target.name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    // formData.latitude = position.latitude;
-    // formData.longitude = position.longitude;
     await axios
       .post("http://localhost:8000/api/doctorLogin", formData)
       .then((res) => {
         console.log(res.data);
         const { username, email } = res.data;
-        console.log(username, email);
-        // dispatch(setUser({ username, email }));
         localStorage.setItem("username", username);
-        console.log(localStorage.getItem("username"));
-        console.log(res.data.refresh_token, res.data.access_token);
         if (res.data.access_token && res.data.refresh_token) {
           Cookie.set("refreshToken", res.data.refresh_token);
           Cookie.set("accessToken", res.data.access_token);
@@ -84,11 +50,13 @@ const DoctorLoginForm = () => {
       .catch((err) => {
         console.log(err);
       });
+
+      console.log(formData)
   };
 
   return (
     <div className="flex items-center justify-evenly h-screen gap-2 overflow-auto flex-row w-screen">
-      <div className=" flex-col gap-2 w-1/2 p-20">
+      <div className="flex-col gap-2 w-1/2 p-20">
         <div className="bg-[#4F46E5] rounded-3xl w-[12rem] text-white py-2 flex flex-row justify-center ml-[90px]">
           <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white">
             Patient
@@ -104,12 +72,7 @@ const DoctorLoginForm = () => {
         </p>
         <form action="" onSubmit={handleSubmit} className="flex flex-col gap-2">
           <div className="input-group font-semibold">
-            <label
-              htmlFor="username"
-              className={`transition-transform ${
-                formData.email ? "-translate-y-6 text-sm" : ""
-              } text-[15px]`}
-            >
+            <label htmlFor="username" className="transition-transform text-[15px]">
               Username
             </label>
             <input
@@ -124,18 +87,10 @@ const DoctorLoginForm = () => {
           </div>
           <div className="input-group font-semibold">
             <div className="flex flex-row justify-between items-center">
-              <label
-                htmlFor="password"
-                className={`transition-transform ${
-                  formData.password ? "text-sm" : ""
-                } text-[15px] `}
-              >
+              <label htmlFor="password" className="transition-transform text-[15px]">
                 Password
               </label>
-              <Link
-                to="/forgotpassword"
-                className="text-[10px] text-blue-500 hover:cursor-pointer  "
-              >
+              <Link to="/forgotpassword" className="text-[10px] text-blue-500 hover:cursor-pointer">
                 Forgot Password?
               </Link>
             </div>
@@ -154,7 +109,7 @@ const DoctorLoginForm = () => {
               type="checkbox"
               name="remember"
               id="remember"
-              value={formData.remember}
+              checked={formData.remember}
               onChange={handleChange}
             />
             <label htmlFor="remember" className="px-2 text-[15px]">
@@ -170,14 +125,14 @@ const DoctorLoginForm = () => {
         </form>
         <br />
         <br />
-        <div className=" text-center">
+        <div className="text-center">
           <p className="text-[15px]">
             Don’t have an account yet? Register now, for free!
           </p>
         </div>
       </div>
-      <div className=" bg-[#003CD8] h-screen justify-center flex items-center w-1/2">
-        <img src="./public/image.png" alt="" className=" w-full" />
+      <div className="bg-[#003CD8] h-screen justify-center flex items-center w-1/2">
+        <img src="./public/image.png" alt="" className="w-full" />
       </div>
     </div>
   );

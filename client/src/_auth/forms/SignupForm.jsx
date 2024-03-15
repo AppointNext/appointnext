@@ -55,8 +55,6 @@ const LoginForm = () => {
     username: "",
     password: "",
     confpassword:"",
-    latitude: "",
-    longitude: "",
     remember: false,
     email:"",
     phone:"",
@@ -69,22 +67,22 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    formData.latitude = position.latitude;
-    formData.longitude = position.longitude;
+    // formData.latitude = position.latitude;
+      // formData.longitude = position.longitude;
     await axios
-      .post("http://localhost:8000/api/login", formData)
+      .post("http://localhost:8000/api/signup", formData)
       .then((res) => {
         console.log(res.data);
         const { username, email } = res.data;
         console.log(username, email);
-        // dispatch(setUser({ username, email }));
-        localStorage.setItem("username", username);
-        console.log(localStorage.getItem("username"));
-        console.log(res.data.refresh_token, res.data.access_token);
-        if (res.data.access_token && res.data.refresh_token) {
-          Cookie.set("refreshToken", res.data.refresh_token);
-          Cookie.set("accessToken", res.data.access_token);
-          navigate("/overview");
+        // // dispatch(setUser({ username, email }));
+        // localStorage.setItem("username", username);
+        // console.log(localStorage.getItem("username"));
+        // console.log(res.data.refresh_token, res.data.access_token);
+        if (res.data.success) {
+        //   Cookie.set("refreshToken", res.data.refresh_token);
+        //   Cookie.set("accessToken", res.data.access_token);
+          navigate("/login");
         }
       })
       .catch((err) => {
@@ -166,6 +164,7 @@ const LoginForm = () => {
               onChange={handleChange}
               className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
               required
+              placeholder="Enter Contact Number"
             />
           </div>
           <div className="input-group font-semibold">
