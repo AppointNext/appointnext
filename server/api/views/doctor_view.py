@@ -11,10 +11,20 @@ from rest_framework import serializers
 from django.contrib.auth.backends import BaseBackend
 
 class VerifyUser(BaseBackend):
-    def authenticate(self, request, username=None, password=None):
-        user = authenticate(request=request, username=username, password=password)
-        return user
-
+    def authenticate(self, username=None, password=None):
+        # Query the Doctor model to find a user with the given username and password
+        try:
+            print(username,password)
+            user = Doctor.objects.get(username=username)
+            print(user)
+            # Check if the provided password matches the user's password
+            if user.check_password(password):
+                print(password)
+                return user  # Return the user object if authentication succeeds
+        except Doctor.DoesNotExist:
+            print("User does not exist")
+            pass  # Handle the case where the user does not exist
+        return None  # Return None if authentication fails
 
 # Serializer for Doctor model
 class DoctorSerializer(serializers.ModelSerializer):
@@ -23,50 +33,46 @@ class DoctorSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 @api_view(['POST'])
-@renderer_classes([JSONRenderer])
-def doctorSignUp(request):
+def register(request):
     if request.method == 'POST':
-        # Extract data from request
+        email = request.data.get('email')
         username = request.data.get('username')
         password = request.data.get('password')
-        email = request.data.get('email')
-        phone = request.data.get('phone')
         first_name = request.data.get('first_name')
         last_name = request.data.get('last_name')
+        dob = request.data.get('dob')
+        gender = request.data.get('gender')
+        phone = request.data.get('phone')
         medical_license = request.data.get('medical_license')
         specialization = request.data.get('specialization')
-        dob = request.data.get('dob')
+        clinic = request.data.get('clinic')
+        years_of_experience = request.data.get('years_of_experience')
+        medical_qualifications = request.data.get('medical_qualifications')
+        print(request.data)
 
-        # Validate input data
-        if not all([username, password, email]):
-            return Response({'message': 'All fields are required'})
+        print(username, password, email, phone)
+        if not all([username, password, email,phone]):
+            return Response({'message': 'All fields are required'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Check if username or email already exists
         if Doctor.objects.filter(username=username).exists():
-            return Response({'message': 'Username already exists'})
+            return Response({'message': 'Username already exists'}, status=status.HTTP_400_BAD_REQUEST)
+
         if Doctor.objects.filter(email=email).exists():
-            return Response({'message': 'Email already exists'})
+            return Response({'message': 'Email already exists'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Create Doctor instance
-        doctor = Doctor.objects.create(username=username, email=email, phone=phone, first_name=first_name,
-                                       last_name=last_name, medical_license=medical_license, specialization=specialization,
-                                       dob=dob)
+        user = Doctor.objects.create(username=username, email=email, first_name=first_name, last_name=last_name, dob=dob,specialization=specialization,medical_license=medical_license,years_of_experience=years_of_experience,medical_qualifications=medical_qualifications)
+        user.set_password(password)
+        user.save()
 
-        # Authenticate the user
-        user = authenticate(username=username, password=password)
-
-        if user is not None:
-            # Check if Doctor instance was created successfully
-            if doctor:
-                # Serialize the created Doctor instance
-                serializer = DoctorSerializer(doctor)
-                return Response({'message': 'User created', 'Doctor': serializer.data, 'success': True})
-            else:
-                return Response({'message': 'User not created'})
+        if user:
+            return Response({'message': 'Registration successful','id':user.id, 'username': username, 'email': email,'specialization':specialization,
+                              'medical_license':medical_license,'years_of_experience':years_of_experience,'medical_qualifications':medical_qualifications
+                             }, status=status.HTTP_201_CREATED)
         else:
-            return Response({'message': 'Invalid username or password'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'message': 'User creation failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     else:
-        return Response({'message': 'Invalid request'})
+        return Response({'message': 'Invalid request'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    
 
 @api_view(['POST'])
 def login(request):
@@ -77,16 +83,17 @@ def login(request):
         if not all([username, password]):
             return Response({'message': 'All fields are required'}, status=status.HTTP_400_BAD_REQUEST)
 
-        doctor = authenticate(request, username=username, password=password)
+        # Authenticate the user using the custom backend
+        user = VerifyUser().authenticate(username=username, password=password)
 
-        if doctor is not None:
-            refresh = RefreshToken.for_user(doctor)
-            doctor.refreshToken = str(refresh)
-            doctor.save()
+        if user is not None:
+            refresh = RefreshToken.for_user(user)
+            user.refreshToken = str(refresh)
+            user.save()
             return Response({
                 'message': 'Login successful',
-                'id': doctor.id,
-                'email': doctor.email,
+                'id': user.id,
+                'email': user.email,
                 'username': username,
                 'refresh_token': str(refresh),
                 'access_token': str(refresh.access_token)
