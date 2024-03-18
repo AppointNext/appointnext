@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 // import { setUser } from "../../store/userSlice";
 // import { useSelector } from "react-redux";
 
-const LoginForm = () => {
+const SignupForm = () => {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(true);
   const [position, setPosition] = useState({ latitude: null, longitude: null });
@@ -54,10 +54,10 @@ const LoginForm = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    confpassword:"",
+    confpassword: "",
     remember: false,
-    email:"",
-    phone:"",
+    email: "",
+    phone: "",
   });
 
   const handleChange = (e) => {
@@ -68,7 +68,7 @@ const LoginForm = () => {
     e.preventDefault();
     console.log(formData);
     // formData.latitude = position.latitude;
-      // formData.longitude = position.longitude;
+    // formData.longitude = position.longitude;
     await axios
       .post("http://localhost:8000/api/signup", formData)
       .then((res) => {
@@ -80,8 +80,8 @@ const LoginForm = () => {
         // console.log(localStorage.getItem("username"));
         // console.log(res.data.refresh_token, res.data.access_token);
         if (res.data.success) {
-        //   Cookie.set("refreshToken", res.data.refresh_token);
-        //   Cookie.set("accessToken", res.data.access_token);
+          //   Cookie.set("refreshToken", res.data.refresh_token);
+          //   Cookie.set("accessToken", res.data.access_token);
           navigate("/login");
         }
       })
@@ -89,7 +89,7 @@ const LoginForm = () => {
         console.log(err);
       });
 
-      console.log(formData);
+    console.log(formData);
   };
 
   return (
@@ -144,7 +144,8 @@ const LoginForm = () => {
               value={formData.email}
               onChange={handleChange}
               className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
-              placeholder="Enter Your Email" required
+              placeholder="Enter Your Email"
+              required
             />
           </div>
           <div className="input-group font-semibold">
@@ -157,7 +158,7 @@ const LoginForm = () => {
               Contact
             </label>
             <input
-              type='tel'
+              type="tel"
               name="phone"
               id="phone"
               value={formData.phone}
@@ -177,7 +178,6 @@ const LoginForm = () => {
               >
                 Password
               </label>
-      
             </div>
             <input
               type="password"
@@ -186,7 +186,8 @@ const LoginForm = () => {
               value={formData.password}
               onChange={handleChange}
               className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
-              placeholder="Enter Your Password" required
+              placeholder="Enter Your Password"
+              required
             />
           </div>
           <div className="input-group font-semibold">
@@ -199,7 +200,6 @@ const LoginForm = () => {
               >
                 Confirm Password
               </label>
-            
             </div>
             <input
               type="password"
@@ -208,7 +208,8 @@ const LoginForm = () => {
               value={formData.confpassword}
               onChange={handleChange}
               className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
-              placeholder="Enter Confirm Password" required
+              placeholder="Enter Confirm Password"
+              required
             />
           </div>
           <div className="input-group flex flex-row items-center">
@@ -234,7 +235,11 @@ const LoginForm = () => {
         <br />
         <div className=" text-center">
           <p className="text-[15px]">
-            Don’t have an account yet? Register now, for free!
+            Already have an account? <Link to="/login">Login</Link>
+            <br />
+            or
+            <br />
+            register as a <Link to="/doctorSignup">Doctor</Link>
           </p>
         </div>
       </div>
@@ -245,4 +250,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;

@@ -10,7 +10,11 @@ import { useDispatch } from "react-redux";
 const LoginForm = () => {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigation = useNavigate();
   const [position, setPosition] = useState({ latitude: null, longitude: null });
+  const changePage = (page) => {
+    navigation(page);
+  };
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -90,13 +94,19 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-evenly h-screen gap-2 overflow-auto flex-row w-screen">
+    <div className="main-container flex items-center justify-evenly h-screen gap-2 overflow-auto flex-col  w-screen md:flex-row">
       <div className=" flex-col gap-2 w-1/2 p-20">
         <div className="bg-[#4F46E5] rounded-3xl w-[12rem] text-white py-2 flex flex-row justify-center ml-[90px]">
-          <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white">
+          <button
+            className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white active:bg-white"
+            onClick={() => changePage("/register")}
+          >
             Patient
           </button>
-          <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white">
+          <button
+            className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white"
+            onClick={() => changePage("/doctorSignup")}
+          >
             Doctor
           </button>
         </div>
@@ -175,7 +185,8 @@ const LoginForm = () => {
         <br />
         <div className=" text-center">
           <p className="text-[15px]">
-            Don’t have an account yet? Register now, for free!
+            Don’t have an account yet? <Link to="/register">Register now</Link>,
+            as user for free!
           </p>
         </div>
       </div>

@@ -26,7 +26,10 @@ const DoctorSignupForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8000/api/doctorSignup", formData);
+      const res = await axios.post(
+        "http://localhost:8000/api/doctorSignup",
+        formData
+      );
       console.log(res.data);
       // Redirect to dashboard or any other page upon successful signup
       navigate("/dashboard");
@@ -43,7 +46,10 @@ const DoctorSignupForm = () => {
       <div className="flex flex-col justify-center items-center gap-2 w-1/2">
         <h1 className="text-center font-bold text-[23px]">Doctor SignUp</h1>
         <div className="flex flex-col items-center justify-center p-4 gap-2 w overflow-auto h-auto mx-[300px] font-semibold">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-[500px]">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-2 w-[500px]"
+          >
             <div className="input-group">
               <label htmlFor="firstName" className="text-[15px]">
                 First Name
