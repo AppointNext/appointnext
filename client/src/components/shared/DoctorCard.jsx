@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa";
 
 const DoctorCard = () => {
   return (
-    <div className="doctor-card-container container ">
+    <div className="doctor-card-container container border-2 border-[#F5F5F7] rounded-xl hover:shadow-xl ">
       <div className="doctor-card-content bg-white p-2 py-4 rounded-lg w-[320px] gap-2">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center gap-2 ">
