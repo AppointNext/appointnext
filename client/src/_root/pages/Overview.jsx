@@ -7,7 +7,7 @@ import UpcomingAppointCard from "../../components/shared/UpcomingAppointCard";
 
 const Overview = () => {
   return (
-    <div className="md:ml-[200px] bg-[#f5f5f7]">
+    <div className="cotainer md:ml-[200px] bg-[#f5f5f7]">
       <div className="flex flex-row">
         <div className="w-full">
           <div className="flex xl:flex-row xl:justify-between md:justify-between bg-[#F5F5F7] w-full">
