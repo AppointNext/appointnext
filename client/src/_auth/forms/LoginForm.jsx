@@ -94,7 +94,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="main-container flex items-center justify-evenly h-screen gap-2 overflow-auto flex-col  w-screen md:flex-row">
+      <div className=" flex items-center justify-evenly h-screen gap-2 overflow-auto flex-col  w-screen md:flex-row">
       <div className=" flex-col gap-2 w-1/2 p-20">
         <div className="bg-[#4F46E5] rounded-3xl w-[12rem] text-white py-2 flex flex-row justify-center ml-[90px]">
           <button
