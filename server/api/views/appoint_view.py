@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from django.utils import timezone
-
+from math import radians, sin, cos, sqrt, asin
 
 
 @api_view(['POST'])
@@ -104,3 +104,32 @@ def book_appointment(request):
             return Response({'message': 'Appointment booked', 'appointment_id': appointment.id}, status=status.HTTP_201_CREATED)
         else:
             return Response({'message': 'Appointment booking failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+
+
+# implement the core feature get nearest hospitals 
+        
+
+
+def haversine(lat1, lon1, lat2, lon2):
+    # Radius of the Earth in kilometers
+    R = 6371.0
+
+    # Convert latitude and longitude from degrees to radians
+    lat1 = radians(lat1)
+    lon1 = radians(lon1)
+    lat2 = radians(lat2)
+    lon2 = radians(lon2)
+
+    # Calculate the differences in latitude and longitude
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+
+    # Calculate the distance using the Haversine formula
+    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+    c = 2 * asin(sqrt(a))
+    distance = R * c
+
+    return distance
+
+

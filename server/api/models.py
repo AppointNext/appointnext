@@ -125,6 +125,12 @@ class Hospital(models.Model):
     def __str__(self):
         return self.clinic_name
 
+class Hospital_Location(models.Model):
+    hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    created_at = models.DateTimeField(auto_now_add=True)
+
 
 class HospitalSerializer(serializers.ModelSerializer):
     class Meta:
