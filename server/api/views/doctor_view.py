@@ -79,7 +79,7 @@ def login(request):
     if request.method == 'POST':
         username = request.data.get('username')
         password = request.data.get('password')
-
+        print(username,password)
         if not all([username, password]):
             return Response({'message': 'All fields are required'}, status=status.HTTP_400_BAD_REQUEST)
 

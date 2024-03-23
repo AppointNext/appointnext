@@ -23,7 +23,9 @@ const Overview = () => {
         }
       );
 
-      setUpcomingAppointments(res.data);
+      console.log(res.data.appointments);
+
+      setUpcomingAppointments(res.data.appointments);
     };
 
     getUpcomingAppointments();
@@ -61,14 +63,22 @@ const Overview = () => {
               <div>&lt; &gt;</div>
             </div>
             <div className="flex flex-row overflow-x-auto gap-3">
+              {/* <UpcomingAppointCard />
               <UpcomingAppointCard />
               <UpcomingAppointCard />
               <UpcomingAppointCard />
               <UpcomingAppointCard />
               <UpcomingAppointCard />
               <UpcomingAppointCard />
-              <UpcomingAppointCard />
-              <UpcomingAppointCard />
+              <UpcomingAppointCard /> */}
+              {upcomingAppointments.map((appointment) => (
+                <UpcomingAppointCard
+                  title={`${appointment.doctor.first_name} ${appointment.doctor.last_name}`}
+                  key={appointment.id}
+                  description={appointment.description}
+                  time={appointment.date_time}
+                />
+              ))}
             </div>
           </div>
         </div>
