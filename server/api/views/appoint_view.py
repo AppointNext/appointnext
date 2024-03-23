@@ -1,5 +1,5 @@
 from rest_framework.decorators import api_view,permission_classes
-from ..models import Appointment,User,Doctor
+from ..models import Appointment,User,Doctor,DoctorSerializer
 # from models import Appointment,AppointmentSerializer
 from ..models import AppointmentSerializer,Appointment,Hospital,HospitalSerializer
 from rest_framework.response import Response
@@ -26,15 +26,29 @@ def show_dates_appointment(request):
       return Response({'message': 'No appointments found'}, status=status.HTTP_404_NOT_FOUND)
     
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def show_upcoming_appointments(request):
     user_id = request.data.get('id')
     current_time = timezone.now()
-    user_a = User.objects.get(id=user_id)
-    upcoming_appointments = Appointment.objects.filter(user=user_a, status='BOOKED').order_by('date_time')
+    
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return Response({'message': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+    upcoming_appointments = Appointment.objects.filter(user=user, status='BOOKED', date_time__gte=current_time).order_by('date_time')
+
     if upcoming_appointments.exists():
         serialized_appointments = AppointmentSerializer(upcoming_appointments, many=True).data
+        for appointment in serialized_appointments:
+            doctor_id = appointment['doctor']
+            try:
+                doctor = Doctor.objects.get(id=doctor_id)
+                appointment['doctor'] = DoctorSerializer(doctor).data
+            except Doctor.DoesNotExist:
+                appointment['doctor'] = None
+        
         return Response({'message': 'Upcoming appointments found', 'appointments': serialized_appointments}, status=status.HTTP_200_OK)
     else:
         return Response({'message': 'No upcoming appointments found'}, status=status.HTTP_404_NOT_FOUND)

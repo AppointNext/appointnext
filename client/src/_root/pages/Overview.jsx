@@ -13,9 +13,9 @@ const Overview = () => {
   console.log(accessToken);
   useEffect(() => {
     const getUpcomingAppointments = async () => {
-      const res = await axios.get(
+      const res = await axios.post(
         "http://localhost:8000/api/getUpcomingAppointments",
-        { id: 2 },
+        { id: 6 },
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -23,7 +23,6 @@ const Overview = () => {
         }
       );
 
-      console.log(res.data);
       setUpcomingAppointments(res.data);
     };
 
