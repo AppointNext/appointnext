@@ -15,10 +15,11 @@ def show_dates_appointment(request):
   date = request.data.get('date')
   user_id = request.data.get('id')
 
+
   if not date:
     return Response({'message': 'Date is required'}, status=status.HTTP_400_BAD_REQUEST)
   else:
-    appointments = Appointment.objects.filter(date=date,id=user_id)
+    appointments = Appointment.objects.filter(date=date,id=user_a)
     if appointments:
       return Response({'message': 'Appointments found', 'appointments': appointments}, status=status.HTTP_200_OK)
     else:
@@ -30,7 +31,8 @@ def show_dates_appointment(request):
 def show_upcoming_appointments(request):
     user_id = request.data.get('id')
     current_time = timezone.now()
-    upcoming_appointments = Appointment.objects.filter(user=user_id, date_time__gte=current_time, status='BOOKED').order_by('date_time')
+    user_a = User.objects.get(id=user_id)
+    upcoming_appointments = Appointment.objects.filter(user=user_a, status='BOOKED').order_by('date_time')
     if upcoming_appointments.exists():
         serialized_appointments = AppointmentSerializer(upcoming_appointments, many=True).data
         return Response({'message': 'Upcoming appointments found', 'appointments': serialized_appointments}, status=status.HTTP_200_OK)
@@ -99,7 +101,7 @@ def book_appointment(request):
     if not all([user_id, doctor_id, date_time]):
         return Response({'message': 'User id, doctor id, date and time are required'}, status=status.HTTP_400_BAD_REQUEST)
     else:
-        appointment = Appointment.objects.create(user=user, doctor=doctor, description=description, status='PENDING', date_time=date_time)
+        appointment = Appointment.objects.create(user=user, doctor=doctor, description=description, status='BOOKED', date_time=date_time)
         if appointment:
             return Response({'message': 'Appointment booked', 'appointment_id': appointment.id}, status=status.HTTP_201_CREATED)
         else:
@@ -133,3 +135,5 @@ def haversine(lat1, lon1, lat2, lon2):
     return distance
 
 
+# @api_view(["GET"])
+# def get_all_the

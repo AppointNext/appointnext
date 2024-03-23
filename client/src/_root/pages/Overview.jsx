@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Hero from "../../components/ui/Dashboard/Hero";
 import Calendar from "../../components/ui/Dashboard/Calender";
 import DoctorCard from "../../components/shared/DoctorCard";
 import TaskTodayCard from "../../components/shared/TaskTodayCard";
 import UpcomingAppointCard from "../../components/shared/UpcomingAppointCard";
+import axios from "axios";
+import Cookie from "js-cookie";
 
 const Overview = () => {
+  const [upcomingAppointments, setUpcomingAppointments] = useState([]);
+  const accessToken = Cookie.get("accessToken");
+  console.log(accessToken);
+  useEffect(() => {
+    const getUpcomingAppointments = async () => {
+      const res = await axios.get(
+        "http://localhost:8000/api/getUpcomingAppointments",
+        { id: 2 },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      console.log(res.data);
+      setUpcomingAppointments(res.data);
+    };
+
+    getUpcomingAppointments();
+  }, []);
   return (
     <div className="cotainer md:ml-[200px] bg-[#f5f5f7]">
       <div className="flex flex-row">

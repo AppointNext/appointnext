@@ -22,6 +22,7 @@ urlpatterns = [
     path('bookappointment', appoint_view.book_appointment, name='book_appointment'),
     path('addHospital', doctor_view.add_hospital, name='addHospital'),
     path('getAllHospitals', appoint_view.get_all_hospital, name='getAllHospitals'),
+    path('getUpcomingAppointments',appoint_view.show_upcoming_appointments,name="showUpcomingAppointments"),
     # # path('appointments/', appointments, name='appointments'),
     # # path('history/', history, name='history'),
     # # path('organisation/', organisation, name='organisation'),
