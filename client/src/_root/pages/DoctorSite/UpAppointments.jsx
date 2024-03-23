@@ -32,7 +32,7 @@ const UpAppointments = () => {
   return (
     <div className="ml-[200px] mt-4 px-4 relative">
       <h1 className="font-semibold text-[23px]">Upcoming Appointments</h1>
-      <div className="overflow-x-auto flex flex-no-wrap h-[310px]">
+      <div className="overflow-x-auto flex flex-no-wrap h-[310px] overflow-hidden">
         <UpcomingAppointDoctorCard />
         <UpcomingAppointDoctorCard />
         <UpcomingAppointDoctorCard />
