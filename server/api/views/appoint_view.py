@@ -11,6 +11,24 @@ from datetime import datetime
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+def getAllAppointments(request):
+    user_id = request.data.get('id')
+    appointments = Appointment.objects.filter(user_id=user_id)
+    if appointments.exists():
+        serialized_appointments = AppointmentSerializer(appointments, many=True).data
+        for appointment in serialized_appointments:
+            doctor_id = appointment['doctor']
+            try:
+                doctor = Doctor.objects.get(id=doctor_id)
+                appointment['doctor'] = DoctorSerializer(doctor).data
+            except Doctor.DoesNotExist:
+                appointment['doctor'] = None
+        return Response({'message': 'Appointments found', 'appointments': serialized_appointments}, status=status.HTTP_200_OK)
+    else:
+        return Response({'message': 'No appointments found'}, status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def show_dates_appointment(request):
     date_str = request.data.get('date')
     user_id = request.data.get('id')
@@ -38,6 +56,34 @@ def show_dates_appointment(request):
     else:
         return Response({'message': 'No appointments found'}, status=status.HTTP_404_NOT_FOUND)
     
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def get_past_appointments(request):
+    user_id = request.data.get('id')
+    current_time = timezone.now()
+    
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return Response({'message': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+    past_appointments = Appointment.objects.filter(user=user, status='COMPLETED', date_time__lt=current_time).order_by('date_time')
+
+    if past_appointments.exists():
+        serialized_appointments = AppointmentSerializer(past_appointments, many=True).data
+        for appointment in serialized_appointments:
+            doctor_id = appointment['doctor']
+            try:
+                doctor = Doctor.objects.get(id=doctor_id)
+                appointment['doctor'] = DoctorSerializer(doctor).data
+            except Doctor.DoesNotExist:
+                appointment['doctor'] = None
+        
+        return Response({'message': 'Past appointments found', 'appointments': serialized_appointments}, status=status.HTTP_200_OK)
+    else:
+        return Response({'message': 'No past appointments found'}, status=status.HTTP_404_NOT_FOUND)
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def show_upcoming_appointments(request):

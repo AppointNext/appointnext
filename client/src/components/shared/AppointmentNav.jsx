@@ -5,16 +5,16 @@ import { CiSearch } from "react-icons/ci";
 
 const AppointmentNav = () => {
   return (
-    <div className="nav-container flex justify-between m-5 my-8">
+    <div className="nav-container flex justify-between lg:m-5 lg:my-8">
       <div className=" flex justify-center items-center gap-2">
         <CiSearch />
         <input
           type="text"
           placeholder="Search Appointment"
-          className=" outline-blue-400 rounded-lg w-[300px] px-2 p-2"
+          className=" outline-blue-400 rounded-lg lg:w-[300px] w-[80px] px-2 p-2"
         />
       </div>
-      <div className=" flex gap-10">
+      <div className=" flex lg:gap-10">
         <div className=" flex justify-center items-center gap-2">
           <BiCategory />
           <p>Category</p>
