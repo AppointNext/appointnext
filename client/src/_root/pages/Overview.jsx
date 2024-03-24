@@ -10,6 +10,7 @@ import Cookie from "js-cookie";
 const Overview = () => {
   const [upcomingAppointments, setUpcomingAppointments] = useState([]);
   const accessToken = Cookie.get("accessToken");
+  const [todayAppointment, setTodayAppointment] = useState({});
   console.log(accessToken);
   useEffect(() => {
     const getUpcomingAppointments = async () => {
@@ -30,6 +31,7 @@ const Overview = () => {
 
     getUpcomingAppointments();
   }, []);
+
   return (
     <div className="cotainer md:ml-[200px]  lg:ml-[188px] bg-[#f5f5f7] m-2">
       <div className="flex flex-col lg:flex-row">
@@ -63,14 +65,6 @@ const Overview = () => {
               <div>&lt; &gt;</div>
             </div>
             <div className="flex flex-row overflow-x-auto gap-3">
-              {/* <UpcomingAppointCard />
-              <UpcomingAppointCard />
-              <UpcomingAppointCard />
-              <UpcomingAppointCard />
-              <UpcomingAppointCard />
-              <UpcomingAppointCard />
-              <UpcomingAppointCard />
-              <UpcomingAppointCard /> */}
               {upcomingAppointments.length > 0 ? (
                 upcomingAppointments.map((appointment) => (
                   <UpcomingAppointCard
@@ -89,7 +83,7 @@ const Overview = () => {
           </div>
         </div>
         <div>
-          <Calendar />
+          <Calendar setTodayAppointment={setTodayAppointment} />
           <TaskTodayCard />
         </div>
       </div>

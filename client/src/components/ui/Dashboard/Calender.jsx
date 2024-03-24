@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { format, addDays, startOfWeek } from "date-fns";
 import { GrFormPrevious } from "react-icons/gr";
 import { MdNavigateNext } from "react-icons/md";
+import axios from "axios";
+import Cookies from "js-cookie";
 
-const Calendar = () => {
+const Calendar = ({ setTodayAppointment }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
-
+  const [selectedDate, setSelectedDate] = useState();
   const days = [];
+  const accessToken = Cookies.get("accessToken");
   const startDate = startOfWeek(currentDate);
+  const [dateAppointment, setDateAppointment] = useState({});
 
   // Generate dates for the current week
   for (let i = 0; i < 7; i++) {
@@ -23,6 +27,26 @@ const Calendar = () => {
 
   const goToNextWeek = () => {
     setCurrentDate((prevDate) => addDays(prevDate, 7));
+  };
+
+  const getAppointmentsByDate = async () => {
+    const res = await axios.post(
+      "http://localhost:8000/api/getAppointmentOfDate",
+      { selectedDate },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    console.log(res.data);
+    setDateAppointment(res.data);
+    setTodayAppointment(res.data);
+  };
+
+  const handleDateClick = (day) => {
+    setSelectedDate(day);
+    getAppointmentsByDate();
   };
 
   return (
@@ -48,8 +72,11 @@ const Calendar = () => {
                 ? "bg-black text-white"
                 : "text-black bg-gray-200"
             }`}
+            onClick={() => handleDateClick(dayOfMonth)}
           >
-            <div className="font-bold">{dayInitial}</div>
+            <button>
+              <div className="font-bold">{dayInitial}</div>
+            </button>
             <div
               className={`${
                 new Date().getDate() === parseInt(dayOfMonth)
