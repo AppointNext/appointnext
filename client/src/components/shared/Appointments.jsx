@@ -1,6 +1,6 @@
 import React from "react";
 
-const AppointsCard = () => {
+const AppointsCard = ({ dname, specialization, description, time }) => {
   return (
     <div className="bg-white p-2 py-4 container  w-[275px] min-w-[275px]  rounded-lg ">
       <img
@@ -14,7 +14,6 @@ const AppointsCard = () => {
         <p>About appointment</p>
         <p>Available time slots</p>
         <h1>10:00 AM-12:00 AM(time slot)</h1>
-
       </div>
     </div>
   );
