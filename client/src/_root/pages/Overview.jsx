@@ -31,13 +31,13 @@ const Overview = () => {
     getUpcomingAppointments();
   }, []);
   return (
-    <div className="cotainer md:ml-[200px] bg-[#f5f5f7]">
-      <div className="flex flex-row">
-        <div className="w-full">
-          <div className="flex xl:flex-row xl:justify-between md:justify-between bg-[#F5F5F7] w-full">
+    <div className="cotainer md:ml-[200px]  lg:ml-[188px] bg-[#f5f5f7] m-2">
+      <div className="flex flex-col lg:flex-row">
+        <div className="ml-auto w-full">
+          <div className="flex xl:flex-row xl:justify-between md:justify-between bg-[#F5F5F7] w-full mt-12 lg:w-[500px]">
             <Hero />
           </div>
-          <div className="w-[800px]">
+          <div className="w-full lg:w-[500px]">
             <div className="flex flex-row justify-between">
               <div>Monthly Doctors</div>
               <div>&lt; &gt;</div>
@@ -57,7 +57,7 @@ const Overview = () => {
               <DoctorCard />
             </div>
           </div>
-          <div className="w-[800px]">
+          <div className="w-full  lg:w-[500px]">
             <div className="flex flex-row justify-between">
               <div>Upcoming Appointments</div>
               <div>&lt; &gt;</div>
@@ -71,14 +71,20 @@ const Overview = () => {
               <UpcomingAppointCard />
               <UpcomingAppointCard />
               <UpcomingAppointCard /> */}
-              {upcomingAppointments.map((appointment) => (
-                <UpcomingAppointCard
-                  title={`${appointment.doctor.first_name} ${appointment.doctor.last_name}`}
-                  key={appointment.id}
-                  description={appointment.description}
-                  time={appointment.date_time}
-                />
-              ))}
+              {upcomingAppointments.length > 0 ? (
+                upcomingAppointments.map((appointment) => (
+                  <UpcomingAppointCard
+                    title={`${appointment.doctor.first_name} ${appointment.doctor.last_name}`}
+                    key={appointment.id}
+                    description={appointment.description}
+                    time={appointment.date_time}
+                  />
+                ))
+              ) : (
+                <div className="flex h-full w-full justify-center items-center">
+                  <h1 className="text-center">No Upcoming Appoinments</h1>
+                </div>
+              )}
             </div>
           </div>
         </div>
