@@ -31,12 +31,13 @@ const Overview = () => {
 
     getUpcomingAppointments();
   }, []);
+  console.log(todayAppointment);
 
   return (
     <div className="cotainer md:ml-[200px]  lg:ml-[188px] bg-[#f5f5f7] m-2">
-      <div className="flex flex-col lg:flex-row">
-        <div className="ml-auto w-full">
-          <div className="flex xl:flex-row xl:justify-between md:justify-between bg-[#F5F5F7] w-full mt-12 lg:w-[500px]">
+      <div className="flex flex-col lg:flex-row mt-12">
+        <div className="ml-auto w-full ">
+          <div className="flex xl:flex-row xl:justify-between md:justify-between bg-[#F5F5F7] w-full  lg:w-[500px]">
             <Hero />
           </div>
           <div className="w-full lg:w-[500px]">
@@ -84,7 +85,22 @@ const Overview = () => {
         </div>
         <div>
           <Calendar setTodayAppointment={setTodayAppointment} />
-          <TaskTodayCard />
+          {todayAppointment.length > 0 ? (
+            todayAppointment.map((appointment) => (
+              <TaskTodayCard
+                key={appointment.id}
+                title={
+                  appointment.doctor.first_name + appointment.doctor.last_name
+                }
+                description={appointment.description}
+                dateTime={appointment.date_time}
+              />
+            ))
+          ) : (
+            <div>
+              <h1>No Appointments Today</h1>
+            </div>
+          )}
         </div>
       </div>
     </div>

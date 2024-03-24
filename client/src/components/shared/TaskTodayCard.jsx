@@ -2,7 +2,7 @@ import React from "react";
 import { BsThreeDots } from "react-icons/bs";
 import Button from "./Button";
 
-const TaskTodayCard = () => {
+const TaskTodayCard = ({ title, description, dateTime }) => {
   return (
     <div className="p-4 m-2 bg-white rounded-lg w-auto flex flex-col gap-2">
       <div className="flex flex-row justify-between ">
@@ -16,8 +16,8 @@ const TaskTodayCard = () => {
       />
       <div className="flex flex-col justify-between">
         <div className="border-[#c8c8c8] border-b-[1px]">
-          <h1>Dr. John Doe(appointment with)</h1>
-          <h1>10:00 AM-12:00 AM(time slot)</h1>
+          <h1>{title}</h1>
+          <h1>{}</h1>
         </div>
         <div>
           <h1>Appointment Details</h1>

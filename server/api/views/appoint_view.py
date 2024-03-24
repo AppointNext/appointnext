@@ -7,25 +7,37 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from django.utils import timezone
 from math import radians, sin, cos, sqrt, asin
-
+from datetime import datetime
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def show_dates_appointment(request):
-  date = request.data.get('date')
-  user_id = request.data.get('id')
+    date_str = request.data.get('date')
+    user_id = request.data.get('id')
 
+    if not date_str:
+        return Response({'message': 'Date is required'}, status=status.HTTP_400_BAD_REQUEST)
 
-  if not date:
-    return Response({'message': 'Date is required'}, status=status.HTTP_400_BAD_REQUEST)
-  else:
-    appointments = Appointment.objects.filter(date=date,id=user_a)
-    if appointments:
-      return Response({'message': 'Appointments found', 'appointments': appointments}, status=status.HTTP_200_OK)
+    try:
+        date = datetime.strptime(date_str, '%Y-%m-%d').date()
+    except ValueError:
+        return Response({'message': 'Invalid date format. Date must be in YYYY-MM-DD format'}, status=status.HTTP_400_BAD_REQUEST)
+
+    appointments = Appointment.objects.filter(date_time__date=date, user_id=user_id)
+
+    if appointments.exists():
+        serialized_appointments = AppointmentSerializer(appointments, many=True).data
+        for appointment in serialized_appointments:
+            doctor_id = appointment['doctor']
+            try:
+                doctor = Doctor.objects.get(id=doctor_id)
+                appointment['doctor'] = DoctorSerializer(doctor).data
+            except Doctor.DoesNotExist:
+                appointment['doctor'] = None
+        return Response({'message': 'Appointments found', 'appointments': serialized_appointments}, status=status.HTTP_200_OK)
     else:
-      return Response({'message': 'No appointments found'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'message': 'No appointments found'}, status=status.HTTP_404_NOT_FOUND)
     
-
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def show_upcoming_appointments(request):

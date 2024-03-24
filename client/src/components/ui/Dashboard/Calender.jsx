@@ -11,7 +11,6 @@ const Calendar = ({ setTodayAppointment }) => {
   const days = [];
   const accessToken = Cookies.get("accessToken");
   const startDate = startOfWeek(currentDate);
-  const [dateAppointment, setDateAppointment] = useState({});
 
   // Generate dates for the current week
   for (let i = 0; i < 7; i++) {
@@ -29,10 +28,15 @@ const Calendar = ({ setTodayAppointment }) => {
     setCurrentDate((prevDate) => addDays(prevDate, 7));
   };
 
-  const getAppointmentsByDate = async () => {
+  const getAppointmentsByDate = async (selectedDate) => {
+    // Format the selected date as YYYY-MM-DD
+    const formattedDate = format(selectedDate, "yyyy-MM-dd");
+
+    console.log(formattedDate, typeof formattedDate);
+    console.log(accessToken);
     const res = await axios.post(
       "http://localhost:8000/api/getAppointmentOfDate",
-      { selectedDate },
+      { id: 6, date: formattedDate }, // Send the formatted date in the request body
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -40,15 +44,16 @@ const Calendar = ({ setTodayAppointment }) => {
       }
     );
     console.log(res.data);
-    setDateAppointment(res.data);
-    setTodayAppointment(res.data);
+    setTodayAppointment(res.data.appointments);
   };
 
   const handleDateClick = (day) => {
-    setSelectedDate(day);
-    getAppointmentsByDate();
+    const selected = day
+      ? new Date(currentDate.getFullYear(), currentDate.getMonth(), day)
+      : new Date(); // Default to current date if day is not provided
+    setSelectedDate(selected);
+    getAppointmentsByDate(selected);
   };
-
   return (
     <div className="container  md:w-auto xl:w-auto m-2 bg-white px-4 py-4 rounded-lg ">
       <div className="flex justify-between items-center mb-4">
