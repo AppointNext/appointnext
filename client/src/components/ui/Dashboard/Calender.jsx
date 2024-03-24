@@ -55,7 +55,7 @@ const Calendar = ({ setTodayAppointment }) => {
     getAppointmentsByDate(selected);
   };
   return (
-    <div className="container  md:w-auto xl:w-auto m-2 bg-white px-4 py-4 rounded-lg ">
+    <div className="container  md:w-auto xl:w-auto m-2 bg-white px-4 py-4 rounded-lg 2xl:w-[450px]">
       <div className="flex justify-between items-center mb-4">
         <button
           className="px-2 py-1 rounded  text-black"

@@ -35,12 +35,12 @@ const Overview = () => {
 
   return (
     <div className="cotainer md:ml-[200px]  lg:ml-[188px] bg-[#f5f5f7] m-2">
-      <div className="flex flex-col lg:flex-row mt-12">
-        <div className="ml-auto w-full ">
-          <div className="flex xl:flex-row xl:justify-between md:justify-between bg-[#F5F5F7] w-full  lg:w-[500px]">
+      <div className="flex flex-col lg:flex-row mt-12 ">
+        <div className=" w-full 2xl:w-[1100px]">
+          <div className="flex xl:flex-row xl:justify-between md:justify-between bg-[#F5F5F7] w-full  lg:w-[500px] 2xl:w-full ">
             <Hero />
           </div>
-          <div className="w-full lg:w-[500px]">
+          <div className="w-full lg:w-[500px] 2xl:w-full">
             <div className="flex flex-row justify-between">
               <div>Monthly Doctors</div>
               <div>&lt; &gt;</div>
@@ -60,7 +60,7 @@ const Overview = () => {
               <DoctorCard />
             </div>
           </div>
-          <div className="w-full  lg:w-[500px]">
+          <div className="w-full  lg:w-[500px] 2xl:w-full">
             <div className="flex flex-row justify-between">
               <div>Upcoming Appointments</div>
               <div>&lt; &gt;</div>
