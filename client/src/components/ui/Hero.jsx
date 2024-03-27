@@ -11,7 +11,7 @@ const Hero = () => {
         <Button title="Get Started" />
       </div>
       <div className="w-1/2 ">
-        <img src="./hero.svg" className=" w-[800px] " alt="hero" />
+        <img src="../../../hero.svg" className=" w-[800px] " alt="hero" />
       </div>
     </div>
   );
