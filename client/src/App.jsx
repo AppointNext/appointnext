@@ -13,9 +13,10 @@ import AppointForm from "./_root/pages/AppointForm";
 import DoctorLoginForm from "./_auth/forms/DoctorLoginForm";
 import DoctorSignupForm from "./_auth/forms/DoctorSignupForm";
 import Emergency from "./_root/pages/Emergency";
-import UpAppointments from "./_root/pages/DoctorSite/UpAppointments";
+import UpAppointments from "./_root/pages/DoctorSide/UpAppointments";
 import DoctorDetail from "./_root/pages/DoctorDetail";
 import Profile from "./_root/pages/Profile";
+import Settings from "./_root/pages/Settings";
 
 function App() {
   const location = useLocation();
@@ -40,7 +41,7 @@ function App() {
           <Route path="/dappointments/:id" element={<Detailedappointment />} />
           <Route path="/doctors" element={<Doctors />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/settings" element={<settings />} />
+          <Route path="/settings" element={<Settings />} />
           <Route path="/emergency" element={<Emergency />} />
           <Route path="/upappointments" element={<UpAppointments />} />
           <Route path="/drDetail" element={<DoctorDetail />} />

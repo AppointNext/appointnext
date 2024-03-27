@@ -13,7 +13,7 @@ const RootLayout = () => {
   return (
     <div className="h-screen ">
       <Sidebar />
-      <div className="ml-[200px] lg:ml-[188px] h-full ">
+      <div className=" :md:ml-[200px] lg:ml-[188px] h-full ">
         <Outlet />
       </div>
     </div>
