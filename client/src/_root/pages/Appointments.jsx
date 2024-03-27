@@ -44,7 +44,7 @@ const Appointments = () => {
       <AppointmentNav />
       <div className="flex flex-col gap-4 bg-gray-200">
         <h1>Upcoming Appointments</h1>
-        <div className="flex flex-col items-center lg:flex-row overflow-x-auto gap-3">
+        <div className="flex flex-col items-center m-2 lg:flex-row overflow-x-auto gap-3">
           {upcomingAppointments.length > 0 ? (
             upcomingAppointments.map((upcomingappointment) => (
               <Link
@@ -65,7 +65,7 @@ const Appointments = () => {
             </div>
           )}
         </div>
-        <div className="flex  overflow-x-auto gap-3 flex-col items-center">
+        <div className="flex flex-col gap-4 bg-gray-200">
           {" "}
           {/*lg:flex-row*/}
           <h1>Past Appointments</h1>

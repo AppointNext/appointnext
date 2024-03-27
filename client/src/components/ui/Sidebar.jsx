@@ -88,13 +88,13 @@ const Sidebar = () => {
                   </div>
                 </Link>
                 <Link
-                  to="/messages"
+                  to="/Profile"
                   className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white text-[14px]"
                 >
                   <div className="flex flex-row items-center gap-2">
                     {" "}
                     <AiOutlineMessage />
-                    Messages
+                    Profile
                   </div>
                 </Link>
                 <Link
