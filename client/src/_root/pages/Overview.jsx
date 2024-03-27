@@ -34,7 +34,7 @@ const Overview = () => {
   console.log(todayAppointment);
 
   return (
-    <div className="cotainer md:ml-[200px]  lg:ml-[188px] bg-[#f5f5f7] m-2">
+    <div className="cotainer    bg-[#f5f5f7] m-2">
       <div className="flex flex-col lg:flex-row mt-20 ">
         <div className=" w-full xl:w-[900px] 2xl:w-[1100px]">
           <div className="flex xl:flex-row xl:justify-between md:justify-between bg-[#F5F5F7] w-full  lg:w-[600px] xl:w-full ">

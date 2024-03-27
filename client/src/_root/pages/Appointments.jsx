@@ -40,9 +40,9 @@ const Appointments = () => {
     getPastAppointments();
   }, []);
   return (
-    <div className="lg:ml-[200px] my-20">
+    <div className=" my-20 h-full">
       <AppointmentNav />
-      <div className="flex flex-col gap-4 bg-gray-200">
+      <div className="flex flex-col gap-4 bg-gray-200 h-full">
         <h1>Upcoming Appointments</h1>
         <div className="flex flex-col items-center m-2 lg:flex-row overflow-x-auto gap-3">
           {upcomingAppointments.length > 0 ? (

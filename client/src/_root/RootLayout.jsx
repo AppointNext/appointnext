@@ -11,9 +11,11 @@ const RootLayout = () => {
   }
 
   return (
-    <div className="">
+    <div className="h-screen ">
       <Sidebar />
-      <Outlet />
+      <div className="ml-[200px] lg:ml-[188px] h-full ">
+        <Outlet />
+      </div>
     </div>
   );
 };

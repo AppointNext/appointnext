@@ -8,8 +8,6 @@ import RootLayout from "./_root/RootLayout";
 import Overview from "./_root/pages/Overview";
 import Appointments from "./_root/pages/Appointments";
 import Doctors from "./_root/pages/Doctors";
-import Message from "./_root/pages/Messages";
-import Messages from "./_root/pages/Messages";
 import Detailedappointment from "./_root/pages/Detailedappointment";
 import AppointForm from "./_root/pages/AppointForm";
 import DoctorLoginForm from "./_auth/forms/DoctorLoginForm";
@@ -39,7 +37,7 @@ function App() {
           <Route path="/overview" element={<Overview />} />
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/appointmentForm" element={<AppointForm />} />
-          <Route path="/dappointments" element={<Detailedappointment />} />
+          <Route path="/dappointments/:id" element={<Detailedappointment />} />
           <Route path="/doctors" element={<Doctors />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<settings />} />
