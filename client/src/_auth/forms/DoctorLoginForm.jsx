@@ -46,12 +46,11 @@ const DoctorLoginForm = () => {
         console.log(res.data);
         const { username, email } = res.data;
         dispatch(setUser({ username, email, isDoctor: true }));
-        getUserData();
         localStorage.setItem("username", username);
         if (res.data.access_token && res.data.refresh_token) {
           Cookie.set("refreshToken", res.data.refresh_token);
           Cookie.set("accessToken", res.data.access_token);
-          navigate("/overview");
+          navigate("/doctor/upappointments");
         }
       })
       .catch((err) => {

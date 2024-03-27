@@ -79,13 +79,10 @@ const LoginForm = () => {
     await axios
       .post("http://localhost:8000/api/login", formData)
       .then((res) => {
-        console.log(res.data);
         const { username, email } = res.data;
         console.log(username, email);
         dispatch(setUser({ username, email, id: res.data.id }));
         localStorage.setItem("username", username);
-        console.log(localStorage.getItem("username"));
-        console.log(res.data.refresh_token, res.data.access_token);
         if (res.data.access_token && res.data.refresh_token) {
           Cookie.set("refreshToken", res.data.refresh_token);
           Cookie.set("accessToken", res.data.access_token);
@@ -96,33 +93,6 @@ const LoginForm = () => {
         console.log(err);
       });
   };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   console.log("Form Data:", formData);
-  //   formData.latitude = position.latitude;
-  //   formData.longitude = position.longitude;
-  //   console.log("Form Data with Position:", formData);
-
-  //   try {
-  //     const res = await axios.post("http://localhost:8000/api/login", formData);
-  //     console.log("Response Data:", res.data);
-  //     const { username, email } = res.data;
-  //     console.log("Username:", username, "Email:", email);
-  //     dispatch(setUser({ username, email, id: res.data.id }));
-  //     console.log("Redux State after dispatch:", store.getState().status); // Log the updated state
-  //     localStorage.setItem("username", username);
-  //     console.log("Local Storage Username:", localStorage.getItem("username"));
-  //     console.log("Tokens:", res.data.refresh_token, res.data.access_token);
-  //     if (res.data.access_token && res.data.refresh_token) {
-  //       Cookie.set("refreshToken", res.data.refresh_token);
-  //       Cookie.set("accessToken", res.data.access_token);
-  //       navigate("/overview");
-  //     }
-  //   } catch (err) {
-  //     console.log("Error:", err);
-  //   }
-  // };
 
   return (
     <div className=" flex items-center justify-evenly h-screen gap-2 overflow-auto flex-col  w-screen md:flex-row">

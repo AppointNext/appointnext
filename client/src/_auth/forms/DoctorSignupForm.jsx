@@ -7,8 +7,9 @@ const DoctorSignupForm = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    userName: "",
+    username: "",
     email: "",
+    password: "",
     dob: "",
     gender: "",
     phone: "",
@@ -25,6 +26,7 @@ const DoctorSignupForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
     try {
       const res = await axios.post(
         "http://localhost:8000/api/doctorSignup",
@@ -32,72 +34,86 @@ const DoctorSignupForm = () => {
       );
       console.log(res.data);
       // Redirect to dashboard or any other page upon successful signup
-      navigate("/dashboard");
+      navigate("/doctorLogin");
     } catch (err) {
       console.log(err);
       // Handle errors, show error messages to the user
     }
-
-    console.log(formData);
   };
 
   return (
     <div className="flex justify-between h-screen">
       <div className="flex flex-col justify-center items-center gap-2 w-1/2">
         <h1 className="text-center font-bold text-[23px]">Doctor SignUp</h1>
-        <div className="flex flex-col items-center justify-center p-4 gap-2 w overflow-auto h-auto mx-[300px] font-semibold">
+        <div className="flex flex-col items-center justify-center p-4 gap-2 w overflow-auto h-auto mx-[300px] font-semibold w-full">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-2 w-[500px]"
+            className="flex flex-col gap-2 w-full p-4"
           >
-            <div className="input-group">
-              <label htmlFor="firstName" className="text-[15px]">
-                First Name
-              </label>
-              <input
-                type="text"
-                name="firstName"
-                id="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
-                placeholder="Enter Your First Name"
-                required
-              />
-            </div>
+            <div className="flex flex-row gap-4">
+              <div className="input-group">
+                <label htmlFor="firstName" className="text-[15px]">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
+                  placeholder="Enter Your First Name"
+                  required
+                />
+              </div>
 
-            <div className="input-group">
-              <label htmlFor="lastName" className="text-[15px]">
-                Last Name
-              </label>
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
-                placeholder="Enter Your Last Name"
-                required
-              />
+              <div className="input-group">
+                <label htmlFor="lastName" className="text-[15px]">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  id="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
+                  placeholder="Enter Your Last Name"
+                  required
+                />
+              </div>
             </div>
-
-            <div className="input-group">
-              <label htmlFor="userName" className="text-[15px]">
-                User Name
-              </label>
-              <input
-                type="text"
-                name="userName"
-                id="userName"
-                value={formData.userName}
-                onChange={handleChange}
-                className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
-                placeholder="Enter Your User Name"
-                required
-              />
+            <div className="flex flex-row gap-4">
+              <div className="input-group">
+                <label htmlFor="userName" className="text-[15px]">
+                  User Name
+                </label>
+                <input
+                  type="text"
+                  name="username"
+                  id="userName"
+                  value={formData.username}
+                  onChange={handleChange}
+                  className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
+                  placeholder="Enter Your User Name"
+                  required
+                />
+              </div>
+              <div className="input-group">
+                <label htmlFor="dob" className="text-[15px]">
+                  Date of Birth
+                </label>
+                <input
+                  type="date"
+                  name="dob"
+                  id="dob"
+                  value={formData.dob}
+                  onChange={handleChange}
+                  className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
+                  required
+                />
+              </div>
             </div>
-
             <div className="input-group">
               <label htmlFor="email" className="text-[15px]">
                 Email
@@ -113,18 +129,18 @@ const DoctorSignupForm = () => {
                 required
               />
             </div>
-
             <div className="input-group">
-              <label htmlFor="dob" className="text-[15px]">
-                Date of Birth
+              <label htmlFor="password" className="text-[15px]">
+                Password
               </label>
               <input
-                type="date"
-                name="dob"
-                id="dob"
-                value={formData.dob}
+                type="password"
+                name="password"
+                id="password"
+                value={formData.password}
                 onChange={handleChange}
                 className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Enter Your Password"
                 required
               />
             </div>
@@ -148,20 +164,37 @@ const DoctorSignupForm = () => {
               </select>
             </div>
 
-            <div className="input-group">
-              <label htmlFor="phone" className="text-[15px]">
-                Phone
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                id="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
-                placeholder="Enter Your Phone Number"
-                required
-              />
+            <div className="flex flex-row gap-4">
+              <div className="input-group">
+                <label htmlFor="phone" className="text-[15px]">
+                  Phone
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  id="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
+                  placeholder="Enter Your Phone Number"
+                  required
+                />
+              </div>
+              <div className="input-group">
+                <label htmlFor="yearsOfExperience" className="text-[15px]">
+                  Years of Experience
+                </label>
+                <input
+                  type="number"
+                  name="yearsOfExperience"
+                  id="yearsOfExperience"
+                  value={formData.yearsOfExperience}
+                  onChange={handleChange}
+                  className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
+                  placeholder="Enter Your Years of Experience"
+                  required
+                />
+              </div>
             </div>
 
             <div className="input-group">
@@ -213,22 +246,6 @@ const DoctorSignupForm = () => {
             </div>
 
             <div className="input-group">
-              <label htmlFor="yearsOfExperience" className="text-[15px]">
-                Years of Experience
-              </label>
-              <input
-                type="number"
-                name="yearsOfExperience"
-                id="yearsOfExperience"
-                value={formData.yearsOfExperience}
-                onChange={handleChange}
-                className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
-                placeholder="Enter Your Years of Experience"
-                required
-              />
-            </div>
-
-            <div className="input-group">
               <label htmlFor="medicalQualifications" className="text-[15px]">
                 Medical Qualifications
               </label>
@@ -246,6 +263,7 @@ const DoctorSignupForm = () => {
             <button
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              onClick={handleSubmit}
             >
               Signup
             </button>
