@@ -5,7 +5,7 @@ import DoctorCard from "../../components/shared/DoctorCard";
 // import "../pages/"
 const Doctors = () => {
   return (
-    <div className="ml-[200px] doctor-container">
+    <div className="mt-20 doctor-container">
       <AppointmentNav />
 
       <div className="flex flex-col gap-y-5">

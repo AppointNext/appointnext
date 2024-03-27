@@ -26,7 +26,6 @@ const AppointsCard = ({ dname, specialization, description, time }) => {
             {showDescription ? "Show Less" : "Show More"}
           </button>
         )}
-        <p>Available time slots</p>
         <h1>{time}</h1>
       </div>
     </div>
