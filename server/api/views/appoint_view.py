@@ -32,6 +32,7 @@ def getAllAppointments(request):
 def show_dates_appointment(request):
     date_str = request.data.get('date')
     user_id = request.data.get('id')
+    print(date_str)
 
     if not date_str:
         return Response({'message': 'Date is required'}, status=status.HTTP_400_BAD_REQUEST)
