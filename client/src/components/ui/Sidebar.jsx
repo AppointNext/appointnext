@@ -39,8 +39,8 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="py-0 fixed top-1 ">
-      <nav className="flex justify-between w-screen items-center px-4">
+    <div className="py-0 fixed top-0  ">
+      <nav className="flex justify-between w-screen items-center px-4 bg-white py-1">
         <div className="flex justify-center items-center px-2 w-[1/2]">
           <IoMenuSharp
             className="xl:hidden md:hidden cursor-pointer text-3xl"
