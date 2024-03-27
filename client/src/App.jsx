@@ -17,6 +17,7 @@ import UpAppointments from "./_root/pages/DoctorSide/UpAppointments";
 import DoctorDetail from "./_root/pages/DoctorDetail";
 import Profile from "./_root/pages/Profile";
 import Settings from "./_root/pages/Settings";
+import DoctorOverview from "./_root/pages/DoctorSide/DoctorOverview";
 
 function App() {
   const location = useLocation();
@@ -45,6 +46,8 @@ function App() {
           <Route path="/emergency" element={<Emergency />} />
           <Route path="/upappointments" element={<UpAppointments />} />
           <Route path="/drDetail" element={<DoctorDetail />} />
+          {/* Doctor routes*/}
+          <Route path="/doctor/upappointments" element={<DoctorOverview />} />
         </Route>
       </Routes>
       {/* Render the Emergency button only if the current page is not the Emergency page */}

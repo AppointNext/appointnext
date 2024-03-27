@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../store/userSlice";
 const DoctorLoginForm = () => {
   const [position, setPosition] = useState({ latitude: null, longitude: null });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -29,9 +30,13 @@ const DoctorLoginForm = () => {
   });
 
   const handleChange = (e) => {
-    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setFormData({ ...formData, [e.target.name]: value });
   };
+
+  const user = useSelector((state) => state.user);
+  console.log(user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,6 +45,8 @@ const DoctorLoginForm = () => {
       .then((res) => {
         console.log(res.data);
         const { username, email } = res.data;
+        dispatch(setUser({ username, email, isDoctor: true }));
+        getUserData();
         localStorage.setItem("username", username);
         if (res.data.access_token && res.data.refresh_token) {
           Cookie.set("refreshToken", res.data.refresh_token);
@@ -51,7 +58,7 @@ const DoctorLoginForm = () => {
         console.log(err);
       });
 
-      console.log(formData)
+    console.log(formData);
   };
 
   return (
@@ -72,7 +79,10 @@ const DoctorLoginForm = () => {
         </p>
         <form action="" onSubmit={handleSubmit} className="flex flex-col gap-2">
           <div className="input-group font-semibold">
-            <label htmlFor="username" className="transition-transform text-[15px]">
+            <label
+              htmlFor="username"
+              className="transition-transform text-[15px]"
+            >
               Username
             </label>
             <input
@@ -87,10 +97,16 @@ const DoctorLoginForm = () => {
           </div>
           <div className="input-group font-semibold">
             <div className="flex flex-row justify-between items-center">
-              <label htmlFor="password" className="transition-transform text-[15px]">
+              <label
+                htmlFor="password"
+                className="transition-transform text-[15px]"
+              >
                 Password
               </label>
-              <Link to="/forgotpassword" className="text-[10px] text-blue-500 hover:cursor-pointer">
+              <Link
+                to="/forgotpassword"
+                className="text-[10px] text-blue-500 hover:cursor-pointer"
+              >
                 Forgot Password?
               </Link>
             </div>

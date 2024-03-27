@@ -6,12 +6,15 @@ import TaskTodayCard from "../../components/shared/TaskTodayCard";
 import UpcomingAppointCard from "../../components/shared/UpcomingAppointCard";
 import axios from "axios";
 import Cookie from "js-cookie";
+import { useSelector } from "react-redux";
 
 const Overview = () => {
   const [upcomingAppointments, setUpcomingAppointments] = useState([]);
   const accessToken = Cookie.get("accessToken");
   const [todayAppointment, setTodayAppointment] = useState({});
   console.log(accessToken);
+  const userData = useSelector((state) => state.user);
+  console.log(userData);
   useEffect(() => {
     const getUpcomingAppointments = async () => {
       const res = await axios.post(
