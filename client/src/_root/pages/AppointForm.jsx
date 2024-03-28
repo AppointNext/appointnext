@@ -99,6 +99,7 @@ const AppointForm = () => {
         <Calendar
           localizer={localizer}
           events={appointments}
+          date={selectedDate}
           startAccessor="start"
           endAccessor="end"
           views={["day"]}
