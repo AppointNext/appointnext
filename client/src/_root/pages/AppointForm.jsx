@@ -5,6 +5,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const localizer = momentLocalizer(moment);
 
@@ -49,10 +50,31 @@ const AppointForm = () => {
     setSelectedTime(time);
   };
 
-  const handleBooking = () => {
+  const handleBooking = async () => {
     if (selectedTime) {
       // Perform booking logic here, such as making an API call to book the appointment
-      console.log("Appointment booked for:", selectedTime);
+      console.log("Appointment booked for:", selectedTime, selectedDate);
+
+      const isoFormattedDate = selectedDate.toISOString().split("T")[0]; // Get the ISO-formatted date without time
+      const formattedTime = selectedTime.padStart(5, "0"); // Ensure the time is formatted with leading zero if necessary
+      const accessToken = Cookies.get("accessToken");
+      const combinedDateTime = `${isoFormattedDate}T${formattedTime}:00.000Z`;
+      console.log(combinedDateTime);
+      const response = await axios.post(
+        "http://localhost:8000/api/bookappointment",
+        {
+          id: 6,
+          doctor_id: 3,
+          description: "Appointment booked by patient",
+          date_time: combinedDateTime,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      console.log(response.data);
       // Reset selected time after booking
       setSelectedTime(null);
     } else {
