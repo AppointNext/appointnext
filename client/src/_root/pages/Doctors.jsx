@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CiSearch } from "react-icons/ci";
 import AppointmentNav from "../../components/shared/AppointmentNav";
 import DoctorCard from "../../components/shared/DoctorCard";
-// import "../pages/"
+import axios from "axios";
 const Doctors = () => {
+  const [doctors, setDoctors] = React.useState([]);
+  useEffect(() => {
+    const getAllDoctors = async () => {
+      try {
+        const res = await axios.get("http://localhost:8000/api/getAllDoctors");
+        console.log(res.data);
+        setDoctors(res.data.doctors);
+        console.log(doctors);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAllDoctors();
+  }, []);
+
   return (
     <div className="mt-20 doctor-container">
       <AppointmentNav />
@@ -14,11 +29,18 @@ const Doctors = () => {
             <h1 className="font-bold text-[23px]">Recent Doctors</h1>
           </div>
           <div className="flex overflow-x-auto overflow-y-hidden gap-2 doctor-scroll-container">
-            <DoctorCard />
-            <DoctorCard />
-            <DoctorCard />
-            <DoctorCard />
-            <DoctorCard />
+            {doctors.map((doctor) => {
+              console.log(doctor.first_name + " " + doctor.last_name);
+              return (
+                <DoctorCard
+                  key={doctor.id}
+                  id={doctor.id}
+                  doctor={doctor}
+                  first_name={doctor.first_name}
+                  last_name={doctor.last_name}
+                />
+              );
+            })}
           </div>
         </div>
 

@@ -16,6 +16,7 @@
     "date-fns": "^3.4.0",
     "js-cookie": "^3.0.5",
     "react": "^18.2.0",
+    "react-calendar": "^4.8.0",
     "react-cookie": "^7.1.0",
     "react-dom": "^18.2.0",
     "react-icon": "^1.0.0",

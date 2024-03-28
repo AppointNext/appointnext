@@ -26,5 +26,7 @@ urlpatterns = [
     path('getAppointmentOfDate',appoint_view.show_dates_appointment,name='date_appoinment'),
     path('getAllAppointments',appoint_view.getAllAppointments,name='getAllAppointments'),
     path('getPastAppointments',appoint_view.get_past_appointments,name='getPastAppointments'),
+    path('getAllDoctors',doctor_view.get_all_doctors,name='getAllDoctors'),
+    path('getDoctorById',doctor_view.getDoctorById,name='getDoctorById'),
     path('test',test_view.test)
 ]

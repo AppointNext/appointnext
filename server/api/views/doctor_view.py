@@ -216,7 +216,28 @@ def add_hospital(request):
     else:
       return Response({'message': 'Hospital addition failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+# i want to all the doctor but not there password
+@api_view(['GET'])
+def get_all_doctors(request):
+    doctorsData = Doctor.objects.all()
+    doctors = DoctorSerializer(doctorsData, many=True).data
+    if doctors:
+        return Response({'message': 'Doctors found', 'doctors': doctors}, status=status.HTTP_200_OK)
+    else:
+        return Response({'message': 'No doctors found'}, status=status.HTTP_404_NOT_FOUND)
 
+
+@api_view(['POST'])
+def getDoctorById(request):
+    doctor_id = request.data.get('id')
+    print(doctor_id)
+    doctor = Doctor.objects.get(id=doctor_id)
+    doctors = DoctorSerializer(doctor).data
+    if doctor:
+        return Response({'message': 'Doctor found', 'doctor': doctors}, status=status.HTTP_200_OK)
+    else:
+        return Response({'message': 'Doctor not found'}, status=status.HTTP_404_NOT_FOUND)
+    
 # features
 # @api_view(["GET"])
 # @permission_classes([IsAuthenticated])

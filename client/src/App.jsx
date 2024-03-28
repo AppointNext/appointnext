@@ -46,7 +46,7 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/emergency" element={<Emergency />} />
           <Route path="/upappointments" element={<UpAppointments />} />
-          <Route path="/drDetail" element={<DoctorDetail />} />
+          <Route path="/drDetail/:id" element={<DoctorDetail />} />
           {/* Doctor routes*/}
           <Route element={<ProtectedDoctorRoute />}>
             <Route path="/doctor/upappointments" element={<DoctorOverview />} />
