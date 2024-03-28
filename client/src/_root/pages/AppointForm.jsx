@@ -45,7 +45,7 @@ const AppointForm = () => {
   //   try {
   //     const response = await axios.get("http://localhost:8000/api/getAppointments");
   //     console.log(response.data);
-  
+
   //     // Format appointments for the Calendar component
   //     const formattedAppointments = response.data.appointments.map((appointment) => ({
   //       id: appointment.id,
@@ -53,74 +53,81 @@ const AppointForm = () => {
   //       start: new Date(appointment.date_time),
   //       end: moment(appointment.date_time).add(1, "hour").toDate(), // Assuming appointments are 1 hour long
   //     }));
-  
+
   //     setAppointments(formattedAppointments);
   //   } catch (error) {
   //     console.error("Error fetching appointments:", error);
   //   }
   // };
 
+  //   const fetchAppointments = async (date) => {
+  //     try {
+  //       const response = await axios.get("http://localhost:8000/api/getAppointments");
+  //       console.log(response.data);
 
-//   const fetchAppointments = async (date) => {
-//     try {
-//       const response = await axios.get("http://localhost:8000/api/getAppointments");
-//       console.log(response.data);
-  
-//       // Format appointments for the Calendar component
-//       const formattedAppointments = response.data.appointments.map((appointment) => ({
-//         id: appointment.id,
-//         title: "Appointment Booked by Patient",
-//         start: moment.utc(appointment.date_time).toDate(), // Parse date-time string as UTC
-//         end: moment.utc(appointment.date_time).add(1, "hour").toDate(), // Add 1 hour to the start time
-//       }));
-  
-//       setAppointments(formattedAppointments);
-//     } catch (error) {
-//       console.error("Error fetching appointments:", error);
-//     }
-//   };
-  
+  //       // Format appointments for the Calendar component
+  //       const formattedAppointments = response.data.appointments.map((appointment) => ({
+  //         id: appointment.id,
+  //         title: "Appointment Booked by Patient",
+  //         start: moment.utc(appointment.date_time).toDate(), // Parse date-time string as UTC
+  //         end: moment.utc(appointment.date_time).add(1, "hour").toDate(), // Add 1 hour to the start time
+  //       }));
 
-//   const fetchAppointments = async (date) => {
-//   try {
-//     const response = await axios.get("http://localhost:8000/api/getAppointments");
-//     console.log(response.data);
+  //       setAppointments(formattedAppointments);
+  //     } catch (error) {
+  //       console.error("Error fetching appointments:", error);
+  //     }
+  //   };
 
-//     // Format appointments for the Calendar component
-//     const formattedAppointments = response.data.appointments.map((appointment) => ({
-//       id: appointment.id,
-//       title: "Appointment Booked by Patient",
-//       start: moment.utc(appointment.date_time).toDate(), // Parse date-time string as UTC
-//       end: moment.utc(appointment.date_time).add(1, "hour").toDate(), // Add 1 hour to the start time
-//     }));
+  //   const fetchAppointments = async (date) => {
+  //   try {
+  //     const response = await axios.get("http://localhost:8000/api/getAppointments");
+  //     console.log(response.data);
 
-//     setAppointments(formattedAppointments);
-//   } catch (error) {
-//     console.error("Error fetching appointments:", error);
-//   }
-// };
+  //     // Format appointments for the Calendar component
+  //     const formattedAppointments = response.data.appointments.map((appointment) => ({
+  //       id: appointment.id,
+  //       title: "Appointment Booked by Patient",
+  //       start: moment.utc(appointment.date_time).toDate(), // Parse date-time string as UTC
+  //       end: moment.utc(appointment.date_time).add(1, "hour").toDate(), // Add 1 hour to the start time
+  //     }));
 
-const fetchAppointments = async (date) => {
-  try {
-    const response = await axios.get("http://localhost:8000/api/getAppointments");
-    console.log(response.data);
+  //     setAppointments(formattedAppointments);
+  //   } catch (error) {
+  //     console.error("Error fetching appointments:", error);
+  //   }
+  // };
 
-    // Format appointments for the Calendar component
-    const formattedAppointments = response.data.appointments.map((appointment) => ({
-      id: appointment.id,
-      title: "Appointment Booked by Patient",
-      start: moment.utc(appointment.date_time).local().subtract(5.5,"hours").toDate(), // Convert UTC time to local time
-      end: moment.utc(appointment.date_time).local().subtract(4.5, "hour").toDate(), // Add 1 hour to the start time
-    }));
+  const fetchAppointments = async (date) => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/getAppointments"
+      );
+      console.log(response.data);
 
-    setAppointments(formattedAppointments);
-  } catch (error) {
-    console.error("Error fetching appointments:", error);
-  }
-};
+      // Format appointments for the Calendar component
+      const formattedAppointments = response.data.appointments.map(
+        (appointment) => ({
+          id: appointment.id,
+          title: "Appointment Booked by Patient",
+          start: moment
+            .utc(appointment.date_time)
+            .local()
+            .subtract(5.5, "hours")
+            .toDate(), // Convert UTC time to local time
+          end: moment
+            .utc(appointment.date_time)
+            .local()
+            .subtract(4.5, "hour")
+            .toDate(), // Add 1 hour to the start time
+        })
+      );
 
-
-  
+      setAppointments(formattedAppointments);
+    } catch (error) {
+      console.error("Error fetching appointments:", error);
+    }
+  };
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -130,49 +137,17 @@ const fetchAppointments = async (date) => {
     setSelectedTime(time);
   };
 
-  // const handleBooking = async () => {
-  //   if (selectedTime) {
-  //     // Perform booking logic here, such as making an API call to book the appointment
-  //     console.log("Appointment booked for:", selectedTime, selectedDate);
-
-  //     const isoFormattedDate = selectedDate.toISOString().split("T")[0]; // Get the ISO-formatted date without time
-  //     const formattedTime = selectedTime.padStart(0, "0"); // Ensure the time is formatted with leading zero if necessary
-  //     const accessToken = Cookies.get("accessToken");
-  //     const combinedDateTime = `${isoFormattedDate}T${formattedTime}`;
-  //     console.log(combinedDateTime);
-  //     const response = await axios.post(
-  //       "http://localhost:8000/api/bookappointment",
-  //       {
-  //         id: 6,
-  //         doctor_id: 3,
-  //         description: "Appointment booked by patient",
-  //         date_time: combinedDateTime,
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //         },
-  //       }
-  //     );
-  //     console.log(response.data);
-  //     // Reset selected time after booking
-  //     setSelectedTime(null);
-  //   } else {
-  //     console.log("Please select a time slot.");
-  //   }
-  // };
-
   const handleBooking = async () => {
     if (selectedTime) {
       // Perform booking logic here, such as making an API call to book the appointment
       console.log("Appointment booked for:", selectedTime, selectedDate);
-  
+
       const isoFormattedDate = moment(selectedDate).format("YYYY-MM-DD");
       const formattedTime = moment(selectedTime, "HH:mm").format("HH:mm"); // Properly format the time
       const combinedDateTime = `${isoFormattedDate}T${formattedTime}`;
       console.log(combinedDateTime);
       const accessToken = Cookies.get("accessToken");
-      
+
       try {
         const response = await axios.post(
           "http://localhost:8000/api/bookappointment",
@@ -188,7 +163,7 @@ const fetchAppointments = async (date) => {
             },
           }
         );
-  
+
         console.log(response.data);
         // Reset selected time after booking
         setSelectedTime(null);
@@ -199,7 +174,6 @@ const fetchAppointments = async (date) => {
       console.log("Please select a time slot.");
     }
   };
-  
 
   return (
     <div className="flex  justify-center items-center h-screen flex-col mt-44 md:mt-20  ">
