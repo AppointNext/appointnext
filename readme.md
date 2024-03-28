@@ -3,7 +3,7 @@
 ### Run Client or Frontend
 
 ```
-git clone <project url>
+git clone https://github.com/Latish705/Appoint-next.git
 ```
 
 ```
