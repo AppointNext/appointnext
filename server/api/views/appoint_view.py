@@ -9,9 +9,18 @@ from django.utils import timezone
 from math import radians, sin, cos, sqrt, asin
 from datetime import datetime
 
+@api_view(['GET'])
+def getAppointments(request):
+    appointments = Appointment.objects.all()
+    if appointments:
+        serialized_appointments = AppointmentSerializer(appointments, many=True).data
+        return Response({'message': 'Appointments found', 'appointments': serialized_appointments}, status=status.HTTP_200_OK)
+    else:
+        return Response({'message': 'No appointments found'}, status=status.HTTP_404_NOT_FOUND)
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def getAllAppointments(request):
+def getAllAppointmentsOfUser(request):
     user_id = request.data.get('id')
     appointments = Appointment.objects.filter(user_id=user_id)
     if appointments.exists():

@@ -49,7 +49,7 @@ function App() {
           <Route path="/drDetail/:id" element={<DoctorDetail />} />
           {/* Doctor routes*/}
           <Route element={<ProtectedDoctorRoute />}>
-            <Route path="/doctor/upappointments" element={<DoctorOverview />} />
+            <Route path="/doctor/doctorOverview" element={<DoctorOverview />} />
           </Route>
         </Route>
       </Routes>

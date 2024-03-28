@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import axios from "axios";
 
 const localizer = momentLocalizer(moment);
 
@@ -19,27 +20,22 @@ const AppointForm = () => {
 
   const fetchAppointments = async (date) => {
     try {
-      // Perform API call to fetch appointments for the selected date
-      // Example: const response = await fetch(`/api/appointments?date=${date}`);
-      // const data = await response.json();
-      // setAppointments(data.appointments);
-      // Replace the above lines with your actual API call
-      const mockAppointments = [
-        {
-          id: 1,
-          title: "Appointment 1",
-          start: new Date(moment(date).set({ hour: 9, minute: 0 })),
-          end: new Date(moment(date).set({ hour: 10, minute: 0 })),
-        },
-        {
-          id: 2,
-          title: "Appointment 2",
-          start: new Date(moment(date).set({ hour: 10, minute: 0 })),
-          end: new Date(moment(date).set({ hour: 11, minute: 0 })),
-        },
-        // Add more mock appointments as needed
-      ];
-      setAppointments(mockAppointments);
+      const response = await axios.get(
+        "http://localhost:8000/api/getAppointments"
+      );
+      console.log(response.data);
+
+      // Format appointments for the Calendar component
+      const formattedAppointments = response.data.appointments.map(
+        (appointment) => ({
+          id: appointment.id,
+          title: "Appointment Booked by Patient",
+          start: new Date(appointment.date_time),
+          end: moment(appointment.date_time).add(1, "hour").toDate(), // Assuming appointments are 1 hour long
+        })
+      );
+
+      setAppointments(formattedAppointments);
     } catch (error) {
       console.error("Error fetching appointments:", error);
     }
@@ -65,7 +61,7 @@ const AppointForm = () => {
   };
 
   return (
-    <div className="flex  justify-center items-center h-screen flex-col">
+    <div className="flex  justify-center items-center h-screen flex-col mt-44 md:mt-20  ">
       <div className="flex flex-row">
         <div className=" p-2">
           <h2 className="text-2xl mb-4">Select Date:</h2>
