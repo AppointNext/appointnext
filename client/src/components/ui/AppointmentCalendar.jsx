@@ -3,11 +3,16 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const localizer = momentLocalizer(moment);
 
 const AppointForm = () => {
+  const [input, setInput] = useState({
+    prevVisit: "",
+    file: "",
+    Describe: "",
+    treat: "",
+  });
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [appointments, setAppointments] = useState([]);
 
@@ -44,30 +49,36 @@ const AppointForm = () => {
     }
   };
 
+  const handleChange = (event) => {
+    const { name, value, type } = event.target;
+    setInput((prevState) => ({
+      ...prevState,
+      [name]: type === "radio" ? value : value,
+    }));
+  };
+
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="w-1/2 p-4">
-        <h2 className="text-2xl mb-4">Select Date:</h2>
+      <div className="calendar-container">
+        <h2>Select Date:</h2>
         <DatePicker
           selected={selectedDate}
           onChange={handleDateChange}
           dateFormat="dd/MM/yyyy"
-          className="p-2 border border-gray-300 rounded"
         />
       </div>
-      <div className="w-1/2 p-4">
-        <h2 className="text-2xl mb-4">Doctor's Appointments:</h2>
+      <div className="calendar-container">
+        <h2>Doctor's Appointments:</h2>
         <Calendar
           localizer={localizer}
           events={appointments}
           startAccessor="start"
           endAccessor="end"
           style={{ height: 500 }}
-          className="border border-gray-300 rounded p-4"
         />
       </div>
     </div>

@@ -4,6 +4,7 @@ import { GrFormPrevious } from "react-icons/gr";
 import { MdNavigateNext } from "react-icons/md";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useSelector } from "react-redux";
 
 const Calendar = ({ setTodayAppointment }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -11,7 +12,7 @@ const Calendar = ({ setTodayAppointment }) => {
   const days = [];
   const accessToken = Cookies.get("accessToken");
   const startDate = startOfWeek(currentDate);
-
+  const id = useSelector((state) => state.user.userData.id);
   // Generate dates for the current week
   for (let i = 0; i < 7; i++) {
     const date = addDays(startDate, i);
@@ -36,7 +37,7 @@ const Calendar = ({ setTodayAppointment }) => {
     console.log(accessToken);
     const res = await axios.post(
       "http://localhost:8000/api/getAppointmentOfDate",
-      { id: 6, date: formattedDate }, // Send the formatted date in the request body
+      { id, date: formattedDate }, // Send the formatted date in the request body
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,

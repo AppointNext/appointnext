@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Hero from "../../components/ui/Dashboard/Hero";
-import Calendar from "../../components/ui/Dashboard/Calender";
-import DoctorCard from "../../components/shared/DoctorCard";
-import TaskTodayCard from "../../components/shared/TaskTodayCard";
-import UpcomingAppointCard from "../../components/shared/UpcomingAppointCard";
+import Hero from "../../../components/ui/Hero";
+import Calendar from "../../../components/ui/Dashboard/Calender";
+import DoctorCard from "../../../components/shared/DoctorCard";
+import TaskTodayCard from "../../../components/shared/TaskTodayCard";
+import UpcomingAppointCard from "../../../components/shared/UpcomingAppointCard";
 import axios from "axios";
 import Cookie from "js-cookie";
 import { useSelector } from "react-redux";
