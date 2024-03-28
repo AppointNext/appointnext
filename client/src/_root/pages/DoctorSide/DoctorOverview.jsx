@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import DoctorCard from "../../../components/shared/DoctorCard";
-import Hero from "../../../components/ui/Hero";
+import Hero from "../../components/ui/Dashboard/Hero";
+import Calendar from "../../components/ui/Dashboard/Calender";
+import DoctorCard from "../../components/shared/DoctorCard";
+import TaskTodayCard from "../../components/shared/TaskTodayCard";
+import UpcomingAppointCard from "../../components/shared/UpcomingAppointCard";
 import axios from "axios";
+import Cookie from "js-cookie";
 import { useSelector } from "react-redux";
-import Cookies from "js-cookie";
-import UpcomingAppointCard from "../../../components/shared/UpcomingAppointCard";
-import Calendar from "../../../components/ui/Dashboard/Calender";
-import TaskTodayCard from "../../../components/shared/TaskTodayCard";
 
-const DoctorOverview = () => {
+const Overview = () => {
   const [upcomingAppointments, setUpcomingAppointments] = useState([]);
-  const accessToken = Cookies.get("accessToken");
+  const accessToken = Cookie.get("accessToken");
+  const id = useSelector((state) => state.user.userData.id);
   const [todayAppointment, setTodayAppointment] = useState({});
   console.log(accessToken);
   const userData = useSelector((state) => state.user);
@@ -19,7 +20,7 @@ const DoctorOverview = () => {
     const getUpcomingAppointments = async () => {
       const res = await axios.post(
         "http://localhost:8000/api/getUpcomingAppointments",
-        { id: 6 },
+        { id },
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -110,4 +111,4 @@ const DoctorOverview = () => {
   );
 };
 
-export default DoctorOverview;
+export default Overview;

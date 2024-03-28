@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import Calendar from "react-calendar"; // Example calendar library
 import "react-calendar/dist/Calendar.css";
@@ -14,8 +15,11 @@ const AppointForm = () => {
 
   const fetchAvailableAppointments = async (date) => {
     // Example API call, replace with your actual API endpoint
-    const response = await fetch(
-      `/api/appointments?doctorId=123&date=${date.toISOString()}`
+    const response = await axios.post(
+      "http://localhost:8000/api/getAppointmentsByDate",
+      {
+        date: date.toISOString(),
+      }
     );
     if (response.ok) {
       const data = await response.json();
