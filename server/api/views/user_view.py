@@ -46,18 +46,18 @@ def login(request):
     if request.method == 'POST':
         username = request.data.get('username')
         password = request.data.get('password')
-        latitude = request.data.get('latitude')
-        longitude = request.data.get('longitude')
+        # latitude = request.data.get('latitude')
+        # longitude = request.data.get('longitude')
         print(request.data)
-        print(username, password, latitude, longitude)
-        if not all([username, password, latitude, longitude]):
+        # print(username, password, latitude, longitude)
+        if not all([username, password]):
             return Response({'message': 'All fields are required'}, status=status.HTTP_400_BAD_REQUEST)
         
         user = authenticate(request, username=username, password=password)
         print(user)
         if user is not None:
             # Create UserLocation instance with user instance
-            user_location = UserLocation.objects.create(user=user, latitude=latitude, longitude=longitude)
+            # user_location = UserLocation.objects.create(user=user)
             refresh = RefreshToken.for_user(user)
             user.refreshToken = str(refresh)
             user.save()

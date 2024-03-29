@@ -93,10 +93,10 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-evenly h-screen gap-2 overflow-auto flex-row w-screen">
-      <div className=" flex-col gap-2 w-1/2 p-20">
-        <div className="bg-[#4F46E5] rounded-3xl w-[12rem] text-white py-2 flex flex-row justify-center ml-[90px]">
-          <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white">
+    <div className="flex items-center justify-evenly h-screen gap-2 overflow-auto flex-col lg:flex-row w-screen">
+      <div className=" flex-col gap-2 md:w-1/2 p-20">
+        <div className="bg-[#4F46E5] rounded-3xl w-[12rem] text-white py-2 flex flex-row justify-center md:ml-[90px]">
+          <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 bg-white rounded-2xl px-3 text-black">
             Patient
           </button>
           <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white">
@@ -243,7 +243,7 @@ const SignupForm = () => {
           </p>
         </div>
       </div>
-      <div className=" bg-[#003CD8] h-screen justify-center flex items-center w-1/2">
+      <div className=" bg-[#003CD8] h-screen justify-center flex items-center w-full md:w-1/2 m-2">
         <img src="./public/image.png" alt="" className=" w-full" />
       </div>
     </div>

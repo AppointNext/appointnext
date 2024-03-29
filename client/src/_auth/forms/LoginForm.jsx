@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../store/userSlice.js";
 import { useSelector } from "react-redux";
 import { store } from "../../store/store.js";
+import Logo from "../../components/utils/Logo.jsx";
 
 const LoginForm = () => {
   const [location, setLocation] = useState(null);
@@ -77,7 +78,7 @@ const LoginForm = () => {
     formData.latitude = position.latitude;
     formData.longitude = position.longitude;
     await axios
-      .post("https://appoint-next.onrender.com/api/login", formData)
+      .post("http://localhost:8000/api/login", formData)
       .then((res) => {
         const { username, email } = res.data;
         console.log(username, email);
@@ -95,11 +96,17 @@ const LoginForm = () => {
   };
 
   return (
-    <div className=" flex items-center justify-evenly h-screen gap-2 overflow-auto flex-col  w-screen md:flex-row">
-      <div className=" flex-col gap-2 w-1/2 p-20">
-        <div className="bg-[#4F46E5] rounded-3xl w-[12rem] text-white py-2 flex flex-row justify-center ml-[90px]">
+    <div className=" flex items-center justify-start h-screen gap-2 overflow-auto flex-col  w-screen md:flex-row">
+      <div
+        className=" flex-col gap-2 md:w-1/2 p-8 items-center flex 
+      "
+      >
+        <div className="mb-8">
+          <Logo />
+        </div>
+        <div className="bg-[#4F46E5] rounded-3xl w-[12rem] text-white py-2 flex flex-row justify-center md:ml-[90px]">
           <button
-            className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white active:bg-white"
+            className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white bg-white text-black rounded-2xl px-3"
             onClick={() => changePage("/register")}
           >
             Patient
@@ -191,7 +198,7 @@ const LoginForm = () => {
           </p>
         </div>
       </div>
-      <div className=" bg-[#003CD8] h-screen justify-center flex items-center w-1/2">
+      <div className=" bg-[#003CD8] h-screen justify-center flex items-center w-full md:w-1/2">
         <img src="./public/image.png" alt="" className=" w-full" />
       </div>
     </div>
