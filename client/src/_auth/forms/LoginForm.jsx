@@ -84,6 +84,7 @@ const LoginForm = () => {
         console.log(username, email);
         dispatch(setUser({ username, email, id: res.data.id }));
         localStorage.setItem("username", username);
+        localStorage.setItem("userid", res.data.id);
         if (res.data.access_token && res.data.refresh_token) {
           Cookie.set("refreshToken", res.data.refresh_token);
           Cookie.set("accessToken", res.data.access_token);

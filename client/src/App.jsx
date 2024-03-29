@@ -39,7 +39,7 @@ function App() {
         <Route element={<RootLayout />}>
           <Route path="/overview" element={<Overview />} />
           <Route path="/appointments" element={<Appointments />} />
-          <Route path="/appointmentForm" element={<AppointForm />} />
+          <Route path="/appointmentForm/:id" element={<AppointForm />} />
           <Route path="/dappointments/:id" element={<Detailedappointment />} />
           <Route path="/doctors" element={<Doctors />} />
           <Route path="/profile" element={<Profile />} />

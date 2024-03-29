@@ -1,3 +1,4 @@
+from django.db.models import Min
 from rest_framework.decorators import api_view,permission_classes
 from ..models import Appointment,User,Doctor,DoctorSerializer
 # from models import Appointment,AppointmentSerializer
@@ -188,8 +189,6 @@ def book_appointment(request):
             return Response({'message': 'Appointment booked', 'appointment_id': appointment.id}, status=status.HTTP_201_CREATED)
         else:
             return Response({'message': 'Appointment booking failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
-
 
 # implement the core feature get nearest hospitals 
         

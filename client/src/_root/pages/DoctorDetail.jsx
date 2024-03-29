@@ -86,7 +86,7 @@ const DoctorDetail = () => {
           </div>
         </div>
       </div>
-      <NavLink to="/appointmentForm">
+      <NavLink to={`/appointmentForm/${id}`}>
         <button className=" bg-blue-500 p-2 rounded-lg text-white font-semibold hover:shadow-xl hover:bg-blue-600 hover:scale-105 transition-all">
           Book Now
         </button>

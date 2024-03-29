@@ -5,7 +5,10 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 const localizer = momentLocalizer(moment);
 
@@ -14,94 +17,21 @@ const AppointForm = () => {
   const [selectedTime, setSelectedTime] = useState(null);
   const [appointments, setAppointments] = useState([]);
 
+  const doctorId = useParams();
+  console.log(doctorId);
+
   useEffect(() => {
     // Fetch doctor's appointments for the selected date from backend
     fetchAppointments(selectedDate);
   }, [selectedDate]);
 
-  // const fetchAppointments = async (date) => {
-  //   try {
-  //     const response = await axios.get(
-  //       "http://localhost:8000/api/getAppointments"
-  //     );
-  //     console.log(response.data);
-
-  //     // Format appointments for the Calendar component
-  //     const formattedAppointments = response.data.appointments.map(
-  //       (appointment) => ({
-  //         id: appointment.id,
-  //         title: "Appointment Booked by Patient",
-  //         start: new Date(appointment.date_time),
-  //         end: moment(appointment.date_time).add(1, "hour").toDate(), // Assuming appointments are 1 hour long
-  //       })
-  //     );
-
-  //     setAppointments(formattedAppointments);
-  //   } catch (error) {
-  //     console.error("Error fetching appointments:", error);
-  //   }
-  // };
-  // const fetchAppointments = async (date) => {
-  //   try {
-  //     const response = await axios.get("http://localhost:8000/api/getAppointments");
-  //     console.log(response.data);
-
-  //     // Format appointments for the Calendar component
-  //     const formattedAppointments = response.data.appointments.map((appointment) => ({
-  //       id: appointment.id,
-  //       title: "Appointment Booked by Patient",
-  //       start: new Date(appointment.date_time),
-  //       end: moment(appointment.date_time).add(1, "hour").toDate(), // Assuming appointments are 1 hour long
-  //     }));
-
-  //     setAppointments(formattedAppointments);
-  //   } catch (error) {
-  //     console.error("Error fetching appointments:", error);
-  //   }
-  // };
-
-  //   const fetchAppointments = async (date) => {
-  //     try {
-  //       const response = await axios.get("http://localhost:8000/api/getAppointments");
-  //       console.log(response.data);
-
-  //       // Format appointments for the Calendar component
-  //       const formattedAppointments = response.data.appointments.map((appointment) => ({
-  //         id: appointment.id,
-  //         title: "Appointment Booked by Patient",
-  //         start: moment.utc(appointment.date_time).toDate(), // Parse date-time string as UTC
-  //         end: moment.utc(appointment.date_time).add(1, "hour").toDate(), // Add 1 hour to the start time
-  //       }));
-
-  //       setAppointments(formattedAppointments);
-  //     } catch (error) {
-  //       console.error("Error fetching appointments:", error);
-  //     }
-  //   };
-
-  //   const fetchAppointments = async (date) => {
-  //   try {
-  //     const response = await axios.get("http://localhost:8000/api/getAppointments");
-  //     console.log(response.data);
-
-  //     // Format appointments for the Calendar component
-  //     const formattedAppointments = response.data.appointments.map((appointment) => ({
-  //       id: appointment.id,
-  //       title: "Appointment Booked by Patient",
-  //       start: moment.utc(appointment.date_time).toDate(), // Parse date-time string as UTC
-  //       end: moment.utc(appointment.date_time).add(1, "hour").toDate(), // Add 1 hour to the start time
-  //     }));
-
-  //     setAppointments(formattedAppointments);
-  //   } catch (error) {
-  //     console.error("Error fetching appointments:", error);
-  //   }
-  // };
-
   const fetchAppointments = async (date) => {
     try {
       const response = await axios.get(
-        "https://appoint-next.onrender.com/api/getAppointments"
+        "http://localhost:8000/api/getAppointments"
+        // {
+        // doctor_id: doctorId.id,
+        // }
       );
       console.log(response.data);
 
@@ -136,11 +66,13 @@ const AppointForm = () => {
   const handleTimeChange = (time) => {
     setSelectedTime(time);
   };
+  const userid = localStorage.getItem("userid");
+  console.log(userid, doctorId.id);
 
   const handleBooking = async () => {
     if (selectedTime) {
       // Perform booking logic here, such as making an API call to book the appointment
-      console.log("Appointment booked for:", selectedTime, selectedDate);
+      // console.log("Appointment booked for:", selectedTime, selectedDate);
 
       const isoFormattedDate = moment(selectedDate).format("YYYY-MM-DD");
       const formattedTime = moment(selectedTime, "HH:mm").format("HH:mm"); // Properly format the time
@@ -150,10 +82,10 @@ const AppointForm = () => {
 
       try {
         const response = await axios.post(
-          "https://appoint-next.onrender.com/api/bookappointment",
+          "http://localhost:8000/api/bookappointment",
           {
-            id: 6,
-            doctor_id: 3,
+            id: userid,
+            doctor_id: doctorId.id,
             description: "Appointment booked by patient",
             date_time: combinedDateTime,
           },
@@ -173,6 +105,11 @@ const AppointForm = () => {
     } else {
       console.log("Please select a time slot.");
     }
+  };
+
+  const handleNavigate = (newDate) => {
+    setSelectedDate(newDate);
+    fetchAppointments(newDate); // Fetch appointments for the new date
   };
 
   return (
@@ -221,6 +158,7 @@ const AppointForm = () => {
           defaultView="day"
           style={{ height: 500 }}
           className="border border-gray-300 rounded p-4"
+          onNavigate={handleNavigate} // Call handleNavigate when the user navigates to a different date
         />
       </div>
     </div>
