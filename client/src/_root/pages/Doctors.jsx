@@ -8,7 +8,9 @@ const Doctors = () => {
   useEffect(() => {
     const getAllDoctors = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/getAllDoctors");
+        const res = await axios.get(
+          "https://appoint-next.onrender.com/api/getAllDoctors"
+        );
         console.log(res.data);
         setDoctors(res.data.doctors);
         console.log(doctors);

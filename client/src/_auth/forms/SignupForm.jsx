@@ -70,7 +70,7 @@ const SignupForm = () => {
     // formData.latitude = position.latitude;
     // formData.longitude = position.longitude;
     await axios
-      .post("http://localhost:8000/api/signup", formData)
+      .post("https://appoint-next.onrender.com/api/signup", formData)
       .then((res) => {
         console.log(res.data);
         const { username, email } = res.data;

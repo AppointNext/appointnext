@@ -101,7 +101,7 @@ const AppointForm = () => {
   const fetchAppointments = async (date) => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/getAppointments"
+        "https://appoint-next.onrender.com/api/getAppointments"
       );
       console.log(response.data);
 
@@ -150,7 +150,7 @@ const AppointForm = () => {
 
       try {
         const response = await axios.post(
-          "http://localhost:8000/api/bookappointment",
+          "https://appoint-next.onrender.com/api/bookappointment",
           {
             id: 6,
             doctor_id: 3,

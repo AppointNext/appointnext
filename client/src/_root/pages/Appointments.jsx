@@ -12,7 +12,7 @@ const Appointments = () => {
   useEffect(() => {
     const getUpcomingAppointments = async () => {
       const res = await axios.post(
-        "http://localhost:8000/api/getUpcomingAppointments",
+        "https://appoint-next.onrender.com/api/getUpcomingAppointments",
         { id: 13 },
         {
           headers: {
@@ -26,7 +26,7 @@ const Appointments = () => {
     getUpcomingAppointments();
     const getPastAppointments = async () => {
       const res = await axios.post(
-        "http://localhost:8000/api/getPastAppointments",
+        "https://appoint-next.onrender.com/api/getPastAppointments",
         { id: 6 },
         {
           headers: {

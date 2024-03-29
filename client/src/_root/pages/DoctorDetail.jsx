@@ -16,7 +16,7 @@ const DoctorDetail = () => {
     const fetchDoctorDetails = async () => {
       try {
         const response = await axios.post(
-          `http://localhost:8000/api/getDoctorById`,
+          `https://appoint-next.onrender.com/api/getDoctorById`,
           { id }
         );
         const data = response.data;
