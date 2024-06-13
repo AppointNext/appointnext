@@ -152,7 +152,7 @@ This project is licensed under the GPL License - see the [LICENSE](LICENSE) file
 If you have any questions or feedback, feel free to reach out:
 
 - **Author**: Latish Adwani
-- **Email**: [your-email@example.com](mailto:latishadwani705@gmail.com)
+- **Email**: [latishadwani705@gmail.com](mailto:latishadwani705@gmail.com)
 
 ---
 
