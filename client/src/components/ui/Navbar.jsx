@@ -49,10 +49,10 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex justify-between items-center w-100  flex-row gap-1 cursor-pointer md:w-auto">
-          <button className={`border-[#003CD8] border-2 md:px-2 text-[#003CD8] rounded-2xl md:py-2 hover:shadow-2xl active:translate-y-2 transition-all ${isAnimating ? "active:delay-75" : ""} md:text-[12px] text-[10px] px-4 py-1`} onClick={handleSignInClick}>
+          <button type="button" className={`border-[#003CD8] border-2 md:px-2 text-[#003CD8] rounded-2xl md:py-2 hover:shadow-2xl active:translate-y-2 transition-all ${isAnimating ? "active:delay-75" : ""} md:text-[12px] text-[10px] px-4 py-1`} onClick={handleSignInClick}>
             Sign In
           </button>
-          <button className={`border-[#003CD8] border-2 md:px-2 text-[#003CD8] rounded-2xl md:py-2 hover:shadow-2xl active:translate-y-2 transition-all ${isAnimating ? "active:delay-75" : ""} md:text-[12px] text-[10px] px-4 py-1`} onClick={handleSignUpClick}>
+          <button type="button" className={`border-[#003CD8] border-2 md:px-2 text-[#003CD8] rounded-2xl md:py-2 hover:shadow-2xl active:translate-y-2 transition-all ${isAnimating ? "active:delay-75" : ""} md:text-[12px] text-[10px] px-4 py-1`} onClick={handleSignUpClick}>
             Sign Up
           </button>
         </div>
