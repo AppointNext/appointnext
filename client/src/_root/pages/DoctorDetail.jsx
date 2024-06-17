@@ -11,7 +11,7 @@ const DoctorDetail = () => {
   const { id } = useParams();
   console.log(id);
   const [doctor, setDoctor] = React.useState({});
-  const BACKEND_BASE_URL = import.meta.env.BACKEND_BASE_URL;
+  const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
   useEffect(() => {
     const fetchDoctorDetails = async () => {

@@ -27,7 +27,7 @@ const DoctorSignupForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    const BACKEND_BASE_URL = import.meta.env.BACKEND_BASE_URL;
+    const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
     try {
       const res = await axios.post(
         `${BACKEND_BASE_URL}/api/doctorSignup`,

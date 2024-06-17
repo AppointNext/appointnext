@@ -9,7 +9,7 @@ const Appointments = () => {
   const [upcomingAppointments, setUpcomingAppointments] = useState([]);
   const [pastAppointments, setPastAppointments] = useState([]);
   const accessToken = Cookie.get("accessToken");
-  const BACKEND_BASE_URL = import.meta.env.BACKEND_BASE_URL;
+  const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
   useEffect(() => {
     const getUpcomingAppointments = async () => {
       const res = await axios.post(
