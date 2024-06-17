@@ -15,6 +15,8 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.status);
   console.log(user);
+  const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+  console.log("BACKEND url", BACKEND_BASE_URL);
   const navigation = useNavigate();
   const [position, setPosition] = useState({ latitude: null, longitude: null });
   const changePage = (page) => {
@@ -77,7 +79,7 @@ const LoginForm = () => {
     console.log(formData);
     formData.latitude = position.latitude;
     formData.longitude = position.longitude;
-    const BACKEND_BASE_URL = import.meta.env.BACKEND_BASE_URL;
+
     await axios
       .post(`${BACKEND_BASE_URL}/api/login`, formData)
       .then((res) => {

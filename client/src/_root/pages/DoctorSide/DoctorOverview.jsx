@@ -16,7 +16,7 @@ const Overview = () => {
   console.log(accessToken);
   const userData = useSelector((state) => state.user);
   console.log(userData);
-  const BACKEND_BASE_URL = import.meta.env.BACKEND_BASE_URL;
+  const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
   useEffect(() => {
     const getUpcomingAppointments = async () => {
       const res = await axios.post(

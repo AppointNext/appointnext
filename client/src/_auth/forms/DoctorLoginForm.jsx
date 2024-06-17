@@ -40,7 +40,8 @@ const DoctorLoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const BACKEND_BASE_URL = import.meta.env.BACKEND_BASE_URL;
+    const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+    console.log("BACKEND url", BACKEND_BASE_URL);
     await axios
       .post(`${BACKEND_BASE_URL}/api/doctorLogin`, formData)
       .then((res) => {
