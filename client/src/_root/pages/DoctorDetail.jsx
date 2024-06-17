@@ -11,12 +11,13 @@ const DoctorDetail = () => {
   const { id } = useParams();
   console.log(id);
   const [doctor, setDoctor] = React.useState({});
+  const BACKEND_BASE_URL = import.meta.env.BACKEND_BASE_URL;
 
   useEffect(() => {
     const fetchDoctorDetails = async () => {
       try {
         const response = await axios.post(
-          `https://appoint-next.onrender.com/api/getDoctorById`,
+          `${BACKEND_BASE_URL}/api/getDoctorById`,
           { id }
         );
         const data = response.data;

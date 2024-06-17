@@ -9,10 +9,11 @@ const Appointments = () => {
   const [upcomingAppointments, setUpcomingAppointments] = useState([]);
   const [pastAppointments, setPastAppointments] = useState([]);
   const accessToken = Cookie.get("accessToken");
+  const BACKEND_BASE_URL = import.meta.env.BACKEND_BASE_URL;
   useEffect(() => {
     const getUpcomingAppointments = async () => {
       const res = await axios.post(
-        "https://appoint-next.onrender.com/api/getUpcomingAppointments",
+        `${BACKEND_BASE_URL}/api/getUpcomingAppointments`,
         { id: 13 },
         {
           headers: {
@@ -26,7 +27,7 @@ const Appointments = () => {
     getUpcomingAppointments();
     const getPastAppointments = async () => {
       const res = await axios.post(
-        "https://appoint-next.onrender.com/api/getPastAppointments",
+        `${BACKEND_BASE_URL}/api/getPastAppointments`,
         { id: 6 },
         {
           headers: {
