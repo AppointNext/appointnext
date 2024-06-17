@@ -17,6 +17,8 @@ AppointNext is a comprehensive appointment management application designed speci
 - **Backend**: Django
 - **Database**: SQLite
 
+### Now we are migrating to node backend for future
+
 ## Getting Started
 
 Follow these instructions to set up and run the project locally.
