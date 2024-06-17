@@ -5,12 +5,11 @@ import DoctorCard from "../../components/shared/DoctorCard";
 import axios from "axios";
 const Doctors = () => {
   const [doctors, setDoctors] = React.useState([]);
+  const BACKEND_BASE_URL = import.meta.env.BACKEND_BASE_URL;
   useEffect(() => {
     const getAllDoctors = async () => {
       try {
-        const res = await axios.get(
-          "https://appoint-next.onrender.com/api/getAllDoctors"
-        );
+        const res = await axios.get(`${BACKEND_BASE_URL}/api/getAllDoctors`);
         console.log(res.data);
         setDoctors(res.data.doctors);
         console.log(doctors);

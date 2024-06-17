@@ -40,8 +40,9 @@ const DoctorLoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const BACKEND_BASE_URL = import.meta.env.BACKEND_BASE_URL;
     await axios
-      .post("https://appoint-next.onrender.com/api/doctorLogin", formData)
+      .post(`${BACKEND_BASE_URL}/api/doctorLogin`, formData)
       .then((res) => {
         console.log(res.data);
         const { username, email } = res.data;

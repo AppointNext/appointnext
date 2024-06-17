@@ -69,8 +69,9 @@ const SignupForm = () => {
     console.log(formData);
     // formData.latitude = position.latitude;
     // formData.longitude = position.longitude;
+    const BACKEND_BASE_URL = import.meta.env.BACKEND_BASE_URL;
     await axios
-      .post("https://appoint-next.onrender.com/api/signup", formData)
+      .post(`${BACKEND_BASE_URL}/api/signup`, formData)
       .then((res) => {
         console.log(res.data);
         const { username, email } = res.data;
