@@ -114,36 +114,6 @@ const Feedback = () => {
               </div>
             ))} 
       </Carousel>
-      {/* <div className="relative mt-10">
-        
-        <div className="flex flex-row overflow-hidden space-x-4">
-          <div
-            className="w-full flex transition-transform duration-500 ease-in-out"
-            style={{
-              transform: `translateX(-${currentIndex * (cardWidth * totalFeedbacks)}%)`,
-              width: `${totalFeedbacks * cardWidth * 100}%`,
-            }}
-          >
-            {users.map((u,index)=>(
-              <div key={index} style={{ width: `${cardWidth}%` }} className="flex snap-start px-2">
-                <FeedBox user={u} />
-              </div>
-            ))} 
-          </div>  
-        </div>
-        <button
-          className="prev-btn absolute top-1/2 transform -translate-y-1/2 left-0 bg-transparent border-none cursor-pointer text-lg text-gray-700"
-          onClick={prevFeedback}
-        >
-          &#10094;
-        </button>
-        <button
-          className="next-btn absolute top-1/2 transform -translate-y-1/2 right-0 bg-transparent border-none cursor-pointer text-lg text-gray-700"
-          onClick={nextFeedback}
-        >
-          &#10095;
-        </button>
-      </div> */}
     </div>
   );
 };
