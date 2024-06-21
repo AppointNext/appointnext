@@ -57,7 +57,7 @@ function App() {
       {!isEmergencyPage && (
         <Link
           to="/emergency"
-          className="fixed bottom-8 right-8 hover:bg-red-700 hover:scale-110 transition-all bg-red-500 text-white font-semibold rounded-full w-21 h-21 flex items-center justify-center text-[17px] p-2  hover:text-[20px]"
+          className="fixed bottom-3 md:bottom-8 right-3 md:right-8 hover:bg-red-700 hover:scale-110 transition-all bg-red-500 text-white font-semibold rounded-full w-21 h-21 flex items-center justify-center text-[17px] p-2  hover:text-[20px]"
         >
           Emergency
         </Link>
