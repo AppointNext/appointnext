@@ -8,6 +8,8 @@ dotenv.config();
 
 const dataURL = process.env.DATABASE_URL;
 
+const bodyParser = require("body-parser")
+
 if (!dataURL) {
     throw new Error('Missing MONGO_URI in environment variables');
   }
@@ -24,6 +26,8 @@ const app = express()
 app.use(express.json());
 
 app.use("/api/auth",authUserRoute);
+
+app.use(bodyParser.urlencoded({extended:true}));
 
 app.listen(8800,() =>{
     console.log("Server is running!")

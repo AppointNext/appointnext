@@ -4,7 +4,7 @@ import User from "../models/userModel";
 import mongoose from "mongoose";
 
 export const register = async (req:Request,res:Response)=>{
-    const{ username, email, phone, password } = req.body;
+    const{ username, password, email, phone } = req.body;
     console.log(req.body);
      
     const hashedPassword = await bcrypt.hash(password,10);
