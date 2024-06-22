@@ -21,6 +21,7 @@ export const register = async (req:Request,res:Response)=>{
     })
 
     console.log(newUser);
+    await newUser.save();
 }
 
 export const login = (req:Request,res:Response)=>{
