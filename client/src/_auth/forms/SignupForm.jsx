@@ -71,7 +71,7 @@ const SignupForm = () => {
     // formData.longitude = position.longitude;
     const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
     await axios
-      .post(`${BACKEND_BASE_URL}/api/signup`, formData)
+      .post(`localhost:8800/api/auth/register`, formData)
       .then((res) => {
         console.log(res.data);
         const { username, email } = res.data;

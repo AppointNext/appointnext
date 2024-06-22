@@ -1,12 +1,12 @@
 import mongoose, { Schema, Document, model } from "mongoose";
 
-interface IUser extends Document {
-  username: string;
-  password: string;
-  email: string;
-  phone: string;
-  history: string;
-  refreshToken: string;
+  interface IUser extends Document {
+    username: string;
+    password: string;
+    email: string;
+    phone: string;
+    history: string;
+    refreshToken: string;
   groups: mongoose.Types.ObjectId[];
   userPermissions: mongoose.Types.ObjectId[];
   addToHistory(appointmentId: string): void;
