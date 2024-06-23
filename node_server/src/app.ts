@@ -1,5 +1,6 @@
 import express from "express";
 import authUserRoute from "./user/routes/authRoutes";
+import authDoctorRoute from "./doctor/routes/authDoctorRoutes";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -14,7 +15,6 @@ if (!dataURL) {
     throw new Error('Missing MONGO_URI in environment variables');
   }
 
-
 mongoose.connect(dataURL)
     .then(( ()=> console.log("MongoDb Connected")))
     .catch((err) => console.log("Mongo Err",err));
@@ -26,6 +26,7 @@ app.use(express.json());
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 
 app.use("/api/auth",authUserRoute);
+app.use("/api/authDoctor",authDoctorRoute);
 
 app.use(bodyParser.urlencoded({extended:true}));
 
