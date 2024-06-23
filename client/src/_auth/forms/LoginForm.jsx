@@ -79,7 +79,7 @@ const LoginForm = () => {
     formData.longitude = position.longitude;
     const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
     await axios
-      .post(`${BACKEND_BASE_URL}/api/login`, formData)
+      .post(`${BACKEND_BASE_URL}/api/auth/login`, formData)
       .then((res) => {
         const { username, email } = res.data;
         console.log(username, email);

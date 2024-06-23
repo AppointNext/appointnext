@@ -4,8 +4,9 @@ import bcrypt from "bcrypt";
 import User from "../models/userModel";
 import jwt from "jsonwebtoken";
 
-// JWT secret key (ensure you set this in your environment variables)
+
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'your_jwt_refresh_secret';
 
 
 export const register = [
@@ -81,15 +82,24 @@ export const login = [
       }
 
       // Generate a JWT token
-      const token = jwt.sign(
+      const accessToken = jwt.sign(
         { userId: user._id, email: user.email },
         JWT_SECRET,
         { expiresIn: '1h' }
       );
 
-      // If the credentials are correct, you can generate a token (e.g., JWT) and return it
-      // Here, we are just sending a success message for simplicity
-      res.status(200).json({ message: 'Login successful', token , user });
+      // Generate a refresh token
+      const refreshToken = jwt.sign(
+        { userId: user._id, email: user.email },
+        JWT_REFRESH_SECRET,
+        { expiresIn: '7d' }
+      );
+
+      // Store the refresh token in the user's record
+      user.refreshToken = refreshToken;
+      await user.save();
+
+      res.status(200).json({ message: 'Login successful', accessToken , refreshToken, user });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Server error' });
@@ -97,6 +107,33 @@ export const login = [
   }
 ];
 
-export const logout = (req:any,res:any)=>{
-    console.log("logout endpoint")
-}
+export const logout = async (req: Request, res: Response) => {
+  const { refreshToken } = req.body;
+
+  if (!refreshToken) {
+    return res.status(400).json({ message: 'Refresh token is required' });
+  }
+
+  try {
+    // Verify the refresh token
+    const decoded = jwt.verify(refreshToken, JWT_REFRESH_SECRET);
+    if (!decoded) {
+      return res.status(401).json({ message: 'Invalid refresh token' });
+    }
+
+    // Find the user by refresh token
+    const user = await User.findOne({ refreshToken });
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid refresh token' });
+    }
+
+    // Invalidate the refresh token
+    user.refreshToken = '';
+    await user.save();
+
+    res.status(200).json({ message: 'Logout successful' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};

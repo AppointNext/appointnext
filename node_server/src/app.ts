@@ -1,7 +1,7 @@
 import express from "express";
 import authUserRoute from "./user/routes/authRoutes";
 import mongoose from "mongoose";
-import User from "./user/models/userModel";
+import cors from "cors";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -22,6 +22,8 @@ mongoose.connect(dataURL)
 const app = express()
 
 app.use(express.json());
+
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 
 app.use("/api/auth",authUserRoute);
 
