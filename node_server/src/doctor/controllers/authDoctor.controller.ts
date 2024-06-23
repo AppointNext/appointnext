@@ -4,9 +4,9 @@ import jwt from 'jsonwebtoken';
 import { body, validationResult } from 'express-validator';
 import Doctor from "../models/doctorModel";
 
-// JWT secret keys (use process.env.JWT_SECRET for security)
-const JWT_SECRET = 'your_jwt_secret';
-const JWT_REFRESH_SECRET = 'your_jwt_refresh_secret';
+
+const JWT_SECRET =  process.env.JWT_SECRET || 'your_jwt_secret';
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'your_jwt_refresh_secret';
 
 export const registerDoctor = [
     body('username').isString().notEmpty().withMessage('Username is required'),
