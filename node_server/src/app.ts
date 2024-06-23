@@ -1,4 +1,4 @@
-import express ,{Request,Response} from "express";
+import express from "express";
 import authUserRoute from "./user/routes/authRoutes";
 import mongoose from "mongoose";
 import User from "./user/models/userModel";
@@ -20,8 +20,6 @@ mongoose.connect(dataURL)
     .catch((err) => console.log("Mongo Err",err));
 
 const app = express()
-
-
 
 app.use(express.json());
 
