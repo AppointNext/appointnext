@@ -27,8 +27,8 @@ app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.use("/api/auth",authUserRoute);
-app.use("/api/authDoctor",authDoctorRoute);
+app.use("/api/user/auth",authUserRoute);
+app.use("/api/doctor/auth",authDoctorRoute);
 
 app.listen(8800,() =>{
     console.log("Server is running!")
