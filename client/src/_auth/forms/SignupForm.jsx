@@ -100,9 +100,9 @@ const SignupForm = () => {
           <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 bg-white rounded-2xl px-3 text-black">
             Patient
           </button>
-          <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white">
+          <Link to="/doctorSignup"><button type="button" className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white">
             Doctor
-          </button>
+          </button></Link>
         </div>
         <br />
         <p className="text-[11px]">
