@@ -19,6 +19,7 @@ import Profile from "./_root/pages/Profile";
 import Settings from "./_root/pages/Settings";
 import DoctorOverview from "./_root/pages/DoctorSide/DoctorOverview";
 import ProtectedDoctorRoute from "./utils/ProtectedRoute";
+import NotFound from "./components/ui/NotFound/NotFound"; // Import the NotFound component
 
 function App() {
   const location = useLocation();
@@ -52,6 +53,8 @@ function App() {
             <Route path="/doctor/doctorOverview" element={<DoctorOverview />} />
           </Route>
         </Route>
+        {/* 404 page */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {/* Render the Emergency button only if the current page is not the Emergency page */}
       {!isEmergencyPage && (
