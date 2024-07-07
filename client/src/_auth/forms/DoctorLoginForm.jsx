@@ -5,6 +5,7 @@ import Cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../store/userSlice";
+import Logo from "../../components/utils/Logo";
 const DoctorLoginForm = () => {
   const [position, setPosition] = useState({ latitude: null, longitude: null });
   const navigate = useNavigate();
@@ -63,14 +64,23 @@ const DoctorLoginForm = () => {
 
   return (
     <div className="flex items-center justify-evenly h-screen gap-2 overflow-auto flex-row w-screen">
-      <div className="flex-col gap-2 w-1/2 p-20">
-        <div className="bg-[#4F46E5] rounded-3xl w-[12rem] text-white py-2 flex flex-row justify-center ml-[90px]">
-          <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white">
-            Patient
-          </button>
-          <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white">
-            Doctor
-          </button>
+      <div className="flex flex-col gap-2 w-1/2 p-20">
+        <div className="mb-8 flex items-center justify-center">
+          <Logo />
+        </div>
+        <div className="flex items-center justify-center">
+          <div className="bg-[#4F46E5] rounded-3xl w-[12rem] text-white py-2 flex flex-row justify-center items-center">
+            <Link to="/login">
+              <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white">
+                Patient
+              </button>
+            </Link>
+            <Link to="/doctorLogin">
+              <button className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white bg-white text-black rounded-2xl px-3 ">
+                Doctor
+              </button>
+            </Link>
+          </div>
         </div>
         <br />
         <p className="text-[11px]">
@@ -143,7 +153,11 @@ const DoctorLoginForm = () => {
         <br />
         <div className="text-center">
           <p className="text-[15px]">
-            Don’t have an account yet? Register now, for free!
+            Don’t have an account yet?
+            <Link to="/doctorSignup" className="text-blue-600">
+              Register now
+            </Link>
+            , for free!
           </p>
         </div>
       </div>

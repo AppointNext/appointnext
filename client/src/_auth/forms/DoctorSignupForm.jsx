@@ -270,7 +270,7 @@ const DoctorSignupForm = () => {
             </button>
           </form>
           <p className="text-[10px]">
-            Already have an account? <Link to="/login">Login</Link>
+            Already have an account? <Link to="/doctorLogin">Login</Link>
           </p>
         </div>
       </div>

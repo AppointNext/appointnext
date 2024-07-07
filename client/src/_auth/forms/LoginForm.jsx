@@ -106,7 +106,7 @@ const LoginForm = () => {
         <div className="mb-8">
           <Logo />
         </div>
-        <div className="bg-[#4F46E5] rounded-3xl w-[12rem] text-white py-2 flex flex-row justify-center md:ml-[90px]">
+        <div className="bg-[#4F46E5] rounded-3xl w-[12rem] text-white py-2 flex flex-row justify-center items-center">
           <button
             className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white bg-white text-black rounded-2xl px-3"
             onClick={() => changePage("/register")}
@@ -115,7 +115,7 @@ const LoginForm = () => {
           </button>
           <button
             className="hover:text-black p-1 m-0.5 hover:rounded-2xl py-1 hover:bg-white"
-            onClick={() => changePage("/doctorSignup")}
+            onClick={() => changePage("/doctorLogin")}
           >
             Doctor
           </button>
@@ -195,8 +195,11 @@ const LoginForm = () => {
         <br />
         <div className=" text-center">
           <p className="text-[15px]">
-            Don’t have an account yet? <Link to="/register">Register now</Link>,
-            as user for free!
+            Don’t have an account yet?{" "}
+            <Link to="/register" className="text-blue-600">
+              Register now
+            </Link>
+            , as user for free!
           </p>
         </div>
       </div>
