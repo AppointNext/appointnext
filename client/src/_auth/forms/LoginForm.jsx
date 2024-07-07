@@ -34,34 +34,12 @@ const LoginForm = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const handleSearch = async () => {
-  //     try {
-  //       const { coords } = await getCurrentLocation();
-  //       const { latitude, longitude } = coords;
-  //       setLocation({ latitude, longitude });
-  //     } catch (error) {
-  //       console.error("Error searching:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   const getCurrentLocation = async () => {
-  //     return new Promise((resolve, reject) => {
-  //       navigator.geolocation.getCurrentPosition(resolve, reject);
-  //     });
-  //   };
-
-  //   handleSearch();
-  // }, []); // Empty dependency array ensures the effect runs only once
-
   console.log(location, position);
   const navigate = useNavigate();
   // const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
     latitude: "",
     longitude: "",
@@ -79,16 +57,17 @@ const LoginForm = () => {
     formData.longitude = position.longitude;
     const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
     await axios
-      .post(`${BACKEND_BASE_URL}/api/auth/login`, formData)
+      .post(`${BACKEND_BASE_URL}/api/user/auth/login`, formData)
       .then((res) => {
-        const { username, email } = res.data;
+        console.log(res.data);
+        const { username, email } = res.data.user;
         console.log(username, email);
-        dispatch(setUser({ username, email, id: res.data.id }));
+        dispatch(setUser({ username, email, id: res.data.user.id }));
         localStorage.setItem("username", username);
-        localStorage.setItem("userid", res.data.id);
-        if (res.data.access_token && res.data.refresh_token) {
-          Cookie.set("refreshToken", res.data.refresh_token);
-          Cookie.set("accessToken", res.data.access_token);
+        localStorage.setItem("userid", res.data.user.id);
+        if (res.data.accessToken && res.data.refreshToken) {
+          Cookie.set("refreshToken", res.data.refreshToken);
+          Cookie.set("accessToken", res.data.accessToken);
           navigate("/overview");
         }
       })
@@ -128,18 +107,18 @@ const LoginForm = () => {
         <form action="" onSubmit={handleSubmit} className="flex flex-col gap-2">
           <div className="input-group font-semibold">
             <label
-              htmlFor="username"
+              htmlFor="email"
               className={`transition-transform ${
                 formData.email ? "-translate-y-6 text-sm" : ""
               } text-[15px]`}
             >
-              Username
+              Email
             </label>
             <input
               type="text"
-              name="username"
-              id="username"
-              value={formData.username}
+              name="email"
+              id="email"
+              value={formData.email}
               onChange={handleChange}
               className="w-full py-1 px-3 mt-1 border rounded-md focus:outline-none focus:border-blue-500"
               placeholder="Enter Your Username"

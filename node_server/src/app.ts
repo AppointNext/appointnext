@@ -10,6 +10,7 @@ dotenv.config();
 const dataURL = process.env.MONGO_URI;
 
 const bodyParser = require("body-parser");
+const PORT = process.env.PORT || 3000;
 
 if (!dataURL) {
   throw new Error("Missing MONGO_URI in environment variables");
@@ -31,6 +32,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api/user/auth", authUserRoute);
 app.use("/api/doctor/auth", authDoctorRoute);
 
-app.listen(8800, () => {
+app.listen(PORT, () => {
   console.log("Server is running!");
 });
