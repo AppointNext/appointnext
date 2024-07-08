@@ -6,20 +6,38 @@ const Feature = () => {
   return (
     <>
       {/* px-40 my-8 py-12 shadow-2xl shadow-gray-300 flex flex-row justify-between items-center rounded-lg overflow-hidden sm:p-0 md:p-0 */}
-      <div className="w-full flex flex-row sm:text-[15px] md:text-[15px] text-[12px]  my-2 shadow-xl rounded-xl justify-between px-2 md:py-6 md:px-8">
+      {/*   <div className="w-full flex flex-row sm:text-[15px] md:text-[15px] text-[12px]  my-2  rounded-xl justify-between px-2 md:py-6 md:px-8">
         <div className="flex flex-row items-center justify-between md:w-[190px] xl:w-[190px] gap-1 w-auto ">
           <FaUser className="bg-[#C2D0F5] rounded-full md:h-10 md:w-10 text-[#003cd8] md:p-2 p-1 h-5 w-auto " />
           <p className="">Manage Patients</p>
         </div>
-        <div className="flex flex-row items-center justify-between gap-1 w-auto">
+       <div className="flex flex-row items-center justify-between gap-1 w-auto">
           <FaUser className="bg-[#C2D0F5] rounded-full md:h-10 md:w-10 text-[#003cd8] md:p-2 p-1 h-5 w-auto" />
 
           <p>Manage Patients</p>
-        </div>
-        <div className="flex flex-row items-center justify-between md:w-[190px] xl:w-[190px] w-auto gap-1 ">
+        </div> 
+       <div className="flex flex-row items-center justify-between md:w-[190px] xl:w-[190px] w-auto gap-1 ">
           <FaUser className="bg-[#C2D0F5] rounded-full md:h-10 md:w-10 text-[#003cd8] md:p-2 p-1 h-5 w-auto" />
           <p>Manage Patients</p>
         </div>
+     </div> */}
+
+      {/* ABout section */}
+      <div className="p-4">
+        <h2 className="text-center text-4xl sm:text-xl md:text-6xl text-blue-800 font-black ">
+          About
+        </h2>
+        <div></div>
+        <p className="mt-5">
+          AppointNext is a website that connects you effortlessly with medical
+          professionals. Seamlessly book appointments with doctors at clinics
+          and hospitals. Access real-time availability, secure communication,
+          and integrated health records. Experience the convenience of a digital
+          pharmacy, ensuring timely access to prescribed medicine. Our platform
+          revolutionizes medical care, offering a user-centric interface for
+          easy navigation. Explore the future of healthcare with our
+          technologically advanced and accessible medical website.
+        </p>
       </div>
       <div className="flex md:flex-row md:gap-4 justify-between m-2 mt-10 flex-col gap-2 xl:justify-around xl:gap-0">
         <div className=" w-150">
