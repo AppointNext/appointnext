@@ -40,14 +40,14 @@ const Feedback = () => {
   };
 
   return (
-    <div className="text-center mx-auto my-20">
-      <h1 className="text-2xl font-bold">
+    <div className="text-center m-5">
+      <h1 className="text-2xl sm:text-2xl md:text-4xl text-blue-800 font-black">
         Trusted by Thousands of <br /> Happy Customers
       </h1>
-      <p className="text-xs">
+      {/* <p className="text-xs">
         These are the stories of our customers who have joined us with great
         <br /> pleasure when using this amazing feature.
-      </p>
+      </p> */}
       <div className="relative mt-10">
         <div className="flex flex-row overflow-hidden">
           <div

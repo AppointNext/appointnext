@@ -23,54 +23,71 @@ const Feature = () => {
      </div> */}
 
       {/* ABout section */}
-      <div className="p-4">
-        <h2 className="text-center text-4xl sm:text-xl md:text-6xl text-blue-800 font-black ">
-          About
-        </h2>
-        <div></div>
-        <p className="mt-5">
-          AppointNext is a website that connects you effortlessly with medical
-          professionals. Seamlessly book appointments with doctors at clinics
-          and hospitals. Access real-time availability, secure communication,
-          and integrated health records. Experience the convenience of a digital
-          pharmacy, ensuring timely access to prescribed medicine. Our platform
-          revolutionizes medical care, offering a user-centric interface for
-          easy navigation. Explore the future of healthcare with our
-          technologically advanced and accessible medical website.
-        </p>
-      </div>
-      <div className="flex md:flex-row md:gap-4 justify-between m-2 mt-10 flex-col gap-2 xl:justify-around xl:gap-0">
-        <div className=" w-150">
-          <img src="./feature.svg" alt="feature image" className="" />
-        </div>
-        <div className="flex flex-col justify-between">
-          <h1 className=" md:text-[25px] xl:text-[50px] 2xl:text-[50px] text-[20px] font-bold">
-            We Provide Many <br /> Features You Can Use
-          </h1>
-          <p className="text-[12px] md:text-[15px] xl:text-[15px] ">
+      <h2 className=" mt-2 text-center text-4xl sm:text-2xl md:text-6xl text-blue-800 font-black ">
+        About
+      </h2>
+      <div className="p-5 flex">
+        <div className="w-1/2">
+          <div className="flex mt-5 justify-around  ">
+            <p className="flex flex-col">
+              <span className="text-blue-700 text-xl  md:text-3xl font-black">
+                2000+{" "}
+              </span>{" "}
+              satisfied patients
+            </p>
+            <p className="flex flex-col">
+              <span className="text-blue-700 text-xl  md:text-3xl font-black">
+                50+{" "}
+              </span>{" "}
+              specialized medical services
+            </p>
+          </div>
+          <p className="mt-5">
+            Seamlessly book appointments with doctors at clinics and hospitals.
+            Our platform revolutionizes medical care, offering a user-centric
+            interface for easy navigation. Explore the future of healthcare with
+            our technologically advanced and accessible medical website.
+          </p>
+          <div className=" mt-3">
+            <div className="flex flex-col justify-between">
+              <h1 className=" text-blue-700 text-xl  md:text-3xl font-semibold">
+                Features
+              </h1>
+              {/* <p className="text-[12px] md:text-[15px] xl:text-[15px] ">
             You can explore the features that we provide with <br /> fun and
             have their own functions each feature.
-          </p>
-          <ul>
-            <li className="flex flex-row items-center gap-2">
-              <RiCheckboxCircleFill className="text-[#2FAB73] " />
-              <p className="inline  text-[15px]  ">
-                Powerfull online protection.
-              </p>
-            </li>
-            <li className="flex flex-row items-center gap-2">
-              <RiCheckboxCircleFill className="text-[#2FAB73] " />{" "}
-              <p className="inline text-[15px]">Internet without borders.</p>
-            </li>
-            <li className="flex flex-row items-center gap-2 ">
-              <RiCheckboxCircleFill className="text-[#2FAB73] " />{" "}
-              <p className="inline text-[15px]">Supercharged VPN.</p>
-            </li>
-            <li className="flex flex-row items-center gap-2">
-              <RiCheckboxCircleFill className="text-[#2FAB73] " />{" "}
-              <p className="inline text-[15px]">No specific time limits.</p>
-            </li>
-          </ul>
+          </p> */}
+              <ul>
+                <li className="flex flex-row items-center gap-2 mt-2">
+                  <RiCheckboxCircleFill className="text-[#2FAB73] " />
+                  <p className="inline  text-[15px]  ">
+                    24/7 chat and phone support for users.
+                  </p>
+                </li>
+                <li className="flex flex-row items-center gap-2">
+                  <RiCheckboxCircleFill className="text-[#2FAB73] " />{" "}
+                  <p className="inline text-[15px]">
+                    Secure registration and login process.
+                  </p>
+                </li>
+                <li className="flex flex-row items-center gap-2 ">
+                  <RiCheckboxCircleFill className="text-[#2FAB73] " />{" "}
+                  <p className="inline text-[15px]">
+                    Access to personal medical history and records.
+                  </p>
+                </li>
+                <li className="flex flex-row items-center gap-2">
+                  <RiCheckboxCircleFill className="text-[#2FAB73] " />{" "}
+                  <p className="inline text-[15px]">
+                    Search for doctors by specialty, location, availability.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div className=" w-1/2">
+          <img src="./feature.svg" alt="feature image" className="" />
         </div>
       </div>
     </>
