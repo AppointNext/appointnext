@@ -3,7 +3,7 @@ import Button from "../utils/Button";
 
 const Hero = () => {
   return (
-    <div className=" flex flex-row w-full bg-cyan-200 items-center overflow-hidden px-5">
+    <div className=" flex flex-row w-full items-center overflow-hidden px-5">
       <div className="w-1/2 ">
         <p className=" text-4xl sm:text-2xl md:text-6xl text-blue-800 font-black ">
           Appoint <span className="text-black"> Next</span>

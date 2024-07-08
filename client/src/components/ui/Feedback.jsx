@@ -24,14 +24,14 @@ const Feedback = () => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla.",
     },
     user2: {
-      name: "John",
+      name: "Jacob",
       title: "CEO",
       address: "New Delhi",
       feedback:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa volutpat aliquam fringilla.",
     },
     user3: {
-      name: "John",
+      name: "Edward",
       title: "CEO",
       address: "Dubai",
       feedback:
@@ -40,9 +40,9 @@ const Feedback = () => {
   };
 
   return (
-    <div className="text-center m-5">
+    <div className="text-center m-5 mt-10">
       <h1 className="text-2xl sm:text-2xl md:text-4xl text-blue-800 font-black">
-        Trusted by Thousands of <br /> Happy Customers
+        Trusted by Thousands of Happy Customers
       </h1>
       {/* <p className="text-xs">
         These are the stories of our customers who have joined us with great

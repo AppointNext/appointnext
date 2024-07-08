@@ -27,7 +27,7 @@ const Feature = () => {
         About
       </h2>
       <div className="p-5 flex">
-        <div className="w-1/2">
+        <div className="md:w-1/2 sm:w-full">
           <div className="flex mt-5 justify-around  ">
             <p className="flex flex-col">
               <span className="text-blue-700 text-xl  md:text-3xl font-black">
@@ -86,7 +86,7 @@ const Feature = () => {
             </div>
           </div>
         </div>
-        <div className=" w-1/2">
+        <div className=" md:flex hidden w-1/2">
           <img src="./feature.svg" alt="feature image" className="" />
         </div>
       </div>
