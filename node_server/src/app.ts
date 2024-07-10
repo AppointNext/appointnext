@@ -48,40 +48,20 @@ const userConnections = new Map();
 wss.on("connection", (ws) => {
   console.log("New client connected");
 
-  ws.on("message", async (message: any) => {
+  ws.on("message", (message: any) => {
     const messageData = JSON.parse(message);
-    const { type, userId, username, recipient, sender, msg } = messageData;
+    const { sender, text } = messageData;
 
-    // Handle initial connection message
-    if (type === "set-online") {
-      userConnections.set(userId, ws);
-
-      // Set user as online in Redis
-      try {
-        await redisClient.hset("onlineUsers", { [userId]: username });
-      } catch (err) {
-        console.error("Error setting user online", err);
+    // Broadcast message to all connected clients
+    wss.clients.forEach((client) => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(JSON.stringify({ sender, text }));
       }
-
-      return; // Exit early to avoid processing as a regular message
-    }
-
-    // Handle regular chat messages
-    if (recipient) {
-      const recipientWs = userConnections.get(recipient);
-      if (recipientWs && recipientWs.readyState === WebSocket.OPEN) {
-        recipientWs.send(JSON.stringify({ sender, message: msg }));
-      }
-    }
+    });
   });
 
   ws.on("close", () => {
     console.log("Client has disconnected");
-    userConnections.forEach((value, key) => {
-      if (value === ws) {
-        userConnections.delete(key);
-      }
-    });
   });
 
   ws.on("error", (error) => {

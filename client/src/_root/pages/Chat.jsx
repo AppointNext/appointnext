@@ -7,17 +7,17 @@ const Chat = () => {
 
   useEffect(() => {
     // Connect to WebSocket server
-    ws = new WebSocket("ws://localhost:3000");
+    ws.current = new WebSocket("ws://localhost:3000");
 
     // Handle incoming messages
-    ws.onmessage = (event) => {
+    ws.current.onmessage = (event) => {
       const messageData = JSON.parse(event.data);
       setMessages((prevMessages) => [...prevMessages, messageData]);
     };
 
     // Cleanup on component unmount
     return () => {
-      ws.close();
+      ws.current.close();
     };
   }, []);
 
@@ -25,7 +25,7 @@ const Chat = () => {
     if (input.trim() !== "") {
       const messageData = { text: input, sender: "You" };
       setMessages([...messages, messageData]);
-      ws.send(JSON.stringify(messageData));
+      ws.current.send(JSON.stringify(messageData));
       setInput("");
     }
   };
