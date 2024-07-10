@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../store/userSlice.js";
 import { useSelector } from "react-redux";
 import { store } from "../../store/store.js";
-import Logo from "../../components/utils/Logo.jsx";
+import Logo from "../../components/utils/LogoText.jsx";
 
 const LoginForm = () => {
   const [location, setLocation] = useState(null);

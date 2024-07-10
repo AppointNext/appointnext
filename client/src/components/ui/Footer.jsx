@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../utils/Logo";
+import Logo from "../utils/LogoText";
 import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
@@ -11,13 +11,11 @@ const Footer = () => {
           AppointNext LaslesVPN is a private virtual network that has unique
           features and has high security.
         </h1>
-<div className="md:flex hidden gap-4">
-        <FaFacebookF className="text-[#F53838]" />
-        <FaTwitter className="text-[#F53838]" />
-        <FaInstagram className="text-[#F53838]" />
-      </div>
-
-
+        <div className="md:flex hidden gap-4">
+          <FaFacebookF className="text-[#F53838]" />
+          <FaTwitter className="text-[#F53838]" />
+          <FaInstagram className="text-[#F53838]" />
+        </div>
       </div>
       <div className="md:w-1/2 md:flex-row md:flex md:gap-4 md:justify-between md:px-10 gap-8 flex items-start justify-evenly">
         <div className="flex flex-col gap-2 items-center justify-center md:items-start md:justify-normal py-4">
@@ -43,15 +41,12 @@ const Footer = () => {
           <p className="text-[12px]">Affiliate</p>
           <p className="text-[12px]">Become Partner</p>
         </div>
-
-
       </div>
       <div className="flex md:hidden gap-4">
         <FaFacebookF className="text-[#F53838]" />
         <FaTwitter className="text-[#F53838]" />
         <FaInstagram className="text-[#F53838]" />
       </div>
-
     </div>
   );
 };
