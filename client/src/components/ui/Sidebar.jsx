@@ -9,6 +9,8 @@ import { FaUserDoctor } from "react-icons/fa6";
 import { AiOutlineMessage } from "react-icons/ai";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoMenuSharp } from "react-icons/io5";
+import { CiChat1 } from "react-icons/ci";
+
 import Logo from "../utils/Logo";
 import { FaBell } from "react-icons/fa";
 
@@ -47,7 +49,7 @@ const Sidebar = () => {
             onClick={toggleDropdown}
           ></IoMenuSharp>
           {isDropdownOpen && (
-            <div className="absolute left-2 top-6 mt-2 w-48 bg-white rounded-lg shadow-xl z-10 xl:h-screen flex flex-col items-center md:left-0 md:top-0 xl:left-0 xl:top-0 md:h-screen md:w-40 lg:w-36 ">
+            <div className="absolute left-2 top-6 mt-2 w-48 bg-white rounded-lg shadow-xl z-10 xl:h-screen flex flex-col items-center md:left-0 md:top-0 xl:left-0 xl:top-0 md:h-screen  ">
               <div className="py-1">
                 <Link
                   to="/overview"
@@ -85,6 +87,16 @@ const Sidebar = () => {
                     {" "}
                     <FaUserDoctor />
                     Doctors
+                  </div>
+                </Link>
+                <Link
+                  to="/Chats"
+                  className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white text-[14px]"
+                >
+                  <div className="flex flex-row items-center gap-2">
+                    {" "}
+                    <CiChat1 />
+                    Chat
                   </div>
                 </Link>
                 <Link

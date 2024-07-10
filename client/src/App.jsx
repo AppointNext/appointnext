@@ -20,6 +20,7 @@ import Settings from "./_root/pages/Settings";
 import DoctorOverview from "./_root/pages/DoctorSide/DoctorOverview";
 import ProtectedDoctorRoute from "./utils/ProtectedRoute";
 import NotFound from "./components/ui/NotFound/NotFound"; // Import the NotFound component
+import Chat from "./_root/pages/Chat";
 
 function App() {
   const location = useLocation();
@@ -45,6 +46,7 @@ function App() {
           <Route path="/doctors" element={<Doctors />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/chats" element={<Chat />} />
           <Route path="/emergency" element={<Emergency />} />
           <Route path="/upappointments" element={<UpAppointments />} />
           <Route path="/drDetail/:id" element={<DoctorDetail />} />
@@ -60,7 +62,7 @@ function App() {
       {!isEmergencyPage && (
         <Link
           to="/emergency"
-          className="fixed bottom-3 md:bottom-8 right-3 md:right-8 hover:bg-red-700 hover:scale-110 transition-all bg-red-500 text-white font-semibold rounded-full w-21 h-21 flex items-center justify-center text-[17px] p-2  hover:text-[20px]"
+          className="fixed bottom-3 md:bottom-20 right-3 md:right-8 hover:bg-red-700 hover:scale-110 transition-all bg-red-500 text-white font-semibold rounded-full w-21 h-21 flex items-center justify-center text-[17px] p-2  hover:text-[20px]"
         >
           Emergency
         </Link>
