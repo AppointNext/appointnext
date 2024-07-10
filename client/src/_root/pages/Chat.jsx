@@ -1,12 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  let ws = useRef(null);
+
+  useEffect(() => {
+    // Connect to WebSocket server
+    ws = new WebSocket("ws://localhost:3000");
+
+    // Handle incoming messages
+    ws.onmessage = (event) => {
+      const messageData = JSON.parse(event.data);
+      setMessages((prevMessages) => [...prevMessages, messageData]);
+    };
+
+    // Cleanup on component unmount
+    return () => {
+      ws.close();
+    };
+  }, []);
 
   const handleSendMessage = () => {
     if (input.trim() !== "") {
-      setMessages([...messages, { text: input, sender: "You" }]);
+      const messageData = { text: input, sender: "You" };
+      setMessages([...messages, messageData]);
+      ws.send(JSON.stringify(messageData));
       setInput("");
     }
   };
