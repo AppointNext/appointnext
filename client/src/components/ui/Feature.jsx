@@ -27,9 +27,12 @@ const Feature = () => {
         About
       </h2>
       <div className="p-5 flex">
+        <div className=" md:flex hidden w-1/2">
+          <img src="./feature.svg" alt="feature image" className="" />
+        </div>
         <div className="md:w-1/2 sm:w-full">
-          <div className="flex mt-5 justify-around  ">
-            <p className="flex flex-col">
+          <div className="flex mt-5 items-start ">
+            <p className="flex flex-col mr-5">
               <span className="text-blue-700 text-xl  md:text-3xl font-black">
                 2000+{" "}
               </span>{" "}
@@ -85,9 +88,6 @@ const Feature = () => {
               </ul>
             </div>
           </div>
-        </div>
-        <div className=" md:flex hidden w-1/2">
-          <img src="./feature.svg" alt="feature image" className="" />
         </div>
       </div>
     </>
