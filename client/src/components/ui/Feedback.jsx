@@ -41,7 +41,7 @@ const Feedback = () => {
 
   return (
     <div className="text-center m-5 mt-10">
-      <h1 className="text-2xl sm:text-2xl md:text-4xl text-blue-800 font-black">
+      <h1 className="mt-2 text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl text-blue-800 font-black">
         Trusted by Thousands of Happy Customers
       </h1>
       {/* <p className="text-xs">

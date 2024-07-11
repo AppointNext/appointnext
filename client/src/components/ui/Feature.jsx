@@ -23,29 +23,29 @@ const Feature = () => {
      </div> */}
 
       {/* ABout section */}
-      <h2 className=" mt-2 text-center text-4xl sm:text-2xl md:text-6xl text-blue-800 font-black ">
+      <h2 className="mt-2 text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-blue-800 font-black">
         About
       </h2>
       <div className="p-5 flex">
-        <div className=" md:flex hidden w-1/2">
+        <div className=" w-1/2">
           <img src="./feature.svg" alt="feature image" className="" />
         </div>
-        <div className="md:w-1/2 sm:w-full">
+        <div className="w-1/2">
           <div className="flex mt-5 items-start ">
             <p className="flex flex-col mr-5">
-              <span className="text-blue-700 text-xl  md:text-3xl font-black">
+              <span className="text-blue-700 text-lg  md:text-3xl font-black">
                 2000+{" "}
               </span>{" "}
               satisfied patients
             </p>
             <p className="flex flex-col">
-              <span className="text-blue-700 text-xl  md:text-3xl font-black">
+              <span className="text-blue-700 text-lg  md:text-3xl font-black">
                 50+{" "}
               </span>{" "}
               specialized medical services
             </p>
           </div>
-          <p className="mt-5">
+          <p className="mt-5 text-sm md:text-base">
             Seamlessly book appointments with doctors at clinics and hospitals.
             Our platform revolutionizes medical care, offering a user-centric
             interface for easy navigation. Explore the future of healthcare with
@@ -53,7 +53,7 @@ const Feature = () => {
           </p>
           <div className=" mt-3">
             <div className="flex flex-col justify-between">
-              <h1 className=" text-blue-700 text-xl  md:text-3xl font-semibold">
+              <h1 className=" text-blue-700 text-lg  md:text-2xl font-semibold">
                 Features
               </h1>
               {/* <p className="text-[12px] md:text-[15px] xl:text-[15px] ">
@@ -63,25 +63,25 @@ const Feature = () => {
               <ul>
                 <li className="flex flex-row items-center gap-2 mt-2">
                   <RiCheckboxCircleFill className="text-[#2FAB73] " />
-                  <p className="inline  text-[15px]  ">
+                  <p className="inline  text-sm md:text-base ">
                     24/7 chat and phone support for users.
                   </p>
                 </li>
                 <li className="flex flex-row items-center gap-2">
                   <RiCheckboxCircleFill className="text-[#2FAB73] " />{" "}
-                  <p className="inline text-[15px]">
+                  <p className="inline  text-sm md:text-base ">
                     Secure registration and login process.
                   </p>
                 </li>
                 <li className="flex flex-row items-center gap-2 ">
                   <RiCheckboxCircleFill className="text-[#2FAB73] " />{" "}
-                  <p className="inline text-[15px]">
+                  <p className="inline  text-sm md:text-base">
                     Access to personal medical history and records.
                   </p>
                 </li>
                 <li className="flex flex-row items-center gap-2">
                   <RiCheckboxCircleFill className="text-[#2FAB73] " />{" "}
-                  <p className="inline text-[15px]">
+                  <p className="inline  text-sm md:text-base">
                     Search for doctors by specialty, location, availability.
                   </p>
                 </li>

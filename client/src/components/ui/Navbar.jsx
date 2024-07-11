@@ -63,7 +63,7 @@ const Navbar = () => {
             type="button"
             className={`border-[#003CD8] border-2 md:px-2 text-[#003CD8] rounded-2xl md:py-2 hover:shadow-2xl active:translate-y-2 transition-all ${
               isAnimating ? "active:delay-75" : ""
-            } md:text-[17px] text-[10px] px-4 py-1`}
+            } md:text-[17px] text-[12px] px-4 py-1`}
             onClick={handleSignInClick}
           >
             Log In
@@ -72,7 +72,7 @@ const Navbar = () => {
             type="button"
             className={`border-[#003CD8] border-2 md:px-2 text-[#003CD8] rounded-2xl md:py-2 hover:shadow-2xl active:translate-y-2 transition-all ${
               isAnimating ? "active:delay-75" : ""
-            } md:text-[17px] text-[10px] px-4 py-1`}
+            } md:text-[17px] text-[12px] px-4 py-1`}
             onClick={handleSignUpClick}
           >
             Sign Up

@@ -5,10 +5,10 @@ const Hero = () => {
   return (
     <div className=" flex flex-row w-full items-center overflow-hidden px-5">
       <div className="w-1/2 ">
-        <p className=" text-4xl sm:text-2xl md:text-6xl text-blue-800 font-black ">
+        <p className="mt-2 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-blue-800  font-black ">
           Appoint <span className="text-black"> Next</span>
         </p>
-        <p className=" mt-5 mb-5 text-base sm:text-sm md:text-lg  text-gray-500 font-semibold">
+        <p className=" mt-5 mb-5 text-sm sm:text-base md:text-lg  text-gray-500 font-semibold">
           You can book your appointment online at any time of the day because we
           care about you
         </p>
