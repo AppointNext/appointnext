@@ -1,80 +1,54 @@
-// import WebSocket from "ws";
+import WebSocket from "ws";
+import { v4 as uuid } from "uuid";
 
-// import app, { server } from "./app";
-// import redis from "redis";
+const userConnections: { [key: string]: WebSocket } = {};
 
-// const wss = new WebSocket.Server({ server });
+export function setupWebSocketServer(server: any) {
+  const wss = new WebSocket.Server({ server });
 
-// const redisClient = redis.createClient();
+  wss.on("connection", (ws: WebSocket) => {
+    const connectionId = uuid();
+    // @ts-ignore
+    ws.id = connectionId;
+    console.log("New connection", connectionId);
 
-// redisClient.on("connect", () => {
-//   console.log("Redis client connected");
-// });
+    ws.on("message", (data: WebSocket.Data) => {
+      try {
+        const dataString = data.toString();
+        const parsedData = JSON.parse(dataString);
 
-// redisClient.on("error", (err) => {
-//   console.error("Redis error: ", err);
-// });
+        const { userId, type, message, receiver } = parsedData;
 
-// const userConnections = new Map();
+        if (type === "connect") {
+          userConnections[userId] = ws;
+          console.log(`User ${userId} connected`);
+        } else if (type === "message") {
+          console.log(`Message from ${userId} to ${receiver}: ${message}`);
 
-// wss.on("connection", (ws) => {
-//   console.log("New client connected");
+          const receiverSocket = userConnections[receiver];
+          if (receiverSocket) {
+            receiverSocket.send(JSON.stringify({ userId, message }));
+          }
+        }
+      } catch (error) {
+        console.error("Error handling WebSocket message:", error);
+      }
+    });
 
-//   ws.on("message", (message: any) => {
-//     const messageData = JSON.parse(message);
-//     const { recipient, sender, msg } = messageData;
+    ws.on("close", () => {
+      for (const userId in userConnections) {
+        if (userConnections[userId] === ws) {
+          delete userConnections[userId];
+          console.log(`User ${userId} disconnected`);
+          break;
+        }
+      }
+    });
 
-//     if (recipient) {
-//       const recipientWs = userConnections.get(recipient);
-//       if (recipientWs && recipientWs.readyState === WebSocket.OPEN) {
-//         recipientWs.send(JSON.stringify({ sender, message: msg }));
-//       }
-//     }
-//   });
+    ws.on("error", (error) => {
+      console.error("WebSocket error:", error);
+    });
+  });
 
-//   ws.on("close", () => {
-//     console.log("Client has disconnected");
-//     userConnections.forEach((value, key) => {
-//       if (value === ws) {
-//         userConnections.delete(key);
-//       }
-//     });
-//   });
-
-//   ws.on("error", (error) => {
-//     console.error("WebSocket error: ", error);
-//   });
-// });
-
-// // API Endpoint to set a user as online
-// app.post("/set-online", (req, res) => {
-//   const { userId, username } = req.body;
-
-//   // Set user as online in Redis
-//   //@ts-ignore
-//   redisClient.hSet("onlineUsers", userId, username, (err) => {
-//     if (err) {
-//       res.status(500).send("Error setting user online");
-//     } else {
-//       res.send("User set online");
-//     }
-//   });
-// });
-
-// // API Endpoint to get online users
-// app.get("/online-users", (req, res) => {
-//   //@ts-ignore
-//   redisClient.hgetall("onlineUsers", (err, onlineUsers) => {
-//     if (err) {
-//       res.status(500).send("Error getting online users");
-//     } else {
-//       res.json(onlineUsers);
-//     }
-//   });
-// });
-
-// const PORT = process.env.PORT || 3000;
-
-// server.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}`);
-// });
+  return wss;
+}
