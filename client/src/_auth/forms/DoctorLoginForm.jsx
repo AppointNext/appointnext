@@ -5,7 +5,7 @@ import Cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../store/userSlice";
-import Logo from "../../components/utils/Logo";
+import Logo from "../../components/utils/LogoText";
 const DoctorLoginForm = () => {
   const [position, setPosition] = useState({ latitude: null, longitude: null });
   const navigate = useNavigate();

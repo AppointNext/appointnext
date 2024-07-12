@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Logo from "../utils/Logo";
+import Logo from "../utils/LogoText";
+
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ const Navbar = () => {
       >
         <Logo />
         <div>
+
           <ul className=" hidden md:flex md:flex-row md:text-[17px] md:gap-4">
             <li className="hover:border-b-2  border-[#003cd8] cursor-pointer">
               About

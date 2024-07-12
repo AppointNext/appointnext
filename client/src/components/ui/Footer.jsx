@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../utils/Logo";
+import Logo from "../utils/LogoText";
 import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
@@ -16,6 +16,7 @@ const Footer = () => {
           <FaFacebookF className="text-blue-900" />
           <FaTwitter className="text-blue-900" />
           <FaInstagram className="text-blue-900" />
+
         </div>
       </div>
       <div className="md:w-1/2 md:flex-row md:flex md:gap-4 md:justify-between md:px-10 gap-8 flex items-start justify-evenly">

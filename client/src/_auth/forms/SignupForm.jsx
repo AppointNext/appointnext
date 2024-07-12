@@ -66,12 +66,11 @@ const SignupForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     // formData.latitude = position.latitude;
     // formData.longitude = position.longitude;
     const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
     await axios
-      .post(`${BACKEND_BASE_URL}/api/auth/register`, formData)
+      .post(`${BACKEND_BASE_URL}/api/user/auth/register`, formData)
       .then((res) => {
         console.log(res.data);
         const { username, email } = res.data;
@@ -89,8 +88,6 @@ const SignupForm = () => {
       .catch((err) => {
         console.log(err);
       });
-
-    console.log(formData);
   };
 
   return (
