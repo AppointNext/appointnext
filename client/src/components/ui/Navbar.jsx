@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../utils/LogoText";
 
+
 const Navbar = () => {
   const navigate = useNavigate();
   const [isAnimating, setIsAnimating] = useState(false);
@@ -35,13 +36,14 @@ const Navbar = () => {
   return (
     <>
       <div
-        className="flex flex-row items-center justify-between md:py-8 xl:py-8 2xl:py-8 py-4 px-4 md:gap-4
+        className="flex flex-row items-center justify-between md:py-4 xl:py-4 2xl:py-4 py-4 px-4 md:gap-4
       "
       >
         <Logo />
         <div>
-          <ul className=" hidden md:flex md:flex-row md:text-[15px] md:gap-4">
-            <li className="hover:border-b-2 border-[#003cd8] cursor-pointer">
+
+          <ul className=" hidden md:flex md:flex-row md:text-[17px] md:gap-4">
+            <li className="hover:border-b-2  border-[#003cd8] cursor-pointer">
               About
             </li>
             <li className="hover:border-b-2 border-[#003cd8] cursor-pointer">
@@ -63,16 +65,16 @@ const Navbar = () => {
             type="button"
             className={`border-[#003CD8] border-2 md:px-2 text-[#003CD8] rounded-2xl md:py-2 hover:shadow-2xl active:translate-y-2 transition-all ${
               isAnimating ? "active:delay-75" : ""
-            } md:text-[12px] text-[10px] px-4 py-1`}
+            } md:text-[17px] text-[12px] px-4 py-1`}
             onClick={handleSignInClick}
           >
-            Sign In
+            Log In
           </button>
           <button
             type="button"
             className={`border-[#003CD8] border-2 md:px-2 text-[#003CD8] rounded-2xl md:py-2 hover:shadow-2xl active:translate-y-2 transition-all ${
               isAnimating ? "active:delay-75" : ""
-            } md:text-[12px] text-[10px] px-4 py-1`}
+            } md:text-[17px] text-[12px] px-4 py-1`}
             onClick={handleSignUpClick}
           >
             Sign Up
