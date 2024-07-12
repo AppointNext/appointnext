@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import WebSocket from "ws";
 import { Redis } from "@upstash/redis";
 import bodyParser from "body-parser";
+import { v4 as uuid } from "uuid";
 
 dotenv.config();
 
@@ -27,7 +28,8 @@ const app = express();
 export const server = http.createServer(app);
 
 app.use(express.json());
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+// app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // User routes
@@ -43,29 +45,58 @@ const redisClient = new Redis({
   token: process.env.UPSTASH_REDIS_TOKEN,
 });
 
-const userConnections = new Map();
+const userConnections: { [key: string]: WebSocket } = {};
 
-wss.on("connection", (ws) => {
-  console.log("New client connected");
+wss.on("connection", (ws: WebSocket) => {
+  // Assign a unique identifier to each connection
+  const connectionId = uuid();
+  // @ts-ignore
+  ws.id = connectionId; // Assuming you want to track the connection ID
+  console.log("New connection", connectionId);
 
-  ws.on("message", (message: any) => {
-    const messageData = JSON.parse(message);
-    const { sender, text } = messageData;
+  ws.on("message", (data: any) => {
+    const dataString = data.toString();
 
-    // Broadcast message to all connected clients
-    wss.clients.forEach((client) => {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(JSON.stringify({ sender, text }));
+    let parsedData;
+    try {
+      parsedData = JSON.parse(dataString);
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return;
+    }
+
+    const { userId, type, message, receiver } = parsedData;
+
+    // Handle the connection event
+    if (type === "connect") {
+      userConnections[userId] = ws;
+      console.log(`User ${userId} connected`);
+    }
+
+    // Handle the message event
+    else if (type === "message") {
+      console.log(`Message from ${userId} to ${receiver}: ${message}`);
+
+      const receiverSocket = userConnections[receiver];
+      if (receiverSocket) {
+        receiverSocket.send(JSON.stringify({ userId, message }));
       }
-    });
+    }
   });
 
   ws.on("close", () => {
-    console.log("Client has disconnected");
+    // Find and remove the closed connection
+    for (const userId in userConnections) {
+      if (userConnections[userId] === ws) {
+        delete userConnections[userId];
+        console.log(`User ${userId} disconnected`);
+        break;
+      }
+    }
   });
 
   ws.on("error", (error) => {
-    console.error("WebSocket error: ", error);
+    console.log("Error with ws", error);
   });
 });
 
