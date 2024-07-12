@@ -1,5 +1,6 @@
 import WebSocket from "ws";
 import { v4 as uuid } from "uuid";
+import Message from "./message/models/messageModel";
 
 const userConnections: { [key: string]: WebSocket } = {};
 
@@ -29,6 +30,11 @@ export function setupWebSocketServer(server: any) {
           if (receiverSocket) {
             receiverSocket.send(JSON.stringify({ userId, message }));
           }
+          const newMessage = new Message({
+            sender: userId,
+            receiver: receiver,
+            message: message,
+          });
         }
       } catch (error) {
         console.error("Error handling WebSocket message:", error);

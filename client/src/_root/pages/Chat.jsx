@@ -1,12 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import Sidebar from "../../components/ui/Sidebar";
+import DoctorSidebar from "../../components/ui/DoctorSidebar";
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [doctors, setDoctors] = useState([]);
+  const [selectedDoctor, setSelectedDoctor] = useState(null);
   let ws = useRef(null);
 
   useEffect(() => {
+    // Fetch doctors from your backend
+    fetchDoctors();
+
     // Connect to WebSocket server
     ws.current = new WebSocket("ws://localhost:3000");
 
@@ -22,21 +28,39 @@ const Chat = () => {
     };
   }, []);
 
+  const fetchDoctors = async () => {
+    // Replace with your actual API call
+    const response = await fetch("/api/doctors");
+    const data = await response.json();
+    setDoctors(data);
+  };
+
   const handleSendMessage = () => {
-    if (input.trim() !== "") {
-      const messageData = { text: input, sender: "You" };
+    if (input.trim() !== "" && selectedDoctor) {
+      const messageData = {
+        text: input,
+        sender: "You",
+        receiver: selectedDoctor.id,
+      };
       setMessages([...messages, messageData]);
       ws.current.send(JSON.stringify(messageData));
       setInput("");
     }
   };
 
+  const handleSelectDoctor = (doctor) => {
+    setSelectedDoctor(doctor);
+    setMessages([]); // Clear messages when selecting a new doctor
+  };
+
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row h-screen">
       <Sidebar showIconsOnly={true} />
-      <div className="flex flex-col h-screen">
+      <DoctorSidebar doctors={doctors} onSelectDoctor={handleSelectDoctor} />
+      <div className="flex flex-col flex-1">
         <header className="bg-blue-500 text-white p-4 flex items-center justify-between">
           <h1 className="text-lg font-bold">Chat App</h1>
+          {selectedDoctor && <span>Chatting with {selectedDoctor.name}</span>}
         </header>
 
         <div className="flex-1 p-4 overflow-y-auto">
@@ -67,10 +91,12 @@ const Chat = () => {
               placeholder="Type a message"
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              disabled={!selectedDoctor}
             />
             <button
               className="bg-blue-500 text-white p-2 rounded-r-lg hover:bg-blue-600"
               onClick={handleSendMessage}
+              disabled={!selectedDoctor}
             >
               Send
             </button>

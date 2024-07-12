@@ -80,7 +80,7 @@ const Sidebar = ({ showIconsOnly }) => {
               <IoMenuSharp />
             </IconButton>
           </Hidden>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" sx={{ flexGrow: 1, marginLeft: 2 }}>
             Dashboard
           </Typography>
           <IconButton color="inherit">
@@ -112,7 +112,7 @@ const Sidebar = ({ showIconsOnly }) => {
             onClick={!isLargeScreen ? toggleDrawer : undefined}
             onKeyDown={!isLargeScreen ? toggleDrawer : undefined}
           >
-            <List>
+            <List sx={{ width: 60 }}>
               <ListItem>{showIconsOnly ? <Logo /> : <LogoText />}</ListItem>
               <ListItem button component={Link} to="/overview">
                 <ListItemIcon>
