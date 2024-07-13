@@ -3,8 +3,8 @@ import { login, logout, register } from "../controllers/auth.controller";
 
 const authRoutes = Router();
 
-authRoutes.post("/login", login);
-authRoutes.post("/register", register);
-authRoutes.post("/logout", logout);
+authRoutes.post("/auth/login", login);
+authRoutes.post("/auth/register", register);
+authRoutes.post("/auth/logout", logout);
 
 export default authRoutes;

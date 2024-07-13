@@ -29,6 +29,7 @@ import { IoMenuSharp } from "react-icons/io5";
 import { FaBell } from "react-icons/fa";
 import Logo from "../utils/Logo";
 import LogoText from "../utils/LogoText";
+import { BACKEND_URL } from "../../App";
 
 const Sidebar = ({ showIconsOnly }) => {
   const [, , removeCookie] = useCookies(["refreshToken", "accessToken"]);
@@ -51,7 +52,7 @@ const Sidebar = ({ showIconsOnly }) => {
   };
 
   const handleLogout = async () => {
-    const response = await axios.post("http://127.0.0.1:8000/api/logout", {
+    const response = await axios.post(BACKEND_URL, {
       username,
     });
     if (response.data.success === true) {

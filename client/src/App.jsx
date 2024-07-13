@@ -22,6 +22,8 @@ import ProtectedDoctorRoute from "./utils/ProtectedRoute";
 import NotFound from "./components/ui/NotFound/NotFound"; // Import the NotFound component
 import Chat from "./_root/pages/Chat";
 
+export const BACKEND_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
 function App() {
   const location = useLocation();
 

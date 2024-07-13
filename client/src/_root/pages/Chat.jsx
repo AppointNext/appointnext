@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Sidebar from "../../components/ui/Sidebar";
 import DoctorSidebar from "../../components/ui/DoctorSidebar";
+import axios from "axios";
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
@@ -10,11 +11,13 @@ const Chat = () => {
   let ws = useRef(null);
 
   useEffect(() => {
+    const WS_BACKEND_URL =
+      "ws:" + import.meta.env.VITE_BACKEND_BASE_URL.split("http")[1];
     // Fetch doctors from your backend
     fetchDoctors();
 
     // Connect to WebSocket server
-    ws.current = new WebSocket("ws://localhost:3000");
+    ws.current = new WebSocket(WS_BACKEND_URL);
 
     // Handle incoming messages
     ws.current.onmessage = (event) => {
@@ -30,7 +33,7 @@ const Chat = () => {
 
   const fetchDoctors = async () => {
     // Replace with your actual API call
-    const response = await fetch("/api/doctors");
+    const response = await axios.get();
     const data = await response.json();
     setDoctors(data);
   };
