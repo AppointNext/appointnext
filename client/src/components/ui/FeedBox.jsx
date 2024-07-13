@@ -2,9 +2,9 @@ import React from "react";
 
 const FeedBox = ({ user }) => {
   return (
-    <div className="border-[#DDDDDD] border-2 rounded-md w-screen mr-4">
+    <div className="border-[#DDDDDD] border-2 rounded-md w-screen">
       <div className="flex flex-row gap-2 items-center justify-between px-2 py-2">
-        <div className="flex flex-row items-center gap-5">
+        <div className="flex flex-row items-center gap-2">
           <div className="w-10">
             <img src="./TestUserImg.png" alt="" />
           </div>
@@ -14,8 +14,8 @@ const FeedBox = ({ user }) => {
           </div>
         </div>
         <div className="flex flex-row items-center">
-          <p className=" text-[12px] ">4.5</p>
-          <img className="h-5" src="./star.png" alt="" />
+          <p className=" text-[12px] ">2.5</p>
+          <img src="./star.png" alt="" />
         </div>
       </div>
       <div className=" text-[12px] px-2 pb-4">
