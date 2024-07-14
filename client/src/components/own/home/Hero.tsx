@@ -25,7 +25,7 @@ const bannerOptions = [
 const Hero = () => {
   return (
     <div>
-      <div className="flex flex-col-reverse md:flex-row px-16 gap-4 items-center justify-between md:gap-10 lg:my-24">
+      <div className="flex flex-col-reverse md:flex-row mx-10 lg:px-16 gap-4 items-center justify-between md:gap-10 lg:my-24">
         <div className="flex flex-col gap-2 items-start justify-center md:gap-4 lg:w-[600px]">
           <h1 className="text-sm font-bold md:text-lg lg:text-3xl">
             Effortlessly Streamline Appointment Management with Intelligent
@@ -53,7 +53,7 @@ const Hero = () => {
         </div>
       </div>
       <div>
-        <div className="flex flex-row md:flex-row gap-4 md:gap-10 items-center justify-between  rounded-xl shadow-md mt-10 mx-10 px-16 py-4">
+        <div className="flex flex-row md:flex-row gap-4 md:gap-10 items-center justify-between  rounded-xl shadow-md mt-10 mx-6 lg:px-16 py-4 px-4">
           {bannerOptions.map((option, index) => (
             <div
               key={index}
@@ -69,7 +69,9 @@ const Hero = () => {
                 />
               </div>
               <div>
-                <h1 className="text-2xl font-bold">{option.number}</h1>
+                <h1 className="text-xl md:text-2xl font-bold">
+                  {option.number}
+                </h1>
                 <p className="text-xs">{option.content}</p>
               </div>
             </div>

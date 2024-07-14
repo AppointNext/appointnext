@@ -7,7 +7,7 @@ const Features = [
 
 const FeatureSection = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center lg:my-52 gap-10 mx-4">
+    <div className="flex flex-col md:flex-row items-center justify-center lg:my-52 gap-10 mx-10 mt-4">
       <div>
         <img src="/assets/home/feature.svg" alt="Feature" />
       </div>
