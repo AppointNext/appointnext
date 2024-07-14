@@ -104,43 +104,50 @@ const Navbar = () => {
     >
       <div className="mb-2">
         <Link href="/">
-          <LogoText />
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ duration: 0.2 }}
+          >
+            <LogoText />
+          </motion.div>
         </Link>
       </div>
       <div>
         <ul className="hidden sm:flex flex-row gap-4 mb-4">
           {options.map((option) => (
-            <li
+            <motion.li
               key={option.name}
-              className="text-sm md:text-md xl:text-2xl 2xl:text-3xl relative transition-all duration-200"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="text-sm md:text-md xl:text-2xl 2xl:text-3xl relative transition-all duration-200 border-b-2 border-transparent p-1"
             >
               <Link
                 href={option.path}
-                className=" hover:underline text-sm lg:text-lg xl:text-lg 2xl:text-2xl relative hover:text-[${BASE_COLOR}]"
+                className="hover:underline text-sm lg:text-lg xl:text-lg 2xl:text-2xl relative hover:text-[${BASE_COLOR}] text-gray-500"
               >
                 {option.name}
               </Link>
-              {/* Tailwind CSS for hover underline effect */}
-              <style jsx>{`
-                a:hover {
-                  @apply border-b-2 border-[${BASE_COLOR}] p-2;
-                }
-              `}</style>
-            </li>
+            </motion.li>
           ))}
         </ul>
       </div>
       <div>
         <div className="hidden md:flex flex-row gap-2 items-center mb-2">
           {authButtons.map((button, index) => (
-            <Button
+            <motion.div
               key={index}
-              className={`bg-transparent text-black hover:text-[#003CD8] rounded-2xl hover:border-[1px] hover:border-[${BASE_COLOR}]
-                sm:text-sm md:text-md lg:text-xl 2xl:text-2xl w-20 lg:w-24 hover:shadow-md  transition-all duration-200 hvoer:shadow-[${BASE_COLOR}] hover:shadow-[#003CD8] xl:w-28 2xl:w-32
-              `}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
             >
-              {button.name}
-            </Button>
+              <Button
+                className={`bg-transparent text-black hover:text-[${BASE_COLOR}] rounded-2xl border-[1px] border-[${BASE_COLOR}] sm:text-sm md:text-md lg:text-xl 2xl:text-2xl w-20 lg:w-24 xl:w-28 2xl:w-32`}
+              >
+                {button.name}
+              </Button>
+            </motion.div>
           ))}
         </div>
         <div>
