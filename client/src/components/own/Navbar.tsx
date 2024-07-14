@@ -87,7 +87,7 @@ const Navbar = () => {
         {authButtons.map((button, index) => (
           <Button
             key={index}
-            className={`bg-transparent text-black hover:text-[${BASE_COLOR}] rounded-2xl border-[1px] border-[${BASE_COLOR}]`}
+            className={`bg-transparent text-black hover:text-[#003CD8] rounded-2xl hover:border-[1px] hover:border-[#003CD8]`}
           >
             {button.name}
           </Button>
@@ -98,8 +98,8 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className={`fixed w-full flex flex-row items-center justify-between py-2 px-4 transition-all duration-200 ${
-        visible ? "top-0" : "-top-16"
+      className={`fixed w-full flex flex-row items-center justify-between py-2 px-4 transition-all duration-200 md:py-2 bg-white ${
+        visible ? "top-0" : "-top-20"
       }`}
     >
       <div className="mb-2">
@@ -114,18 +114,20 @@ const Navbar = () => {
         </Link>
       </div>
       <div>
-        <ul className="hidden sm:flex flex-row gap-4 mb-4">
+        <ul className="hidden sm:flex flex-row gap-4 mb-1">
           {options.map((option) => (
             <motion.li
               key={option.name}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-              className="text-sm md:text-md xl:text-2xl 2xl:text-3xl relative transition-all duration-200 border-b-2 border-transparent p-1"
+              transition={{ duration: 0.05 }}
+              className="text-sm md:text-md xl:text-2xl 2xl:text-3xl relative transition-all duration-200 border-transparent p-1 hover:text-[#003CD8]  text-[#003CD8]"
             >
               <Link
                 href={option.path}
-                className="hover:underline text-sm lg:text-lg xl:text-lg 2xl:text-2xl relative hover:text-[${BASE_COLOR}] text-gray-500"
+                className=" text-sm lg:text-lg xl:text-lg 2xl:text-2xl relative hover:text-[${BASE_COLOR}] 
+                hover:border-[#003CD8]
+                hover:border-b-2 text-gray-500 hover:text-[#003CD8]"
               >
                 {option.name}
               </Link>
@@ -143,7 +145,7 @@ const Navbar = () => {
               transition={{ duration: 0.2 }}
             >
               <Button
-                className={`bg-transparent text-black hover:text-[${BASE_COLOR}] rounded-2xl border-[1px] border-[${BASE_COLOR}] sm:text-sm md:text-md lg:text-xl 2xl:text-2xl w-20 lg:w-24 xl:w-28 2xl:w-32`}
+                className={`bg-transparent text-black hover:text-[#003CD8] rounded-2xl hover:border-[1px] hover:border-[#003CD8] sm:text-sm md:text-md lg:text-xl 2xl:text-2xl w-20 lg:w-24 xl:w-28 2xl:w-32`}
               >
                 {button.name}
               </Button>
