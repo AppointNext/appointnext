@@ -68,6 +68,8 @@ const LoginForm = () => {
         if (res.data.accessToken && res.data.refreshToken) {
           Cookie.set("refreshToken", res.data.refreshToken);
           Cookie.set("accessToken", res.data.accessToken);
+          localStorage.setItem("accessToken", res.data.accessToken);
+          localStorage.setItem("refreshToken", res.data.refreshToken);
           navigate("/overview");
         }
       })

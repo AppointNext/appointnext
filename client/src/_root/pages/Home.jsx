@@ -5,6 +5,7 @@ import Feature from "../../components/ui/Feature";
 import Feedback from "../../components/ui/Feedback";
 import SubscribeLetter from "../../components/ui/SubscribeLetter";
 import Footer from "../../components/ui/Footer";
+import Benefit from "../../components/ui/Benefit";
 
 const Home = () => {
   const [location, setLocation] = useState(null);
@@ -36,6 +37,7 @@ const Home = () => {
       <Navbar />
       <Hero />
       <Feature />
+      <Benefit />
       <Feedback />
       <SubscribeLetter />
       <Footer />

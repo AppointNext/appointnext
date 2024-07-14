@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import Sidebar from "../../components/ui/Sidebar";
 import DoctorSidebar from "../../components/ui/DoctorSidebar";
 import axios from "axios";
+import { BACKEND_URL } from "../../App";
+import Cookies from "js-cookie";
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
@@ -33,7 +35,11 @@ const Chat = () => {
 
   const fetchDoctors = async () => {
     // Replace with your actual API call
-    const response = await axios.get();
+    const response = await axios.get(`${BACKEND_URL}/api/doctors`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    });
     const data = await response.json();
     setDoctors(data);
   };

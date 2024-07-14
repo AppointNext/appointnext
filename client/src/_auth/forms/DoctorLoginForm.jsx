@@ -52,6 +52,7 @@ const DoctorLoginForm = () => {
         if (res.data.access_token && res.data.refresh_token) {
           Cookie.set("refreshToken", res.data.refresh_token);
           Cookie.set("accessToken", res.data.access_token);
+          localStorage.setItem("isDoctor", true);
           navigate("/doctor/doctorOverview");
         }
       })
