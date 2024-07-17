@@ -1,17 +1,20 @@
 import Image from "next/image";
 import LogoSVG from "@/assets/logo.svg";
+import Link from "next/link";
 
 const LogoText = () => {
   return (
-    <div className="flex flex-row items-center gap-2">
+    <div className="flex flex-row items-center gap-2  p-4">
       <div>
-        <Image
-          src="/assets/home/logo.svg"
-          alt="Logo"
-          width={20}
-          height={20}
-          className=" lg:h-14"
-        />
+        <Link href={"/"}>
+          <Image
+            src="/assets/Logo.png"
+            alt="Logo"
+            width={34}
+            height={34}
+            className=" lg:h-12 lg:w-12"
+          />
+        </Link>
       </div>
       <div>
         <h1 className="text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-semibold">

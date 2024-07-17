@@ -1,8 +1,11 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { BASE_COLOR } from "@/utils/constants";
 import doctorHero from "/assets/home/hero.svg";
 import consultantHero from "/assets/home/consultant.svg";
 import specialityHero from "/assets/home/specialitiesHero.svg";
+import { motion } from "framer-motion";
 
 const bannerOptions = [
   {
@@ -25,7 +28,7 @@ const bannerOptions = [
 const Hero = () => {
   return (
     <div>
-      <div className="flex flex-col-reverse md:flex-row mx-10 lg:px-16 gap-4 items-center justify-between md:gap-10 lg:my-24">
+      <div className="flex flex-col-reverse md:flex-row mx-10 mt-16 lg:px-16 gap-4 items-center justify-between md:gap-10 lg:my-24">
         <div className="flex flex-col gap-2 items-start justify-center md:gap-4 lg:w-[600px]">
           <h1 className="text-sm font-bold md:text-lg lg:text-3xl">
             Effortlessly Streamline Appointment Management with Intelligent
@@ -36,11 +39,14 @@ const Hero = () => {
             experience, top clinics and hospitals trust AppointNext for your
             next appointment.
           </p>
-          <Button
-            className={`bg-[#003CD8] text-white rounded-xl hover:shadow-lg hover:shadow-[#003CD8] hover:bg-[#003CD8] transition-all duration-200 active:bg-[#003CD8] active:shadow-lg active:shadow-[#003CD8] active:translate-y-4`}
+          <motion.button
+            whileHover={{ scale: 1.25 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.5 }}
+            className={`bg-[${BASE_COLOR}] text-white rounded-2xl px-4 py-2 hover:bg-[#003CD8]`}
           >
             Get Started
-          </Button>
+          </motion.button>
         </div>
         <div className="flex items-center justify-center">
           <img
@@ -53,7 +59,7 @@ const Hero = () => {
         </div>
       </div>
       <div>
-        <div className="flex flex-row md:flex-row gap-4 md:gap-10 items-center justify-between  rounded-xl shadow-md mt-10 mx-6 lg:px-16 py-4 px-4">
+        <div className="flex flex-row md:flex-row gap-4 md:gap-10 items-center justify-between  rounded-xl shadow-md mt-10 mx-6 lg:px-16 py-4 px-4 lg:py-10 border-2 border-gray-200">
           {bannerOptions.map((option, index) => (
             <div
               key={index}

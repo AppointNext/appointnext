@@ -98,7 +98,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className={`fixed w-full flex flex-row items-center justify-between py-2 px-4 transition-all duration-200 md:py-2 bg-white ${
+      className={`fixed w-full flex flex-row items-center justify-between py-2 px-4 transition-all duration-200 md:py-2 bg-white z-50 shadow-sm hover:shadow-md ${
         visible ? "top-0" : "-top-20"
       }`}
     >

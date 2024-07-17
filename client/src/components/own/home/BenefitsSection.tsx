@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 interface BenefitContent {
   title: string;
   description: string;
@@ -38,35 +42,48 @@ const BenefitContent: BenefitContent[] = [
 
 const BenefitsSection = () => {
   return (
-    <div className="flex flex-col items-center justify-center gap-10 md:mt-10">
-      <div className="flex flex-col gap-4">
-        <h1 className="font-bold text-lg md:text-xl">
+    <div className="flex flex-col items-center justify-center gap-14 py-10 md:py-10 lg:py-14 bg-[#F8F8F8]">
+      <div className="flex flex-col gap-4 items-center">
+        <h1 className="font-bold text-lg md:text-xl lg:text-3xl">
           Benefits of Using AppointNext
         </h1>
         <p className="text-xs">Explore the benefits for better engagement</p>
       </div>
-      <div className="flex flex-wrap flex-row gap-20 md:gap-10 items-center justify-center">
+      <motion.div
+        className="flex flex-wrap flex-row gap-12 md:gap-10 items-center justify-center lg:gap-16"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         {BenefitContent.map((content, index) => (
-          <div
+          <motion.div
             key={index}
-            className="flex flex-col gap-4 items-center justify-center w-52 lg:w-44 border-2 border-gray-200 rounded-xl px-4 py-8 max-h-[350px] min-h-[350px]
-            hover:shadow-lg  hover:border-[#003CD8] transition-all duration-200"
+            className="flex flex-col gap-4 items-center justify-center w-52 lg:w-72 border-2 border-gray-200 rounded-xl px-4 py-8 max-h-[350px] min-h-[350px] hover:shadow-lg hover:border-[#003CD8] "
+            whileHover={{ scale: 1.2 }}
+            transition={{ duration: 1 }}
           >
-            <div>
-              <img
-                src="/assets/home/benefit.svg"
-                alt="Check"
-                height={100}
-                width={100}
-              />
+            <div
+              className="lg:p-10 flex items-center justify-center flex-col gap-4
+            "
+            >
+              <div className="">
+                <img
+                  src="/assets/home/benefit.svg"
+                  alt="Check"
+                  height={100}
+                  width={100}
+                />
+              </div>
+              <div>
+                <h1 className="text-lg font-bold md:text-xl">
+                  {content.title}
+                </h1>
+                <p className="text-xs">{content.description}</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-lg font-bold md:text-xl">{content.title}</h1>
-              <p className="text-xs">{content.description}</p>
-            </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };
