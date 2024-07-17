@@ -1,3 +1,4 @@
+"use client";
 import Footer from "@/components/own/Footer";
 import BenefitsSection from "@/components/own/home/BenefitsSection";
 import FeatureSection from "@/components/own/home/FeatureSection";
@@ -8,7 +9,7 @@ import ScrollAnimation from "@/components/own/ScrollAnimation";
 
 export default function Home() {
   return (
-    <div className="relative">
+    <div className="">
       <ScrollAnimation>
         <Hero />
       </ScrollAnimation>
@@ -22,8 +23,8 @@ export default function Home() {
         <TestimonalSection />
       </ScrollAnimation>
       <ScrollAnimation>
-        <div className="">
-          <div>
+        <div className="relative">
+          <div className="flex items-center justify-center">
             <NewsLetter />
           </div>
           <div>

@@ -1,3 +1,4 @@
+"use client";
 import { FeedbackCardCarousel } from "./FeedbackCardCarousel";
 
 const TestimonalSection = () => {

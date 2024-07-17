@@ -28,7 +28,7 @@ const bannerOptions = [
 const Hero = () => {
   return (
     <div>
-      <div className="flex flex-col-reverse md:flex-row mx-10 mt-16 lg:px-16 gap-4 items-center justify-between md:gap-10 lg:my-24">
+      <div className="flex flex-col-reverse md:flex-row mx-10 mt-16 lg:px-16 gap-4 items-center justify-between md:gap-10 lg:my-24 py-20 md:py-0">
         <div className="flex flex-col gap-2 items-start justify-center md:gap-4 lg:w-[600px]">
           <h1 className="text-sm font-bold md:text-lg lg:text-3xl">
             Effortlessly Streamline Appointment Management with Intelligent
@@ -43,7 +43,7 @@ const Hero = () => {
             whileHover={{ scale: 1.25 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.5 }}
-            className={`bg-[${BASE_COLOR}] text-white rounded-2xl px-4 py-2 hover:bg-[#003CD8]`}
+            className={`relative bg-[${BASE_COLOR}] text-white rounded-2xl px-4 py-2 lg:px-10 lg:py-4 hover:bg-[#003CD8] before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:rounded-2xl before:z-[-1] before:opacity-0 before:transition-opacity before:duration-500 before:bg-gradient-to-r before:from-blue-500 before:to-purple-500 before:blur-lg hover:before:opacity-100`}
           >
             Get Started
           </motion.button>
