@@ -17,13 +17,13 @@ export default function Layout({
         <div className="flex items-center justify-center h-full w-full md:w-1/2 overflow-auto ">
           {children}
         </div>
-        <div className="hidden h-full md:flex md:w-1/2 justify-center items-center bg-blue-400 z-50">
+        <div className="hidden h-full md:flex md:w-1/2 justify-center items-center bg-primary z-50">
           <Image
             src={"/assets/auth/login.svg"}
             alt="login svg"
             width={200}
             height={100}
-            className=" bg-cover h-full w-full p-20"
+            className=" bg-cover h-full w-full p-20 lg:p-40"
           ></Image>
         </div>
       </div>

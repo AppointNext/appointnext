@@ -67,7 +67,7 @@ export default function SignUp() {
         <Loader />
       ) : (
         <>
-          <div className="overflow-scroll flex flex-col gap-4">
+          <div className="overflow-scroll flex flex-col gap-4 w-full">
             <h2 className="text-2xl font-bold mb-3">Sign Up</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-col gap-2 ">
@@ -226,12 +226,13 @@ export default function SignUp() {
                   </LabelInputContainer>
                 </div>
               </div>
-              <button
+              <motion.button
                 type="submit"
                 className="w-full bg-primary text-white p-2 rounded hover:bg-blue-600 mt-4"
+                whileHover={{ scale: 1.25 }}
               >
                 Submit
-              </button>
+              </motion.button>
             </form>
             <p>
               Already have an Account
