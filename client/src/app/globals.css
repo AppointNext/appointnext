@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Add this to your global CSS or component-specific CSS file */
+input {
+  padding-top: 1.5rem; /* Adjust based on label height */
+  padding-bottom: 0.5rem; /* Adjust based on your design */
+}
+
+label {
+  top: 0.5rem; /* Adjust based on your design */
+  left: 0.75rem; /* Adjust based on your design */
+  font-size: 0.875rem; /* Adjust based on your design */
+  color: #555; /* Label color */
+  pointer-events: none; /* Ensure label doesn't block input clicks */
+}

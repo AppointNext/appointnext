@@ -5,11 +5,15 @@ import FeatureSection from "@/components/own/home/FeatureSection";
 import Hero from "@/components/own/home/Hero";
 import NewsLetter from "@/components/own/home/NewsLetter";
 import TestimonalSection from "@/components/own/home/TestimonalSection";
+import Navbar from "@/components/own/Navbar";
 import ScrollAnimation from "@/components/own/ScrollAnimation";
+
+export const backendUrl = process.env.BACKEND_BASE_URL;
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="flex flex-col">
+      <Navbar />
       <ScrollAnimation>
         <Hero />
       </ScrollAnimation>
