@@ -14,7 +14,7 @@ export default function Layout({
     <div className="flex flex-col w-full h-full gap-2">
       <AuthNav />
       <div className="flex flex-col md:flex-row w-full h-full items-center justify-center">
-        <div className="flex items-center justify-center h-full w-full md:w-1/2 overflow-scroll ">
+        <div className="flex items-center justify-center h-full w-full md:w-1/2 overflow-auto ">
           {children}
         </div>
         <div className="hidden h-full md:flex md:w-1/2 justify-center items-center bg-blue-400 z-50">
@@ -23,6 +23,7 @@ export default function Layout({
             alt="login svg"
             width={200}
             height={100}
+            className=" bg-cover h-full w-full p-20"
           ></Image>
         </div>
       </div>

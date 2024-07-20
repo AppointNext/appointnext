@@ -67,177 +67,179 @@ export default function SignUp() {
         <Loader />
       ) : (
         <>
-          <h2 className="text-2xl font-bold mb-6">Sign Up</h2>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex flex-col gap-2">
-              <LabelInputContainer>
-                <Label htmlFor="name" className="pl-2">
-                  Name
-                </Label>
-                <Input
-                  className="rounded-lg"
-                  id="name"
-                  placeholder="John Doe"
-                  type="text"
-                  {...register("name")}
-                />
-                {errors.name && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {getErrorMessage(errors.name)}
-                  </p>
-                )}
-              </LabelInputContainer>
-              <LabelInputContainer>
-                <Label htmlFor="phone" className="pl-2">
-                  Phone
-                </Label>
-                <Input
-                  className="rounded-lg"
-                  id="text"
-                  placeholder="1234567890"
-                  type="text"
-                  {...register("phone")}
-                />
-                {errors.phone && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {getErrorMessage(errors.phone)}
-                  </p>
-                )}
-              </LabelInputContainer>
-              <LabelInputContainer>
-                <Label htmlFor="Email" className="pl-2">
-                  Email
-                </Label>
-                <Input
-                  className="rounded-lg"
-                  id="Email"
-                  placeholder="youremail@gmail.com"
-                  type="text"
-                  {...register("email")}
-                />
-                {errors.email && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {getErrorMessage(errors.email)}
-                  </p>
-                )}
-              </LabelInputContainer>
-              <LabelInputContainer>
-                <Label htmlFor="password" className="pl-2">
-                  Password
-                </Label>
-                <Input
-                  className="rounded-lg"
-                  id="password"
-                  placeholder="********"
-                  type="password"
-                  {...register("password")}
-                />
-                {errors.password && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {getErrorMessage(errors.password)}
-                  </p>
-                )}
-              </LabelInputContainer>
-              <LabelInputContainer>
-                <Label htmlFor="address" className="pl-2">
-                  Address
-                </Label>
-                <Input
-                  className="rounded-lg"
-                  id="address"
-                  placeholder="44 st. Appolo Hospital"
-                  type="text"
-                  {...register("address")}
-                />
-                {errors.address && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {getErrorMessage(errors.address)}
-                  </p>
-                )}
-              </LabelInputContainer>
-              <div className="flex flex-row gap-2">
+          <div className="overflow-scroll flex flex-col gap-4">
+            <h2 className="text-2xl font-bold mb-3">Sign Up</h2>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="flex flex-col gap-2 ">
                 <LabelInputContainer>
-                  <Label htmlFor="city" className="pl-2">
-                    City
+                  <Label htmlFor="name" className="pl-2">
+                    Name
                   </Label>
                   <Input
-                    id="city"
-                    placeholder="Chennai"
+                    className="rounded-lg"
+                    id="name"
+                    placeholder="John Doe"
                     type="text"
-                    {...register("city")}
+                    {...register("name")}
                   />
-                  {errors.city && (
+                  {errors.name && (
                     <p className="text-red-500 text-xs mt-1">
-                      {getErrorMessage(errors.city)}
+                      {getErrorMessage(errors.name)}
                     </p>
                   )}
                 </LabelInputContainer>
                 <LabelInputContainer>
-                  <Label htmlFor="state" className="pl-2">
-                    State
+                  <Label htmlFor="phone" className="pl-2">
+                    Phone
                   </Label>
                   <Input
-                    id="state"
-                    placeholder="Tamil Nadu"
+                    className="rounded-lg"
+                    id="text"
+                    placeholder="1234567890"
                     type="text"
-                    {...register("state")}
+                    {...register("phone")}
                   />
-                  {errors.state && (
+                  {errors.phone && (
                     <p className="text-red-500 text-xs mt-1">
-                      {getErrorMessage(errors.state)}
+                      {getErrorMessage(errors.phone)}
                     </p>
                   )}
                 </LabelInputContainer>
+                <LabelInputContainer>
+                  <Label htmlFor="Email" className="pl-2">
+                    Email
+                  </Label>
+                  <Input
+                    className="rounded-lg"
+                    id="Email"
+                    placeholder="youremail@gmail.com"
+                    type="text"
+                    {...register("email")}
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {getErrorMessage(errors.email)}
+                    </p>
+                  )}
+                </LabelInputContainer>
+                <LabelInputContainer>
+                  <Label htmlFor="password" className="pl-2">
+                    Password
+                  </Label>
+                  <Input
+                    className="rounded-lg"
+                    id="password"
+                    placeholder="********"
+                    type="password"
+                    {...register("password")}
+                  />
+                  {errors.password && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {getErrorMessage(errors.password)}
+                    </p>
+                  )}
+                </LabelInputContainer>
+                <LabelInputContainer>
+                  <Label htmlFor="address" className="pl-2">
+                    Address
+                  </Label>
+                  <Input
+                    className="rounded-lg"
+                    id="address"
+                    placeholder="44 st. Appolo Hospital"
+                    type="text"
+                    {...register("address")}
+                  />
+                  {errors.address && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {getErrorMessage(errors.address)}
+                    </p>
+                  )}
+                </LabelInputContainer>
+                <div className="flex flex-row gap-2">
+                  <LabelInputContainer>
+                    <Label htmlFor="city" className="pl-2">
+                      City
+                    </Label>
+                    <Input
+                      id="city"
+                      placeholder="Chennai"
+                      type="text"
+                      {...register("city")}
+                    />
+                    {errors.city && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {getErrorMessage(errors.city)}
+                      </p>
+                    )}
+                  </LabelInputContainer>
+                  <LabelInputContainer>
+                    <Label htmlFor="state" className="pl-2">
+                      State
+                    </Label>
+                    <Input
+                      id="state"
+                      placeholder="Tamil Nadu"
+                      type="text"
+                      {...register("state")}
+                    />
+                    {errors.state && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {getErrorMessage(errors.state)}
+                      </p>
+                    )}
+                  </LabelInputContainer>
+                </div>
+                <div className="flex flex-row gap-2">
+                  <LabelInputContainer>
+                    <Label htmlFor="pincode" className="pl-2">
+                      Pincode
+                    </Label>
+                    <Input
+                      id="pincode"
+                      placeholder="404040"
+                      type="text"
+                      {...register("pincode")}
+                    />
+                    {errors.pincode && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {getErrorMessage(errors.pincode)}
+                      </p>
+                    )}
+                  </LabelInputContainer>
+                  <LabelInputContainer>
+                    <Label htmlFor="country" className="pl-2">
+                      Country
+                    </Label>
+                    <Input
+                      id="country"
+                      placeholder="India"
+                      defaultValue={"India"}
+                      type="text"
+                      {...register("country")}
+                    />
+                    {errors.country && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {getErrorMessage(errors.country)}
+                      </p>
+                    )}
+                  </LabelInputContainer>
+                </div>
               </div>
-              <div className="flex flex-row gap-2">
-                <LabelInputContainer>
-                  <Label htmlFor="pincode" className="pl-2">
-                    Pincode
-                  </Label>
-                  <Input
-                    id="pincode"
-                    placeholder="404040"
-                    type="text"
-                    {...register("pincode")}
-                  />
-                  {errors.pincode && (
-                    <p className="text-red-500 text-xs mt-1">
-                      {getErrorMessage(errors.pincode)}
-                    </p>
-                  )}
-                </LabelInputContainer>
-                <LabelInputContainer>
-                  <Label htmlFor="country" className="pl-2">
-                    Country
-                  </Label>
-                  <Input
-                    id="country"
-                    placeholder="India"
-                    defaultValue={"India"}
-                    type="text"
-                    {...register("country")}
-                  />
-                  {errors.country && (
-                    <p className="text-red-500 text-xs mt-1">
-                      {getErrorMessage(errors.country)}
-                    </p>
-                  )}
-                </LabelInputContainer>
-              </div>
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-primary text-white p-2 rounded hover:bg-blue-600 mt-4"
-            >
-              Submit
-            </button>
-          </form>
-          <p>
-            Already have an Account
-            <Link className="text-primary px-2" href="/login">
-              Login
-            </Link>
-          </p>
+              <button
+                type="submit"
+                className="w-full bg-primary text-white p-2 rounded hover:bg-blue-600 mt-4"
+              >
+                Submit
+              </button>
+            </form>
+            <p>
+              Already have an Account
+              <Link className="text-primary px-2" href="/login">
+                Login
+              </Link>
+            </p>
+          </div>
         </>
       )}
     </div>
