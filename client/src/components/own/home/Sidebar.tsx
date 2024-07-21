@@ -80,7 +80,7 @@ export default function Sidebar({ isIcon }: any) {
   );
 
   return (
-    <div className="flex">
+    <div className="flex h-full">
       {!isLargeScreen && (
         <IconButton onClick={toggleDrawer(!open)}>
           <MenuIcon />
@@ -110,10 +110,6 @@ export default function Sidebar({ isIcon }: any) {
           {DrawerList}
         </motion.div>
       </Drawer>
-      <div className={`flex-1 ${open && !isLargeScreen ? "ml-240" : "ml-0"}`}>
-        <div className="p-4">Main content here</div>
-        <div>Need help</div>
-      </div>
     </div>
   );
 }
