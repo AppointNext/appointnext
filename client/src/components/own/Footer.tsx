@@ -52,7 +52,7 @@ const Footer = () => {
                   {value.map((item: any, index: any) => (
                     <p
                       key={index}
-                      className="text-xs lg:text-sm cursor-pointer"
+                      className="text-xs lg:text-sm cursor-pointer hover:text-[#003CD8] "
                     >
                       {item}
                     </p>

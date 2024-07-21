@@ -87,7 +87,7 @@ const Navbar = () => {
         {authButtons.map((button, index) => (
           <Button
             key={index}
-            className={`bg-transparent text-black hover:text-[#003CD8] rounded-2xl hover:border-[1px] hover:border-[#003CD8]`}
+            className={`bg-white text-black hover:text-[#003CD8] rounded-2xl hover:border-[1px] hover:border-[#003CD8]`}
           >
             {button.name}
           </Button>
@@ -145,7 +145,7 @@ const Navbar = () => {
               transition={{ duration: 0.2 }}
             >
               <Button
-                className={`bg-transparent text-black hover:text-[#003CD8] rounded-2xl hover:border-[1px] hover:border-[#003CD8] sm:text-sm md:text-md lg:text-xl 2xl:text-2xl w-20 lg:w-24 xl:w-28 2xl:w-32`}
+                className={`bg-transparent text-black hover:text-[#003CD8] rounded-2xl hover:border-[1px] hover:border-[#003CD8] sm:text-sm md:text-md lg:text-xl 2xl:text-2xl w-20 lg:w-24 xl:w-28 2xl:w-32 hover:bg-white`}
               >
                 {button.name}
               </Button>
