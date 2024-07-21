@@ -1,10 +1,10 @@
 "use client";
 import Footer from "@/components/own/Footer";
-import BenefitsSection from "@/components/own/home/BenefitsSection";
-import FeatureSection from "@/components/own/home/FeatureSection";
-import Hero from "@/components/own/home/Hero";
-import NewsLetter from "@/components/own/home/NewsLetter";
-import TestimonalSection from "@/components/own/home/TestimonalSection";
+import BenefitsSection from "@/components/own/landing/BenefitsSection";
+import FeatureSection from "@/components/own/landing/FeatureSection";
+import Hero from "@/components/own/landing/Hero";
+import NewsLetter from "@/components/own/landing/NewsLetter";
+import TestimonalSection from "@/components/own/landing/TestimonalSection";
 import Navbar from "@/components/own/Navbar";
 import ScrollAnimation from "@/components/own/ScrollAnimation";
 
