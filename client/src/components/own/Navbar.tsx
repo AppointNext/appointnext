@@ -103,15 +103,13 @@ const Navbar = () => {
       }`}
     >
       <div className="">
-        <Link href="/">
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            transition={{ duration: 0.2 }}
-          >
-            <LogoText />
-          </motion.div>
-        </Link>
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ duration: 0.2 }}
+        >
+          <LogoText />
+        </motion.div>
       </div>
       <div>
         <ul className="hidden sm:flex flex-row gap-4 mb-1">

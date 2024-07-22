@@ -57,24 +57,26 @@ export default function Sidebar({ isIcon }: any) {
   };
 
   const DrawerList = (
-    <Box sx={{ width: 240 }} role="presentation">
-      <div className="flex flex-col items-center justify-between h-full">
-        <div>
-          <LogoText />
-          <List>
-            {options.map((option, index) => (
-              <ListItem key={option.name} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>{OptionsIcon[index]}</ListItemIcon>
-                  {!isIconOnly && <ListItemText primary={option.name} />}
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </div>
-        <div>
-          <div>Need help</div>
-        </div>
+    <Box
+      sx={{ width: 240 }}
+      role="presentation"
+      className="h-full flex flex-col justify-between"
+    >
+      <div>
+        <LogoText />
+        <List>
+          {options.map((option, index) => (
+            <ListItem key={option.name} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>{OptionsIcon[index]}</ListItemIcon>
+                {!isIconOnly && <ListItemText primary={option.name} />}
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </div>
+      <div className="p-4">
+        <div>Need help</div>
       </div>
     </Box>
   );

@@ -60,10 +60,10 @@ export default function Login() {
     <Loader />
   ) : (
     <div className="max-w-md mx-auto mt-20 p-2 rounded-lg bg-transparent md:p-5 flex flex-col gap-4">
-      <h2 className="text-2xl font-bold mb-6">Login</h2>
+      <h2 className="text-2xl font-bold mb-3">Login</h2>
       {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col gap-4 my-4">
+        <div className="flex flex-col gap-4 my-2">
           <LabelInputContainer>
             <Label htmlFor="name">Email</Label>
             <Input
