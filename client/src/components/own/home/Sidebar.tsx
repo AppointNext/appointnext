@@ -21,6 +21,8 @@ import LogoText from "../LogoText";
 import { motion } from "framer-motion";
 import MenuIcon from "@mui/icons-material/Menu";
 
+import HelpCard from "./HelpCard";
+
 interface Option {
   name: string;
   path: string;
@@ -60,29 +62,31 @@ export default function Sidebar({ isIcon }: any) {
     <Box
       sx={{ width: 240 }}
       role="presentation"
-      className="h-full flex flex-col justify-between"
+      className="h-full flex flex-col  "
     >
-      <div>
-        <LogoText />
-        <List>
-          {options.map((option, index) => (
-            <ListItem key={option.name} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>{OptionsIcon[index]}</ListItemIcon>
-                {!isIconOnly && <ListItemText primary={option.name} />}
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </div>
-      <div className="p-4">
-        <div>Need help</div>
+      <LogoText />
+      <div className="flex flex-col justify-between items-center h-full">
+        <div className="px-4">
+          <List>
+            {options.map((option, index) => (
+              <ListItem key={option.name} disablePadding>
+                <ListItemButton className="rounded-xl">
+                  <ListItemIcon>{OptionsIcon[index]}</ListItemIcon>
+                  {!isIconOnly && <ListItemText primary={option.name} />}
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </div>
+        <div className="p-2  h-full flex items-center justify-center w-full">
+          <HelpCard />
+        </div>
       </div>
     </Box>
   );
 
   return (
-    <div className="flex h-full">
+    <div className="flex">
       {!isLargeScreen && (
         <IconButton onClick={toggleDrawer(!open)}>
           <MenuIcon />
