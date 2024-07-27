@@ -50,8 +50,8 @@ const OptionsIcon = [
 ];
 
 export default function Sidebar({ isIcon }: any) {
-  const [open, setOpen] = useState(true);
   const isLargeScreen = useMediaQuery("(min-width: 1024px)");
+  const [open, setOpen] = useState(isLargeScreen);
   const [isIconOnly, setIsIconOnly] = useState(isIcon);
 
   const toggleDrawer = (newOpen: boolean) => () => {

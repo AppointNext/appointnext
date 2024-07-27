@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { format, addDays, subDays, startOfWeek, endOfWeek } from "date-fns";
+import { Button } from "@mui/material";
 
 const WeeklyCalendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -26,15 +27,23 @@ const WeeklyCalendar = () => {
   return (
     <div className="w-full max-w-md mx-auto  p-4 bg-gray-100 rounded-xl shadow-md">
       <div className="flex items-center justify-between mb-4">
-        <button onClick={prevWeek} className="text-gray-600">
+        <Button
+          onClick={prevWeek}
+          className="text-gray-600 bg-gray-200 rounded-full w-8 h-8"
+          sx={{ minWidth: 0 }}
+        >
           &lt;
-        </button>
+        </Button>
         <h2 className="text-lg font-semibold">
           {format(currentDate, "MMMM yyyy")}
         </h2>
-        <button onClick={nextWeek} className="text-gray-600">
+        <Button
+          onClick={nextWeek}
+          sx={{ minWidth: 0 }}
+          className="text-gray-600 bg-gray-200 rounded-full w-8 h-8"
+        >
           &gt;
-        </button>
+        </Button>
       </div>
       <div className="flex justify-between">
         {days.map((day, index) => (
