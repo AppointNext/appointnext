@@ -49,14 +49,21 @@ const WeeklyCalendar = () => {
         {days.map((day, index) => (
           <div key={index} className="flex flex-col items-center">
             <span className="text-sm text-gray-600">{format(day, "E")}</span>
+
             <div
               className={`w-7 h-7 flex items-center justify-center rounded-full ${
                 format(day, "d") === format(currentDate, "d")
-                  ? "bg-indigo-600 text-white"
+                  ? "bg-gray-200 text-white"
                   : "bg-gray-200"
               }`}
             >
-              {format(day, "d")}
+              <Button
+                sx={{ minWidth: 0, margin: 0, minHeight: 0, padding: 0 }}
+                variant="text"
+                className="text-primary"
+              >
+                {format(day, "d")}
+              </Button>
             </div>
           </div>
         ))}

@@ -7,13 +7,7 @@ export default function Layout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className="flex flex-row w-full h-full bg-[#F5F5F7]">
-      {/* <div className="h-full">
-        <Sidebar />
-      </div> */}
-      <div className="h-full w-full">
-        {/* <Sidebar /> */}
-        {children}
-      </div>
+      <div className="h-full w-full">{children}</div>
     </div>
   );
 }
