@@ -70,7 +70,7 @@ export default function MonthlyDoctor() {
         <div>
           <h1>Monthly Doctors</h1>
         </div>
-        <div className="flex flex-col gap-2 overflow-scroll items-center ">
+        <div className="flex flex-col gap-2 overflow-scroll items-center py-10">
           {doctors.map((doctor, index) => {
             return (
               <DoctorCard

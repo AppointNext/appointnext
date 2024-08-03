@@ -5,10 +5,11 @@ import DashNav from "./DashNav";
 import MonthlyDoctor from "./MonthlyDoctor";
 import Sidebar from "./Sidebar";
 import StatsComp from "./StatsComp";
+import UpComingAppointments from "./UpComingAppointments";
 
 export default function MainDash() {
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <div>
         <div className="flex flex-row w-full bg-bg_primary">
           <Sidebar />
@@ -21,6 +22,9 @@ export default function MainDash() {
       </div>
       <div>
         <MonthlyDoctor />
+      </div>
+      <div>
+        <UpComingAppointments />
       </div>
     </div>
   );

@@ -1,7 +1,5 @@
 "use client";
 
-import Sidebar from "@/components/own/home/Sidebar";
-
 export default function Layout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {

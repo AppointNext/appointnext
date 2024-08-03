@@ -59,7 +59,7 @@ const Hero = () => {
         </div>
       </div>
       <div>
-        <div className="flex flex-row md:flex-row gap-4 md:gap-10 items-center justify-between  rounded-xl shadow-md mt-10 mx-6 lg:px-16 py-4 px-4 lg:py-10 border-2 border-gray-200">
+        <div className="flex flex-row md:flex-row gap-4 md:gap-10 items-center justify-between  rounded-xl shadow-md mt-10 lg:mt-40 mx-6 lg:px-16 py-4 px-4 lg:py-10 border-2 border-gray-200">
           {bannerOptions.map((option, index) => (
             <div
               key={index}
