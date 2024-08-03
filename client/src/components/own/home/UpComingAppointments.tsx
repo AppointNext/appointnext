@@ -1,6 +1,6 @@
 import { useState } from "react";
-import AppointmentCard from "../AppointmentCard";
-
+import AppointmentCard from "./AppointmentCard";
+import AppointmentImage from "/assets/home/AppointmentImage.png";
 interface Appointment {
   image: string;
   title: string;
@@ -11,64 +11,64 @@ interface Appointment {
 export default function UpComingAppointments() {
   const [appointments, setAppointments] = useState<Appointment[]>([
     {
-      image: "https://example.com/images/appointment1.jpg",
+      image: "/assets/home/AppointmentImage.png",
       title: "Doctor's Appointment",
       topic: "General Checkup",
-      dayLeft: 2,
+      daysLeft: 2,
     },
     {
-      image: "https://example.com/images/appointment2.jpg",
+      image: "/assets/home/AppointmentImage.png",
       title: "Business Meeting",
       topic: "Quarterly Review",
-      dayLeft: 5,
+      daysLeft: 5,
     },
     {
-      image: "https://example.com/images/appointment3.jpg",
+      image: "/assets/home/AppointmentImage.png",
       title: "Dentist Visit",
       topic: "Teeth Cleaning",
-      dayLeft: 1,
+      daysLeft: 1,
     },
     {
-      image: "https://example.com/images/appointment4.jpg",
+      image: "/assets/home/AppointmentImage.png",
       title: "Parent-Teacher Conference",
       topic: "Progress Discussion",
-      dayLeft: 3,
+      daysLeft: 3,
     },
     {
-      image: "https://example.com/images/appointment5.jpg",
+      image: "/assets/home/AppointmentImage.png",
       title: "Car Service",
       topic: "Oil Change",
-      dayLeft: 4,
+      daysLeft: 4,
     },
     {
-      image: "https://example.com/images/appointment6.jpg",
+      image: "/assets/home/AppointmentImage.png",
       title: "Webinar",
       topic: "Digital Marketing Strategies",
-      dayLeft: 7,
+      daysLeft: 7,
     },
     {
-      image: "https://example.com/images/appointment7.jpg",
+      image: "/assets/home/AppointmentImage.png",
       title: "Yoga Class",
       topic: "Stress Relief Techniques",
-      dayLeft: 6,
+      daysLeft: 6,
     },
     {
-      image: "https://example.com/images/appointment8.jpg",
+      image: "/assets/home/AppointmentImage.png",
       title: "Interview",
       topic: "Software Developer Position",
-      dayLeft: 2,
+      daysLeft: 2,
     },
     {
-      image: "https://example.com/images/appointment9.jpg",
+      image: "/assets/home/AppointmentImage.png",
       title: "Financial Planning Meeting",
       topic: "Investment Portfolio Review",
-      dayLeft: 10,
+      daysLeft: 10,
     },
     {
-      image: "https://example.com/images/appointment10.jpg",
+      image: "/assets/home/AppointmentImage.png",
       title: "Wedding Anniversary",
       topic: "Dinner Reservation",
-      dayLeft: 8,
+      daysLeft: 8,
     },
   ]);
   return (
@@ -79,14 +79,14 @@ export default function UpComingAppointments() {
       <div className="bg-[#F5F5F7]">
         <div className="m-2">
           <div>
-            <h1>Monthly Doctors</h1>
+            <h1>Upcoming Appointments</h1>
           </div>
-          <div className="flex flex-col gap-2 overflow-scroll items-center py-10">
+          <div className="flex flex-col gap-2 overflow-scroll items-center py-10 md:flex-row md:py-4">
             {appointments.map((appointment: Appointment, index: number) => {
               return (
                 <AppointmentCard
                   key={index}
-                  image={appointment.image}
+                  AppImage={appointment.image}
                   title={appointment.title}
                   topic={appointment.topic}
                   daysLeft={appointment.daysLeft}

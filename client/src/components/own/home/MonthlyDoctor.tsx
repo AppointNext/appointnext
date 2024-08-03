@@ -65,12 +65,12 @@ export default function MonthlyDoctor() {
   ]);
 
   return (
-    <div className="bg-[#F5F5F7]">
+    <div className="bg-[#F5F5F7] ">
       <div className="m-2">
         <div>
           <h1>Monthly Doctors</h1>
         </div>
-        <div className="flex flex-col gap-2 overflow-scroll items-center py-10">
+        <div className="flex flex-col gap-2 overflow-scroll items-center py-10 md:flex-row  w-full md:py-4">
           {doctors.map((doctor, index) => {
             return (
               <DoctorCard

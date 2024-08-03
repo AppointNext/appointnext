@@ -8,13 +8,13 @@ import ActivityChart from "./Chart";
 export default function StatsComp() {
   const [progress, setProgress] = useState(10);
   return (
-    <div>
+    <div className="flex flex-col md:flex-row justify-between lg:ml-[200px] items-center md:max-h-[300px]">
       <div
         className="bg-[#141522]
        bg-gradient-to-tr from-[#141522] to-[#2e3046]
-      text-white flex flex-col gap-6 m-4 rounded-xl p-4"
+      text-white flex flex-col gap-6 m-4 rounded-xl p-4 md:w-full h-full "
       >
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 ">
           <div>
             <h1 className="text-xl">Running Appointment</h1>
           </div>
@@ -35,7 +35,7 @@ export default function StatsComp() {
           </div>
         </div>
       </div>
-      <div className=" bg-bg_primary py-2 px-4">
+      <div className=" bg-bg_primary px-4">
         <ActivityChart />
       </div>
     </div>

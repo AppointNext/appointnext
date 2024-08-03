@@ -59,7 +59,7 @@ const ActivityChart = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 bg-gray-100 rounded-xl shadow-md">
+    <div className="w-full max-w-md mx-auto p-6 bg-gray-100 rounded-xl shadow-md md:max-w-xl lg:max-w-md md:h-full">
       <Line data={data} options={options} />
     </div>
   );

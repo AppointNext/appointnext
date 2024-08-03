@@ -56,11 +56,12 @@ export default function Sidebar({ isIcon }: any) {
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
+    console.log(isLargeScreen);
   };
 
   const DrawerList = (
     <Box
-      sx={{ width: 240 }}
+      sx={{ width: isLargeScreen ? 200 : 240 }}
       role="presentation"
       className="h-full flex flex-col  "
     >
@@ -98,10 +99,10 @@ export default function Sidebar({ isIcon }: any) {
         onClose={toggleDrawer(false)}
         variant={isLargeScreen ? "persistent" : "temporary"}
         sx={{
-          width: isLargeScreen ? 240 : "auto",
+          width: isLargeScreen ? 200 : 240,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
-            width: 240,
+            width: isLargeScreen ? 200 : 240,
             boxSizing: "border-box",
           },
         }}

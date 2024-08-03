@@ -11,20 +11,22 @@ export default function MainDash() {
   return (
     <div className="w-full h-full">
       <div>
-        <div className="flex flex-row w-full bg-bg_primary">
+        <div className="flex flex-row w-full bg-bg_primary lg:gap-4">
           <Sidebar />
           <DashNav />
         </div>
         <StatsComp />
       </div>
-      <div className="md:hidden">
-        <CalAndAppoint />
-      </div>
-      <div>
-        <MonthlyDoctor />
-      </div>
-      <div>
-        <UpComingAppointments />
+      <div className="lg:ml-[200px]">
+        <div className="md:hidden lg:ml-[200px]">
+          <CalAndAppoint />
+        </div>
+        <div>
+          <MonthlyDoctor />
+        </div>
+        <div>
+          <UpComingAppointments />
+        </div>
       </div>
     </div>
   );
