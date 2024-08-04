@@ -3,7 +3,7 @@ import MainDash from "@/components/own/home/MainDash";
 
 export default function Dashboard() {
   return (
-    <div className="flex flex-row h-full w-full max-w-screen-md">
+    <div className="flex flex-row h-full w-full max-w-[820px]">
       <div className="flex flex-row w-full m-0 p-0">
         <MainDash />
       </div>

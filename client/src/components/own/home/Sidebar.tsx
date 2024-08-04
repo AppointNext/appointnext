@@ -67,7 +67,7 @@ export default function Sidebar({ isIcon }: any) {
     >
       <LogoText />
       <div className="flex flex-col justify-between items-center h-full">
-        <div className="px-4">
+        <div className="px-2">
           <List>
             {options.map((option, index) => (
               <ListItem key={option.name} disablePadding>
@@ -79,7 +79,7 @@ export default function Sidebar({ isIcon }: any) {
             ))}
           </List>
         </div>
-        <div className="p-2  h-full flex items-center justify-center w-full">
+        <div className="p-2   h-full flex items-center justify-center ">
           <HelpCard />
         </div>
       </div>
@@ -112,7 +112,11 @@ export default function Sidebar({ isIcon }: any) {
           animate={open ? "visible" : "hidden"}
           variants={drawerVariants}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          style={{ height: "100%", width: 240, overflow: "hidden" }}
+          style={{
+            height: "100%",
+            width: isLargeScreen ? 200 : 240,
+            overflow: "hidden",
+          }}
         >
           {DrawerList}
         </motion.div>
