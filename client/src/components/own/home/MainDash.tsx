@@ -17,7 +17,7 @@ export default function MainDash() {
         </div>
         <StatsComp />
       </div>
-      <div className="lg:ml-[200px]">
+      <div className="lg:ml-[200px] flex flex-col xl:gap-4">
         <div className="md:hidden lg:ml-[200px]">
           <CalAndAppoint />
         </div>
