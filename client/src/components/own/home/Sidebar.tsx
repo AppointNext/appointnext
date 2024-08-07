@@ -11,7 +11,7 @@ import {
   IconButton,
   useMediaQuery,
 } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ImportContactsTwoToneIcon from "@mui/icons-material/ImportContactsTwoTone";
 import { BiCategoryAlt } from "react-icons/bi";
 import { FaUserDoctor } from "react-icons/fa6";
@@ -52,18 +52,24 @@ const OptionsIcon = [
 export default function Sidebar({ isIcon }: any) {
   const isLargeScreen = useMediaQuery("(min-width: 1024px)");
   const [open, setOpen] = useState(isLargeScreen);
-  const [isIconOnly, setIsIconOnly] = useState(isIcon);
+
+  useEffect(() => {
+    if (isLargeScreen) {
+      setOpen(true); // Automatically open on large screens
+    } else {
+      setOpen(false); // Automatically close on small screens
+    }
+  }, [isLargeScreen]);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
-    console.log(isLargeScreen);
   };
 
   const DrawerList = (
     <Box
       sx={{ width: isLargeScreen ? 200 : 240 }}
       role="presentation"
-      className="h-full flex flex-col  "
+      className="h-full flex flex-col"
     >
       <LogoText />
       <div className="flex flex-col justify-between items-center h-full">
@@ -73,13 +79,13 @@ export default function Sidebar({ isIcon }: any) {
               <ListItem key={option.name} disablePadding>
                 <ListItemButton className="rounded-xl">
                   <ListItemIcon>{OptionsIcon[index]}</ListItemIcon>
-                  {!isIconOnly && <ListItemText primary={option.name} />}
+                  {!isIcon && <ListItemText primary={option.name} />}
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
         </div>
-        <div className="p-2   h-full flex items-center justify-center ">
+        <div className="p-2 h-full flex items-center justify-center">
           <HelpCard />
         </div>
       </div>

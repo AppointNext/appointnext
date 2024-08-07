@@ -23,7 +23,7 @@ export default function DoctorCard({
   rating,
 }: DoctorProps) {
   return (
-    <div className="flex flex-col p-3  max-w-72 w-full  shadow-md rounded-xl bg-white hover:shadow-xl transition-all md:min-h-[100px] md:h-full md:min-w-[250px] md:justify-between">
+    <div className="flex flex-col p-3  max-w-72 w-full  shadow-md rounded-xl bg-white hover:shadow-xl transition-all md:min-h-[100px] md:h-full md:min-w-[250px] md:justify-between lg:min-h-[130px]">
       <div className="flex flex-row items-center gap-2 ">
         <div>
           <Image

@@ -4,7 +4,7 @@ import WeeklyCalendar from "./WeeklyCalender";
 
 export default function CalAndAppoint() {
   return (
-    <div className="flex flex-col bg-bg_primary  gap-4 mx-4 my-2 md:w-full ">
+    <div className="flex flex-col bg-bg_primary  gap-4 mx-4 my-2 md:w-full lg:min-w-[370px] xl:min-w-[400px]">
       <WeeklyCalendar />
       <AppointmentTodayCard />
     </div>

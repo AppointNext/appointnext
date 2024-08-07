@@ -17,7 +17,7 @@ export default function AppoinmentCard({
   daysLeft,
 }: AppointmentCardProps) {
   return (
-    <div className="flex flex-col items-start bg-white px-4 py-2 rounded-xl gap-2 md:min-h-[150px] md:min-w-[250px] md:h-full md:justify-between">
+    <div className="flex flex-col items-start bg-white px-4 py-2 rounded-xl gap-2 md:min-h-[150px] md:min-w-[250px] md:h-full md:justify-between xl:min-h-[230px]">
       <div className="flex flex-col gap-2">
         <div>
           <Image
