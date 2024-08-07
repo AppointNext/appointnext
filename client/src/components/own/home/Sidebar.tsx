@@ -22,6 +22,7 @@ import { motion } from "framer-motion";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import HelpCard from "./HelpCard";
+import { useRouter } from "next/navigation";
 
 interface Option {
   name: string;
@@ -34,7 +35,7 @@ const drawerVariants = {
 };
 
 const options: Option[] = [
-  { name: "Overview", path: "/overview" },
+  { name: "Overview", path: "/dashboard" },
   { name: "Appointments", path: "/appointments" },
   { name: "Doctors", path: "/doctors" },
   { name: "Messages", path: "/messages" },
@@ -50,6 +51,7 @@ const OptionsIcon = [
 ];
 
 export default function Sidebar({ isIcon }: any) {
+  const router = useRouter();
   const isLargeScreen = useMediaQuery("(min-width: 1024px)");
   const [open, setOpen] = useState(isLargeScreen);
 
@@ -67,7 +69,7 @@ export default function Sidebar({ isIcon }: any) {
 
   const DrawerList = (
     <Box
-      sx={{ width: isLargeScreen ? 200 : 240 }}
+      sx={{ width: isLargeScreen ? 210 : 240 }}
       role="presentation"
       className="h-full flex flex-col"
     >
@@ -77,7 +79,10 @@ export default function Sidebar({ isIcon }: any) {
           <List>
             {options.map((option, index) => (
               <ListItem key={option.name} disablePadding>
-                <ListItemButton className="rounded-xl">
+                <ListItemButton
+                  className="rounded-xl"
+                  onClick={() => router.push(option.path)}
+                >
                   <ListItemIcon>{OptionsIcon[index]}</ListItemIcon>
                   {!isIcon && <ListItemText primary={option.name} />}
                 </ListItemButton>
@@ -105,10 +110,10 @@ export default function Sidebar({ isIcon }: any) {
         onClose={toggleDrawer(false)}
         variant={isLargeScreen ? "persistent" : "temporary"}
         sx={{
-          width: isLargeScreen ? 200 : 240,
+          width: isLargeScreen ? 210 : 240,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
-            width: isLargeScreen ? 200 : 240,
+            width: isLargeScreen ? 210 : 240,
             boxSizing: "border-box",
           },
         }}
@@ -120,7 +125,7 @@ export default function Sidebar({ isIcon }: any) {
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           style={{
             height: "100%",
-            width: isLargeScreen ? 200 : 240,
+            width: isLargeScreen ? 210 : 240,
             overflow: "hidden",
           }}
         >

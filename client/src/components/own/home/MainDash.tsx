@@ -12,13 +12,15 @@ export default function MainDash() {
     <div className="w-full h-full">
       <div>
         <div className="flex flex-row w-full bg-bg_primary lg:gap-4">
-          <Sidebar />
+          <div className="lg:hidden">
+            <Sidebar />
+          </div>
           <DashNav />
         </div>
         <StatsComp />
       </div>
-      <div className="lg:ml-[200px] flex flex-col xl:gap-4">
-        <div className="md:hidden lg:ml-[200px]">
+      <div className=" flex flex-col xl:gap-4">
+        <div className="md:hidden ">
           <CalAndAppoint />
         </div>
         <div>

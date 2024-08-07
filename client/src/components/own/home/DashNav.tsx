@@ -19,7 +19,7 @@ export default function DashNav() {
   };
 
   return (
-    <div className="flex flex-row justify-between py-2 w-full">
+    <div className="flex flex-row justify-between py-2 pl-2 lg:pl-4 w-full">
       <div className="flex flex-col">
         <h1 className="text-lg font-bold">Hi, {username}</h1>
         <p className="text-xs">Let's see your appointments</p>

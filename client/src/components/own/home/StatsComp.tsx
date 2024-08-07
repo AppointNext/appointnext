@@ -8,7 +8,7 @@ import ActivityChart from "./Chart";
 export default function StatsComp() {
   const [progress, setProgress] = useState(10);
   return (
-    <div className="flex flex-col  md:flex-row justify-between lg:ml-[200px] items-center md:max-h-[300px] px-4 md:px-0">
+    <div className="flex flex-col  md:flex-row justify-between  items-center md:max-h-[300px] px-4 md:px-0">
       <div
         className="bg-[#141522]
        bg-gradient-to-tr from-[#141522] to-[#2e3046]
