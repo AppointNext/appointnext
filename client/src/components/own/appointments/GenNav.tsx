@@ -31,7 +31,7 @@ export default function GenNav() {
   return (
     <div className="flex flex-row justify-between items-center py-2 pl-2 lg:pl-4 w-full bg-[#F5F5F7]">
       <Sidebar />
-      <div className="flex flex-col flex-grow items-center fixed top-16 left-4 lg:left-56 lg:block lg:top-6 ">
+      <div className="flex flex-col flex-grow items-center fixed top-16 left-4 lg:left-56 lg:block lg:top-4 ">
         <h1 className="text-lg font-bold">{headerText}</h1>
       </div>
       <div className="flex flex-row items-center justify-center gap-2">
