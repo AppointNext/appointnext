@@ -12,7 +12,7 @@ export default function MainDash() {
     <div className="w-full h-full">
       <div>
         <div className="flex flex-row w-full bg-bg_primary lg:gap-4">
-          <div className="lg:hidden">
+          <div className="lg:hidden mt-2 ml-2">
             <Sidebar />
           </div>
           <DashNav />

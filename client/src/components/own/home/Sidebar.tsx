@@ -98,7 +98,7 @@ export default function Sidebar({ isIcon }: any) {
   );
 
   return (
-    <div className="flex">
+    <div className="flex overflow-hidden">
       {!isLargeScreen && (
         <IconButton onClick={toggleDrawer(!open)}>
           <MenuIcon />
