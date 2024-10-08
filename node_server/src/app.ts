@@ -7,7 +7,7 @@ import http from "http";
 import dotenv from "dotenv";
 import { setupWebSocketServer } from "./web_socket";
 import bodyParser from "body-parser";
-import redistRoutes from "./user/services/redis/redis";
+// import redistRoutes from "./user/services/redis/redis";
 
 dotenv.config();
 
@@ -29,7 +29,7 @@ app.use("/api/user", authUserRoute);
 app.use("/api/doctor", authDoctorRoute);
 
 // redis routes
-app.use("/api/redis", redistRoutes);
+// app.use("/api/redis", redistRoutes);
 
 // Setup WebSocket server
 const wss = setupWebSocketServer(server);
