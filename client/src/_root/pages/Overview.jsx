@@ -18,8 +18,8 @@ const Overview = () => {
   useEffect(() => {
     const getUpcomingAppointments = async () => {
       const res = await axios.post(
-        "https://appoint-next.onrender.com/api/getUpcomingAppointments",
-        { id: 6 },
+        "http://127.0.0.1:8000/api/getUpcomingAppointments",
+        { id: 15 },
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

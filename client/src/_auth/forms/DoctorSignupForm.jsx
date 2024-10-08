@@ -29,7 +29,7 @@ const DoctorSignupForm = () => {
     console.log(formData);
     try {
       const res = await axios.post(
-        "https://appoint-next.onrender.com/api/doctorSignup",
+        "http://127.0.0.1:8000/api/doctorSignup",
         formData
       );
       console.log(res.data);

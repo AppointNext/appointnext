@@ -78,7 +78,7 @@ const LoginForm = () => {
     formData.latitude = position.latitude;
     formData.longitude = position.longitude;
     await axios
-      .post("https://appoint-next.onrender.com/api/login", formData)
+      .post("http://127.0.0.1:8000/api/login", formData)
       .then((res) => {
         const { username, email } = res.data;
         console.log(username, email);

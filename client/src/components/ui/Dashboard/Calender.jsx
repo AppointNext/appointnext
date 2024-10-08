@@ -36,7 +36,7 @@ const Calendar = ({ setTodayAppointment }) => {
     console.log(formattedDate, typeof formattedDate);
     console.log(accessToken);
     const res = await axios.post(
-      "https://appoint-next.onrender.com/api/getAppointmentOfDate",
+      "http://127.0.0.1:8000/api/getAppointmentOfDate",
       { id, date: formattedDate }, // Send the formatted date in the request body
       {
         headers: {

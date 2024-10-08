@@ -100,6 +100,7 @@ def get_past_appointments(request):
 def show_upcoming_appointments(request):
     user_id = request.data.get('id')
     current_time = timezone.now()
+    print(user_id)
     
     try:
         user = User.objects.get(id=user_id)
@@ -107,7 +108,7 @@ def show_upcoming_appointments(request):
         return Response({'message': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
     
     upcoming_appointments = Appointment.objects.filter(user=user, status='BOOKED', date_time__gte=current_time).order_by('date_time')
-
+    
     if upcoming_appointments.exists():
         serialized_appointments = AppointmentSerializer(upcoming_appointments, many=True).data
         for appointment in serialized_appointments:

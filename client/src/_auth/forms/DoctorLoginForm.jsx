@@ -41,7 +41,7 @@ const DoctorLoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .post("https://appoint-next.onrender.com/api/doctorLogin", formData)
+      .post("http://127.0.0.1:8000/api/doctorLogin", formData)
       .then((res) => {
         console.log(res.data);
         const { username, email } = res.data;
