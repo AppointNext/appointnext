@@ -2,7 +2,8 @@
 
 # AppointNext: Appointment Management App for Doctors
 
-AppointNext is a comprehensive appointment management application designed specifically for doctors to streamline their appointment scheduling and patient management. This application focuses on improving lifestyle by reducing the hassle of managing appointments manually.
+AppointNext is a comprehensive appointment management application designed specifically for doctors to streamline their appointment scheduling and patient management. This application focuses on improving lifestyle by reducing the hassle of managing appointments manually .
+Thank You!!!
 
 ## Features
 
